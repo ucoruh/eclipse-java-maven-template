@@ -51,14 +51,17 @@ call python -m coverxygen --xml-dir ./calculator-app/target/site/doxygen/xml --s
 echo Run lcov genhtml
 call perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml ./calculator-app\target\site\coverxygen\lcov.info -o calculator-app/target/site/coverxygen
 
-echo Package Coverage Report-1
+echo Package Jacoco Test Coverage Report (Optional)
 call tar -czvf test-jacoco-report.tar.gz -C calculator-app/target/site/jacoco .
 
-echo Package Coverage Report-2
+echo Package ReportGenerator Test Coverage Report
 call tar -czvf test-coverage-report.tar.gz -C calculator-app/target/site/coveragereport .
 
 echo Package Code Documentation
 call tar -czvf application-documentation.tar.gz -C calculator-app/target/site/doxygen .
+
+echo Package Documentation Coverage
+call tar -czvf doc-coverage-report.tar.gz -C calculator-app/target/site/coverxygen .
 
 echo Package Product Site
 call tar -czvf application-site.tar.gz -C target/site .

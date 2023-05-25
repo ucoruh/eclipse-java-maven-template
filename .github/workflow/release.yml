@@ -26,35 +26,24 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
 
-      - name: Set up JDK 8
+      - name: Set up Java
         uses: actions/setup-java@v2
         with:
-          java-version: 8
+          java-version: 11
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
           
       - name: Install Doxygen
         run: sudo apt-get install doxygen -y
         shell: bash
-        
-      - name: Generate Documentation
-        run: doxygen Doxyfile
+                
+      - name: Perform Maven clean, test, site generation, and packaging
+        run: mvn clean test site package
         working-directory: ./calculator-app
-        shell: bash
-        
-      #- name: Build and run tests
-      #  run: mvn clean test
-
-      #- name: Generate JaCoCo XML report
-      #  run: mvn jacoco:report
-
-      - name: Build and run tests
-        # run: mvn clean test
-        run: mvn package
-        working-directory: ./calculator-app
-
-      - name: Generate JaCoCo XML report
-        run: mvn jacoco:report
-        working-directory: ./calculator-app
-        
+                
       - name: Check Test Coverage
         run: |
           # Parse the JaCoCo XML report and check coverage percentage
@@ -76,16 +65,26 @@ jobs:
 
       - name: Install ReportGenerator
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
+        
+      - name: Generate Doxygen HTML and XML Documentation
+        run: doxygen Doxyfile
+        shell: bash
 
-      - name: Generate Coverage Report
-        run: reportgenerator "-reports:**/jacoco.xml" "-sourcedirs:src/main/java" "-targetdir:target/site/coveragereport" "-reporttypes:Html"
+      - name: Generate ReportGenerator HTML Report
+        run: reportgenerator "-reports:target/site/jacoco/jacoco.xml" "-sourcedirs:src/main/java" "-targetdir:target/site/coveragereport" -reporttypes:Html
         working-directory: ./calculator-app
 
-      - name: Archive Coverage Report
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-report
-          path: coveragereport
+      - name: Run Coverxygen
+        run: python -m coverxygen --xml-dir ./calculator-app/target/site/doxygen/xml --src-dir ./ --format lcov --output ./calculator-app/target/site/coverxygen/lcov.info --prefix %currentDir%\calculator-app\
+        
+      - name: Run lcov genhtml
+        run: perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml ./calculator-app\target\site\coverxygen\lcov.info -o calculator-app/target/site/coverxygen
+        
+      #- name: Archive Coverage Report
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: coverage-report
+      #    path: coveragereport
           
       - name: Get Commit Summary
         id: commit_summary
@@ -106,32 +105,72 @@ jobs:
             Asst. Prof. Dr. Ugur CORUH
           draft: false
           prerelease: false
-        
-      - name: Compress Linux binaries
-        run: tar -czvf binaries.tar.gz -C publish/linux .
-        working-directory: ./calculator-app
-        
+                
       - name: Compress Test Coverage Report
-        run: tar -czvf application-test-report.tar.gz -C coveragereport .
+        run: tar -czvf test-coverage-report.tar.gz -C calculator-app/target/site/coveragereport .
+        
+      - name: Compress Doc Coverage Report
+        run: tar -czvf doc-coverage-report.tar.gz -C calculator-app/target/site/coverxygen .
+
+      - name: Compress Doxygen Documentation
+        run: tar -czvf app-documents.tar.gz -C calculator-app/target/site/doxygen .
+                
+      - name: Compress Web Site
+        run: tar -czvf app-website.tar.gz -C target/site .
         working-directory: ./calculator-app
         
-      - name: Compress Test Coverage Report
-        run: tar -czvf application-test-report.tar.gz -C coveragereport .
-        working-directory: ./calculator-app
-        
-      - name: Upload Linux release asset
+      - name: Upload release asset
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./linux-binaries.tar.gz
-          asset_name: linux-binaries.tar.gz
+          asset_path: ./target/calculator-app-1.0-SNAPSHOT.jar
+          asset_name: calculator.jar
+          asset_content_type: application/jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          
+      - name: Upload Test Coverage Report
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
+          asset_path: ./test-coverage-report.tar.gz
+          asset_name: test-coverage-report.tar.gz
           asset_content_type: application/gzip
         env:
-          GITHUB_TOKEN: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
           
-      # https://github.com/peaceiris/actions-gh-pages
-      - name: Deploy
+      - name: Upload Doc Coverage Report
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
+          asset_path: ./doc-coverage-report.tar.gz
+          asset_name: doc-coverage-report.tar.gz
+          asset_content_type: application/gzip
+        env:
+          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          
+      - name: Upload Doxygen Documentation
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
+          asset_path: ./app-documents.tar.gz
+          asset_name: app-documents.tar.gz
+          asset_content_type: application/gzip
+        env:
+          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          
+      - name: Upload Web Site
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
+          asset_path: ./app-website.tar.gz
+          asset_name: app-website.tar.gz
+          asset_content_type: application/gzip
+        env:
+          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          
+      - name: Deploy Web Site
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.NET_CORE_TEMPLATE_TOKEN }}
-          publish_dir: ./docs/html
+          github_token: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          publish_dir: ./calculator-app/target/site
