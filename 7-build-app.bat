@@ -27,6 +27,9 @@ cd calculator-app
 echo Generate ReportGenerator HTML Report
 call reportgenerator "-reports:target/site/jacoco/jacoco.xml" "-sourcedirs:src/main/java" "-targetdir:target/site/coveragereport" -reporttypes:Html
 
+echo Generate ReportGenerator Badges
+call reportgenerator "-reports:target/site/jacoco/jacoco.xml" "-sourcedirs:src/main/java" "-targetdir:target/site/coveragereport" -reporttypes:Badges
+
 echo Display information about the binary file
 echo Our Binary is a Single Jar With Dependencies. You Do Not Need to Compress It.
 
@@ -64,10 +67,15 @@ echo Package Documentation Coverage
 call tar -czvf doc-coverage-report.tar.gz -C calculator-app/target/site/coverxygen .
 
 echo Package Product Site
-call tar -czvf application-site.tar.gz -C target/site .
+call tar -czvf application-site.tar.gz -C calculator-app/target/site .
 
-echo Return to the previous directory
-cd ..
+echo Copy badge files to the "assets" directory
+
+copy calculator-app\target\site\coveragereport\badge_combined.svg assets
+copy calculator-app\target\site\coveragereport\badge_combined.svg assets
+copy calculator-app\target\site\coveragereport\badge_branchcoverage.svg assets
+copy calculator-app\target\site\coveragereport\badge_linecoverage.svg assets
+copy calculator-app\target\site\coveragereport\badge_methodcoverage.svg assets
 
 echo Operation Completed!
 pause

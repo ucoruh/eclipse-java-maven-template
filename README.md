@@ -4,6 +4,38 @@
 
 You will generate eclipse maven project with Junit4 from CLI and. Also you will generate jar and then you will run your application. For more information you can check examples [Maven – Maven in 5 Minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html) and [TheNEXUS | A Community Project](https://books.sonatype.com/mvnref-book/reference/index.html)
 
+## Releases
+
+- [![GitHub release badge](https://badgen.net/github/release/ucoruh/eclipse-java-maven-template)](https://github.com/ucoruh/eclipse-java-maven-template/releases/latest)
+
+## Platforms
+
+- ![Ubuntu badge](assets/badge-ubuntu.svg)
+
+- ![macOS badge](assets/badge-macos.svg)
+
+- ![Windows badge](assets/badge-windows.svg)
+
+## Test Coverage
+
+[![Release](https://github.com/ucoruh/eclipse-java-maven-template/actions/workflows/release.yml/badge.svg)](https://github.com/ucoruh/eclipse-java-maven-template/actions/workflows/release.yml)
+
+**Coverage**
+
+- ![All](assets/badge_combined.svg)
+
+**Branch Coverage**
+
+- ![Branch Coverage](assets/badge_branchcoverage.svg)
+
+**Line Coverage**
+
+- ![Line Coverage](assets/badge_linecoverage.svg)
+
+**Method Coverage**
+
+- ![Method Coverage](assets/badge_methodcoverage.svg)
+
 ### Install Requirements
 
 - Eclipse
@@ -1037,7 +1069,6 @@ cd ..
 
 echo Operation Completed!
 pause
-
 ```
 
 ### Run Web Site
@@ -1057,8 +1088,6 @@ mvn site:run
 echo Operation Completed!
 pause
 ```
-
-
 
 ### Run Jar File
 
