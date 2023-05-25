@@ -133,8 +133,7 @@ jobs:
         run: tar -czvf app-documents.tar.gz -C calculator-app/target/site/doxygen .
                 
       - name: Compress Web Site
-        run: tar -czvf app-website.tar.gz -C target/site .
-        working-directory: ./calculator-app
+        run: tar -czvf app-website.tar.gz -C calculator-app/target/site .
         
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
