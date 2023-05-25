@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.7.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/DECORATION/1.7.0 http://maven.apache.org/xsd/decoration-1.7.0.xsd">
+
+	<skin>
+		<groupId>org.apache.maven.skins</groupId>
+		<artifactId>maven-fluido-skin</artifactId>
+	</skin>
+
+	<custom>
+		<fluidoSkin>
+			<topBarEnabled>true</topBarEnabled>
+			<sideBarEnabled>true</sideBarEnabled>
+		</fluidoSkin>
+	</custom>
+
+	<publishDate position="right" />
+	<version position="right" />
+
+	<bannerLeft>
+		<name>Calculator Application</name>
+		<src>images/logo.png</src>
+		<href>https://github.com/ucoruh/eclipse-java-maven-template</href>
+	</bannerLeft>
+
+	<bannerRight>
+		<src>images/banner.png</src>
+	</bannerRight>
+
+	<poweredBy>
+		<logo name="Maven" href="https://maven.apache.org/"
+			img="https://maven.apache.org/images/logos/maven-feather.png" />
+	</poweredBy>
+
+	<body>
+		<head>Calculator App</head>
+		<!-- Add any additional meta tags, CSS files, or JavaScript files -->
+
+		<menu name="Overview">
+				<item name="Introduction" href="index.html" />
+				<item name="Project Info" href="project-info.html" />
+				<item name="Project Summary" href="summary.html" />
+				<item name="Project Team" href="team.html" />
+				<item name="Markdown Sample" href="overview.html" />
+				<item name="GitHub Repository" href="https://github.com/ucoruh/eclipse-java-maven-template" />
+		</menu>
+
+		<menu name="Development">
+				<item name="Source Code" href="scm.html" />
+				<item name="Dependencies" href="dependency-info.html" />
+				<item name="Issue Tracker" href="issue-management.html" />
+				<item name="Distribution Management" href="distribution-management.html" />
+				<!-- Add more items for other HTML pages if needed -->
+		</menu>
+
+		<menu name="Build">
+				<item name="CI Management" href="ci-management.html" />
+				<item name="Build Dependencies" href="dependencies.html" />
+				<item name="Plugin Management" href="plugin-management.html" />
+				<item name="Build Plugins" href="plugins.html" />
+				<!-- Add more items for other HTML pages if needed -->
+		</menu>
+
+		<menu name="Test Coverage">
+				<item name="JaCoCo Report" href="./jacoco/index.html" />
+				<item name="Report Generator" href="./coveragereport/index.html" />
+				<!-- Add more items for other HTML pages if needed -->
+		</menu>
+		
+				<menu name="Document Coverage">
+				<item name="Doxygen Report" href="./doxygen/html/index.html" />
+				<item name="Coverxygen Report" href="./coverxygen/index.html" />
+				<!-- Add more items for other HTML pages if needed -->
+		</menu>
+
+		<footer><![CDATA[All rights reserved.]]></footer>
+	</body>
+</project>
