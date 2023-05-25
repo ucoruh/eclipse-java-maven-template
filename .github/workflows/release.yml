@@ -26,11 +26,12 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
 
-      - name: Set up Java
-        uses: actions/setup-java@v2
-        with:
-          java-version: 11
-          distribution: 'jdk'
+    steps:
+    - name: Setup Java
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin' # See 'Supported distributions' for available options
+        java-version: '17'
 
       - name: Set up Python
         uses: actions/setup-python@v2
