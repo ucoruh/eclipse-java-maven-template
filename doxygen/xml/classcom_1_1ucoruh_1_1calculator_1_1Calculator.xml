@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classcom_1_1ucoruh_1_1calculator_1_1Calculator" kind="class" language="Java" prot="public">
+    <compoundname>com::ucoruh::calculator::Calculator</compoundname>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classcom_1_1ucoruh_1_1calculator_1_1Calculator_1abb2bcc3d207814ed074f454e4b3c9e7a" prot="private" static="yes" mutable="no">
+        <type>final Logger</type>
+        <definition>final Logger com.ucoruh.calculator.Calculator.logger</definition>
+        <argsstring></argsstring>
+        <name>logger</name>
+        <initializer>= (Logger) LoggerFactory.getLogger(Calculator.class)</initializer>
+        <briefdescription>
+<para>Logger for the <ref refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator" kindref="compound">Calculator</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="calculator-app/src/main/java/com/ucoruh/calculator/Calculator.java" line="30" column="31" bodyfile="calculator-app/src/main/java/com/ucoruh/calculator/Calculator.java" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classcom_1_1ucoruh_1_1calculator_1_1Calculator_1ab94ad739d94c9ee89d18b6fa2494385b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int com.ucoruh.calculator.Calculator.add</definition>
+        <argsstring>(int a, int b)</argsstring>
+        <name>add</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>Calculates the sum of two integers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This function takes two integer values, <computeroutput>a</computeroutput> and <computeroutput>b</computeroutput>, and returns their sum. It also logs a message using the logger object.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first integer value. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The second integer value. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The sum of <computeroutput>a</computeroutput> and <computeroutput>b</computeroutput>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="calculator-app/src/main/java/com/ucoruh/calculator/Calculator.java" line="41" column="14" bodyfile="calculator-app/src/main/java/com/ucoruh/calculator/Calculator.java" bodystart="41" bodyend="48"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This class represents a <ref refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator" kindref="compound">Calculator</ref> that performs mathematical operations. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The <ref refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator" kindref="compound">Calculator</ref> class provides methods to perform mathematical operations such as addition, subtraction, multiplication, and division. It also supports logging functionality using the logger object. <simplesect kind="author"><para>ugur.coruh </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="calculator-app/src/main/java/com/ucoruh/calculator/Calculator.java" line="25" column="7" bodyfile="calculator-app/src/main/java/com/ucoruh/calculator/Calculator.java" bodystart="25" bodyend="49"/>
+    <listofallmembers>
+      <member refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator_1ab94ad739d94c9ee89d18b6fa2494385b" prot="public" virt="non-virtual"><scope>com::ucoruh::calculator::Calculator</scope><name>add</name></member>
+      <member refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator_1abb2bcc3d207814ed074f454e4b3c9e7a" prot="private" virt="non-virtual"><scope>com::ucoruh::calculator::Calculator</scope><name>logger</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

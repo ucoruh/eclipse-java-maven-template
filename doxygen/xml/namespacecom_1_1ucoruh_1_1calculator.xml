@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="namespacecom_1_1ucoruh_1_1calculator" kind="namespace" language="Java">
+    <compoundname>com::ucoruh::calculator</compoundname>
+    <innerclass refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator" prot="public">com::ucoruh::calculator::Calculator</innerclass>
+    <innerclass refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp" prot="public">com::ucoruh::calculator::CalculatorApp</innerclass>
+    <briefdescription>
+<para>The <ref refid="namespacecom_1_1ucoruh_1_1calculator" kindref="compound">com.ucoruh.calculator</ref> package contains all the classes and files related to the <ref refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator" kindref="compound">Calculator</ref> App. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="calculator-app/src/main/java/com/ucoruh/calculator/Calculator.java" line="10" column="1"/>
+  </compounddef>
+</doxygen>

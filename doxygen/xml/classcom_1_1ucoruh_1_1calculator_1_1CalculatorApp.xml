@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp" kind="class" language="Java" prot="public">
+    <compoundname>com::ucoruh::calculator::CalculatorApp</compoundname>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_1a754304e5193588f7da28fd0d1a5781b1" prot="private" static="yes" mutable="no">
+        <type>final Logger</type>
+        <definition>final Logger com.ucoruh.calculator.CalculatorApp.logger</definition>
+        <argsstring></argsstring>
+        <name>logger</name>
+        <initializer>= (Logger) LoggerFactory.getLogger(CalculatorApp.class)</initializer>
+        <briefdescription>
+<para>Logger for the <ref refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp" kindref="compound">CalculatorApp</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="calculator-app/src/main/java/com/ucoruh/calculator/CalculatorApp.java" line="34" column="31" bodyfile="calculator-app/src/main/java/com/ucoruh/calculator/CalculatorApp.java" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_1a9e90eda7a6e66cc9a4a4d228878fb152" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void com.ucoruh.calculator.CalculatorApp.main</definition>
+        <argsstring>(String[] args)</argsstring>
+        <name>main</name>
+        <param>
+          <type>String[]</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>The main entry point of the <ref refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator" kindref="compound">Calculator</ref> App. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The main method is the starting point of the <ref refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator" kindref="compound">Calculator</ref> App. It initializes the logger, performs logging, displays a greeting message, and handles user input.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The command-line arguments passed to the application. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="calculator-app/src/main/java/com/ucoruh/calculator/CalculatorApp.java" line="45" column="22" bodyfile="calculator-app/src/main/java/com/ucoruh/calculator/CalculatorApp.java" bodystart="45" bodyend="78"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>This class represents the main application class for the <ref refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator" kindref="compound">Calculator</ref> App. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The <ref refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp" kindref="compound">CalculatorApp</ref> class provides the entry point for the <ref refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator" kindref="compound">Calculator</ref> App. It initializes the necessary components, performs calculations, and handles exceptions. <simplesect kind="author"><para>ugur.coruh </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="calculator-app/src/main/java/com/ucoruh/calculator/CalculatorApp.java" line="30" column="7" bodyfile="calculator-app/src/main/java/com/ucoruh/calculator/CalculatorApp.java" bodystart="30" bodyend="80"/>
+    <listofallmembers>
+      <member refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_1a754304e5193588f7da28fd0d1a5781b1" prot="private" virt="non-virtual"><scope>com::ucoruh::calculator::CalculatorApp</scope><name>logger</name></member>
+      <member refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_1a9e90eda7a6e66cc9a4a4d228878fb152" prot="public" virt="non-virtual"><scope>com::ucoruh::calculator::CalculatorApp</scope><name>main</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

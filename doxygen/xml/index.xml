@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.1" xml:lang="en-US">
+  <compound refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator" kind="class"><name>com::ucoruh::calculator::Calculator</name>
+    <member refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator_1abb2bcc3d207814ed074f454e4b3c9e7a" kind="variable"><name>logger</name></member>
+    <member refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator_1ab94ad739d94c9ee89d18b6fa2494385b" kind="function"><name>add</name></member>
+  </compound>
+  <compound refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp" kind="class"><name>com::ucoruh::calculator::CalculatorApp</name>
+    <member refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_1a754304e5193588f7da28fd0d1a5781b1" kind="variable"><name>logger</name></member>
+    <member refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_1a9e90eda7a6e66cc9a4a4d228878fb152" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="namespacecom" kind="namespace"><name>com</name>
+  </compound>
+  <compound refid="namespacecom_1_1ucoruh" kind="namespace"><name>com::ucoruh</name>
+  </compound>
+  <compound refid="namespacecom_1_1ucoruh_1_1calculator" kind="namespace"><name>com::ucoruh::calculator</name>
+  </compound>
+  <compound refid="Calculator_8java" kind="file"><name>Calculator.java</name>
+  </compound>
+  <compound refid="CalculatorApp_8java" kind="file"><name>CalculatorApp.java</name>
+  </compound>
+  <compound refid="dir_2b4ac3102f69270f8d741b4dcb7a3977" kind="dir"><name>calculator-app/src/main/java/com/ucoruh/calculator</name>
+  </compound>
+  <compound refid="dir_1c7784eab4bc0f94c5603f2d0b846c9c" kind="dir"><name>calculator-app</name>
+  </compound>
+  <compound refid="dir_12bb85d194142459a3272ef7a4d249d4" kind="dir"><name>calculator-app/src/main/java/com</name>
+  </compound>
+  <compound refid="dir_5a96e68c041ec8d5d2f1a030c06c0938" kind="dir"><name>calculator-app/src/main/java</name>
+  </compound>
+  <compound refid="dir_d3e4877daae2ecd1bed7aec7b88729c0" kind="dir"><name>calculator-app/src/main</name>
+  </compound>
+  <compound refid="dir_2c5e30419e38560e9fba585283d8f62c" kind="dir"><name>calculator-app/src</name>
+  </compound>
+  <compound refid="dir_514f6b60ceb7d82f3cda70452100b006" kind="dir"><name>calculator-app/src/main/java/com/ucoruh</name>
+  </compound>
+</doxygenindex>

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="dir_d3e4877daae2ecd1bed7aec7b88729c0" kind="dir">
+    <compoundname>calculator-app/src/main</compoundname>
+    <innerdir refid="dir_5a96e68c041ec8d5d2f1a030c06c0938">calculator-app/src/main/java</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="calculator-app/src/main/"/>
+  </compounddef>
+</doxygen>

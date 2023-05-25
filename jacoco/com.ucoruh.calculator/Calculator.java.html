@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Calculator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">calculator-app</a> &gt; <a href="index.source.html" class="el_package">com.ucoruh.calculator</a> &gt; <span class="el_source">Calculator.java</span></div><h1>Calculator.java</h1><pre class="source lang-java linenums">/**
+
+@file Calculator.java
+@brief This file serves as a demonstration file for the Calculator class.
+@details This file contains the implementation of the Calculator class, which provides various mathematical operations.
+*/
+
+/**
+
+@package com.ucoruh.calculator
+@brief The com.ucoruh.calculator package contains all the classes and files related to the Calculator App.
+*/
+package com.ucoruh.calculator;
+
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
+/**
+
+@class Calculator
+@brief This class represents a Calculator that performs mathematical operations.
+@details The Calculator class provides methods to perform mathematical operations such as addition, subtraction, multiplication, and division. It also supports logging functionality using the logger object.
+@author ugur.coruh
+*/
+<span class="fc" id="L25">public class Calculator {</span>
+
+  /**
+   * @brief Logger for the Calculator class.
+   */
+<span class="fc" id="L30">  private static final Logger logger = (Logger) LoggerFactory.getLogger(Calculator.class);</span>
+
+  /**
+   * @brief Calculates the sum of two integers.
+   *
+   * @details This function takes two integer values, `a` and `b`, and returns their sum. It also logs a message using the logger object.
+   *
+   * @param a The first integer value.
+   * @param b The second integer value.
+   * @return The sum of `a` and `b`.
+   */
+  public int add(int a, int b) {
+    // Logging an informational message
+<span class="fc" id="L43">    logger.info(&quot;Logging message&quot;);</span>
+    // Logging an error message
+<span class="fc" id="L45">    logger.error(&quot;Error message&quot;);</span>
+    // Returning the sum of `a` and `b`
+<span class="fc" id="L47">    return a + b;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
