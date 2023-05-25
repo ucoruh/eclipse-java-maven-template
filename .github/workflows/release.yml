@@ -91,8 +91,9 @@ jobs:
       - name: Run Coverxygen
         run: |
             currentDir=$(pwd)
+            mkdir -p $currentDir/calculator-app/target/site/coverxygen
             python -m coverxygen --xml-dir $currentDir/calculator-app/target/site/doxygen/xml --src-dir $currentDir --format lcov --output $currentDir/calculator-app/target/site/coverxygen/lcov.info --prefix $currentDir/calculator-app/
-
+        
       - name: Run lcov genhtml
         run: genhtml ./calculator-app\target\site\coverxygen\lcov.info -o calculator-app/target/site/coverxygen
         
