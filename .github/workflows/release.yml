@@ -52,8 +52,8 @@ jobs:
       - name: Check Test Coverage
         run: |
           # Parse the JaCoCo XML report and check coverage percentage
-          covered=$(xmllint --xpath "string(//counter[@type='INSTRUCTION']/@covered)" coveragereport/jacoco.xml)
-          missed=$(xmllint --xpath "string(//counter[@type='INSTRUCTION']/@missed)" coveragereport/jacoco.xml)
+          covered=$(xmllint --xpath "string(//counter[@type='INSTRUCTION']/@covered)" calculator-app/target/site/jacoco/jacoco.xml)
+          missed=$(xmllint --xpath "string(//counter[@type='INSTRUCTION']/@missed)" calculator-app/target/site/jacoco/jacoco.xml)
           total=$((covered + missed))
           coverage_percentage=$(awk "BEGIN { print ($covered / $total) * 100 }")
           # Check if coverage is 100%
@@ -67,6 +67,7 @@ jobs:
           echo "Covered: $covered"
           echo "Missed: $missed"
         working-directory: ./calculator-app
+
 
       - name: Install ReportGenerator
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
