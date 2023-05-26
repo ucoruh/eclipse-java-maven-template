@@ -1,0 +1,91 @@
+\hypertarget{classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp}{}\doxysection{com.\+ucoruh.\+calculator.\+Calculator\+App Class Reference}
+\label{classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp}\index{com.ucoruh.calculator.CalculatorApp@{com.ucoruh.calculator.CalculatorApp}}
+
+
+This class represents the main application class for the \mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1Calculator}{Calculator}} App.  
+
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_a9e90eda7a6e66cc9a4a4d228878fb152}{main}} (String\mbox{[}$\,$\mbox{]} args)
+\begin{DoxyCompactList}\small\item\em The main entry point of the \mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1Calculator}{Calculator}} App. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This class represents the main application class for the \mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1Calculator}{Calculator}} App. 
+
+The \mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp}{Calculator\+App}} class provides the entry point for the \mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1Calculator}{Calculator}} App. It initializes the necessary components, performs calculations, and handles exceptions. \begin{DoxyAuthor}{Author}
+ugur.\+coruh 
+\end{DoxyAuthor}
+
+
+Definition at line 30 of file Calculator\+App.\+java.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_a9e90eda7a6e66cc9a4a4d228878fb152}\label{classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_a9e90eda7a6e66cc9a4a4d228878fb152}} 
+\index{com.ucoruh.calculator.CalculatorApp@{com.ucoruh.calculator.CalculatorApp}!main@{main}}
+\index{main@{main}!com.ucoruh.calculator.CalculatorApp@{com.ucoruh.calculator.CalculatorApp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily static void com.\+ucoruh.\+calculator.\+Calculator\+App.\+main (\begin{DoxyParamCaption}\item[{String\mbox{[}$\,$\mbox{]}}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The main entry point of the \mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1Calculator}{Calculator}} App. 
+
+The main method is the starting point of the \mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1Calculator}{Calculator}} App. It initializes the logger, performs logging, displays a greeting message, and handles user input.
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The command-\/line arguments passed to the application. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 45 of file Calculator\+App.\+java.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{45                                          \{}
+\DoxyCodeLine{46     \textcolor{comment}{// Logging messages for informational purposes}}
+\DoxyCodeLine{47     logger.info(\textcolor{stringliteral}{"{}Logging message"{}});}
+\DoxyCodeLine{48     \textcolor{comment}{// Logging an error message}}
+\DoxyCodeLine{49     logger.error(\textcolor{stringliteral}{"{}Error message"{}});}
+\DoxyCodeLine{50     \textcolor{comment}{// Displaying a greeting message}}
+\DoxyCodeLine{51     System.out.println(\textcolor{stringliteral}{"{}Hello World!"{}});}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{54       \textcolor{comment}{// Checking if command-\/line arguments are provided}}
+\DoxyCodeLine{55       \textcolor{keywordflow}{if} (args != \textcolor{keyword}{null}) \{}
+\DoxyCodeLine{56         \textcolor{comment}{// Checking if there are any arguments}}
+\DoxyCodeLine{57         \textcolor{keywordflow}{if} (args.length > 0) \{}
+\DoxyCodeLine{58           \textcolor{comment}{// Checking if the first argument is "{}1"{}}}
+\DoxyCodeLine{59           \textcolor{keywordflow}{if} (args[0].equals(\textcolor{stringliteral}{"{}1"{}})) \{}
+\DoxyCodeLine{60             \textcolor{comment}{// Throwing a dummy IOException}}
+\DoxyCodeLine{61             \textcolor{keywordflow}{throw} \textcolor{keyword}{new} IOException(\textcolor{stringliteral}{"{}Dummy Exception..."{}});}
+\DoxyCodeLine{62           \}}
+\DoxyCodeLine{63         \}}
+\DoxyCodeLine{64       \}}
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66       \textcolor{comment}{// Prompting the user to press Enter to continue}}
+\DoxyCodeLine{67       System.out.println(\textcolor{stringliteral}{"{}Press Enter to Continue..."{}});}
+\DoxyCodeLine{68       \textcolor{comment}{// Reading user input from the console}}
+\DoxyCodeLine{69       System.in.read();}
+\DoxyCodeLine{70       \textcolor{comment}{// Displaying a closing message}}
+\DoxyCodeLine{71       System.out.println(\textcolor{stringliteral}{"{}Thank you..."{}});}
+\DoxyCodeLine{72     \} \textcolor{keywordflow}{catch} (IOException e) \{}
+\DoxyCodeLine{73       \textcolor{comment}{// Logging the exception}}
+\DoxyCodeLine{74       logger.error(e.toString());}
+\DoxyCodeLine{75       \textcolor{comment}{// Printing the exception stack trace}}
+\DoxyCodeLine{76       e.printStackTrace();}
+\DoxyCodeLine{77     \}}
+\DoxyCodeLine{78   \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+calculator-\/app/src/main/java/com/ucoruh/calculator/\mbox{\hyperlink{CalculatorApp_8java}{Calculator\+App.\+java}}\end{DoxyCompactItemize}
