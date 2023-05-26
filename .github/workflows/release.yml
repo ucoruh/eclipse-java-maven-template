@@ -53,8 +53,17 @@ jobs:
         run: sudo apt-get install -y libxml2-utils
         shell: bash
 
-      - name: Perform Maven clean, test, site generation, and packaging
-        run: mvn clean test site package
+      - name: Perform Maven clean, test, and packaging
+        run: mvn clean test package
+        working-directory: ./calculator-app
+
+      - name: Generate Folders
+        run: |
+            currentDir=$(pwd)
+            mkdir -p $currentDir/target/site/assets
+            mkdir -p $currentDir/target/site/coverxygen
+            mkdir -p $currentDir/target/site/doxygen
+            mkdir -p $currentDir/target/site/coveragereport
         working-directory: ./calculator-app
                 
       - name: Check Test Coverage
@@ -76,7 +85,6 @@ jobs:
           echo "Missed: $missed"
         working-directory: ./calculator-app
 
-
       - name: Install ReportGenerator
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
         
@@ -85,7 +93,9 @@ jobs:
         shell: bash
 
       - name: Generate ReportGenerator HTML Report
-        run: reportgenerator "-reports:target/site/jacoco/jacoco.xml" "-sourcedirs:src/main/java" "-targetdir:target/site/coveragereport" -reporttypes:Html
+        run: | 
+          reportgenerator "-reports:target/site/jacoco/jacoco.xml" "-sourcedirs:src/main/java" "-targetdir:target/site/coveragereport" -reporttypes:Html
+          reportgenerator "-reports:target/site/jacoco/jacoco.xml" "-sourcedirs:src/main/java" "-targetdir:target/site/coveragereport" -reporttypes:Badges
         working-directory: ./calculator-app
 
       - name: Run Coverxygen
@@ -95,7 +105,23 @@ jobs:
             python -m coverxygen --xml-dir $currentDir/calculator-app/target/site/doxygen/xml --src-dir $currentDir --format lcov --output $currentDir/calculator-app/target/site/coverxygen/lcov.info --prefix $currentDir/calculator-app/
         
       - name: Run genhtml
-        run: genhtml ./calculator-app/target/site/coverxygen/lcov.info -o calculator-app/target/site/coverxygen
+        run: genhtml ./calculator-app/target/site/coverxygen/lcov.info --legend --title "Documentation Coverage Report" -o calculator-app/target/site/coverxygen
+
+      - name: Copy Folders
+        run: |
+            cp "calculator-app/target/site/coveragereport/badge_combined.svg" "assets/badge_combined.svg"
+            cp "calculator-app/target/site/coveragereport/badge_combined.svg" "assets/badge_combined.svg"
+            cp "calculator-app/target/site/coveragereport/badge_branchcoverage.svg" "assets/badge_branchcoverage.svg"
+            cp "calculator-app/target/site/coveragereport/badge_linecoverage.svg" "assets/badge_linecoverage.svg"
+            cp "calculator-app/target/site/coveragereport/badge_methodcoverage.svg" "assets/badge_methodcoverage.svg"    
+            cp "assets/rteu_logo.jpg" "calculator-app/src/site/resources/images/rteu_logo.jpg"
+            cp README.md "calculator-app/src/site/markdown/readme.md"
+            cp -r ./assets/ ./calculator-app/src/site/resources
+        shell: bash
+
+      - name: Perform Maven site generation
+        run: mvn site
+        working-directory: ./calculator-app
 
       #- name: Archive Coverage Report
       #  uses: actions/upload-artifact@v2

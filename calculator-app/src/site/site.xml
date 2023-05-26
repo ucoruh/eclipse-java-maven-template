@@ -25,7 +25,7 @@
 	</bannerLeft>
 
 	<bannerRight>
-		<src>images/banner.png</src>
+		<src>images/rteu_logo.jpg</src>
 	</bannerRight>
 
 	<poweredBy>
@@ -39,10 +39,11 @@
 
 		<menu name="Overview">
 				<item name="Introduction" href="index.html" />
+				<item name="README.md" href="readme.html" />
+				<item name="Overiew Markdown" href="overview.html" />
 				<item name="Project Info" href="project-info.html" />
 				<item name="Project Summary" href="summary.html" />
 				<item name="Project Team" href="team.html" />
-				<item name="Markdown Sample" href="overview.html" />
 				<item name="GitHub Repository" href="https://github.com/ucoruh/eclipse-java-maven-template" />
 		</menu>
 

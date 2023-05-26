@@ -959,3 +959,8 @@ coverage*[.json, .xml, .info]
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/c,csharp,vs,visualstudio,visualstudiocode,java,maven,c++,cmake,eclipse,netbeans
+
+/calculator-app/src/site/markdown/readme.md
+/calculator-app/src/site/resources/assets/.gitkeep
+/calculator-app/src/site/resources/assets
+/calculator-app/src/site/resources/images/rteu_logo.jpg
