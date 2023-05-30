@@ -22,8 +22,8 @@ jobs:
     steps:
    
       - name: Configure Long Paths for Git
-        #run: git config --global core.longpaths true
-        run: git config --system core.longpaths true
+        #run: sudo git config --global core.longpaths true
+        run: sudo git config --system core.longpaths true
         shell: bash
         
       - name: Checkout Source Code from Github
