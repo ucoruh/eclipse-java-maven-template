@@ -270,6 +270,36 @@ doxygen -g
 
 This will create Doxyfile for us to modify. Use Doxywizard to modify file. Be sure that your output directory should be **./docs** and all warnings should be opened and warnings stop operations.
 
+# 
+
+#### coverxygen Setup
+
+We are parsing doxygen XML output with coverxygen and generate info file for LCOV. This tool generate output that LCOV use and generate HTML document coverage report
+
+To install coverxygen you need python and pip
+
+```bash
+@echo off
+@setlocal enableextensions
+@cd /d "%~dp0"
+echo Installing converxygen doxygen XML parser
+pip install coverxygen
+```
+
+#### LCOV Setup
+
+LCOV is use to generate HTML document coverage tool in this project, but it can be used for different purposes. You can use choco package manager to install application as follow
+
+```bash
+@echo off
+@setlocal enableextensions
+@cd /d "%~dp0"
+echo Installing Report Generator...
+choco install lcov -y
+echo lcov and genhtml located on C:\ProgramData\chocolatey\lib\lcov\tools\bin\
+pause
+```
+
 #### ReportGenerator Setup
 
 We need to install [reportgenerator](https://reportgenerator.io/) for creation of HTML test reports, we will use choco to install visit package manager web site [Chocolatey Software | ReportGenerator (Portable) - Generates reports for various code coverage tools 5.1.20](https://community.chocolatey.org/packages/reportgenerator.portable)
