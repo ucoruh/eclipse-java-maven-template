@@ -29,5 +29,10 @@ curl -s -o %OUTPUT_FILE% %API_URL%
 
 echo Downloaded .gitignore file from %API_URL% and saved as %OUTPUT_FILE%
 
+REM Append '**/desktop.ini' to .gitignore
+echo **/desktop.ini >> %OUTPUT_FILE%
+
+echo Appended '**/desktop.ini' to %OUTPUT_FILE%
+
 pause
 

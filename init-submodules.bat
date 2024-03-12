@@ -3,7 +3,7 @@
 :: Enable necessary extensions
 @setlocal enableextensions
 
-echo ::: DELETE GOOGLE DRIVE desktop.ini FILES ::::
+echo ::: INIT SUBMODULES BEGIN ::::
 
 echo Get the current directory
 set "currentDir=%CD%"
@@ -17,5 +17,7 @@ for /r %%i in (desktop.ini) do (
     git rm --cached --force "%%i"
 )
 
-echo ::: DELETE OPERATION COMPLETED ::::
+git submodule update --init --recursive
+
+echo ::: INIT SUBMODULES COMPLETED ::::
 pause

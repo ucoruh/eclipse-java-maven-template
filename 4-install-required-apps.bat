@@ -2,6 +2,23 @@
 @setlocal enableextensions
 @cd /d "%~dp0"
 
+echo Installing Astyle...
+choco install astyle
+
+echo Installing converxygen doxygen XML parser
+pip install coverxygen
+
+echo Installing Report Generator...
+choco install lcov -y
+echo lcov and genhtml located on C:\ProgramData\chocolatey\lib\lcov\tools\bin\
+
+echo Installing Reportgenerator...
+
+echo before running this you need to install dotnet
+echo you can use winget install Microsoft.DotNet.SDK.8
+echo or you can use choco install dotnetcore
+dotnet tool install --global dotnet-reportgenerator-globaltool
+
 rem force re-install need "--force --force-dependencies -y" parameters
 
 REM Test if Pandoc is installed
@@ -98,4 +115,29 @@ pip install mkdocs-git-committers-plugin
 pip install mkdocs-exclude
 
 pip install pptx2md
+
+pip install junit2html
+
+echo Download Plantuml Jar...
+
+echo Deleting PlantUML jar file...
+del plantuml.jar
+
+echo Download and install jq
+curl -sL -o jq.exe https://github.com/stedolan/jq/releases/download/jq-1.6/jq-win64.exe
+
+echo Extract download URL that ends with "plantuml.jar" from JSON response using jq
+for /f "delims=" %%a in ('curl -s https://api.github.com/repos/plantuml/plantuml/releases/latest ^| jq -r ".assets[] | select(.name | endswith(\"plantuml.jar\")) | .browser_download_url"') do (
+    set download_url=%%a
+)
+
+echo Download plantuml.jar
+curl -sL -o plantuml.jar "%download_url%"
+
+echo Download URL: %download_url%
+echo PlantUML downloaded successfully!
+
+echo Deleting PlantUML jar file...
+del jq.exe
+
 pause
