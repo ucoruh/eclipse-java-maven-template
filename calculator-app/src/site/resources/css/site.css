@@ -1,0 +1,180 @@
+/* Custom styling for the calculator-app Maven site (Fluido skin, Bootstrap 2.x
+   markup). Overrides the empty placeholder Fluido would otherwise generate.
+   Kept dependency-free (no extra CDN) so the site also looks right with no
+   network access, e.g. when opened from the unzipped release/site.zip. */
+
+:root {
+  --site-primary: #2f5d8a;
+  --site-primary-dark: #1f4266;
+  --site-accent: #e8791a;
+  --site-bg-soft: #f4f7fa;
+  --site-border: #d8e1e8;
+}
+
+/* ---------- Landing page hero ---------- */
+
+.site-hero {
+  background: linear-gradient(135deg, var(--site-primary) 0%, var(--site-primary-dark) 100%);
+  color: #fff;
+  padding: 36px 32px;
+  border-radius: 8px;
+  margin-bottom: 28px;
+}
+
+.site-hero h1 {
+  color: #fff;
+  margin-top: 0;
+  font-size: 32px;
+}
+
+.site-hero .tagline {
+  font-size: 17px;
+  color: #e7eef5;
+  max-width: 46em;
+}
+
+.site-hero .badge-row {
+  margin: 14px 0 18px 0;
+  line-height: 2.1;
+}
+
+.site-hero .badge-row img {
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.site-hero .hero-actions .btn {
+  margin-right: 10px;
+  margin-bottom: 8px;
+}
+
+.site-hero .btn-download {
+  background-color: var(--site-accent);
+  border-color: #c96712;
+  color: #fff;
+  font-weight: bold;
+}
+
+.site-hero .btn-download:hover {
+  background-color: #c96712;
+  color: #fff;
+}
+
+/* ---------- Section titles on the landing page ---------- */
+
+.site-section-title {
+  margin-top: 34px;
+  margin-bottom: 6px;
+  border-bottom: 2px solid var(--site-border);
+  padding-bottom: 6px;
+}
+
+.site-section-lead {
+  color: #5a6b78;
+  margin-bottom: 16px;
+}
+
+/* ---------- Report / guide card grid ---------- */
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.report-card {
+  flex: 1 1 260px;
+  min-width: 230px;
+  max-width: 100%;
+  background: #fff;
+  border: 1px solid var(--site-border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  box-shadow: 0 1px 2px rgba(20, 40, 60, 0.06);
+}
+
+.report-card .card-eyebrow {
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--site-accent);
+  font-weight: bold;
+}
+
+.report-card h3 {
+  margin: 4px 0 6px 0;
+  font-size: 16px;
+}
+
+.report-card h3 a {
+  text-decoration: none;
+}
+
+.report-card p {
+  font-size: 13px;
+  color: #4d5b66;
+  margin-bottom: 0;
+}
+
+/* ---------- Report iframe pages ---------- */
+
+.report-toolbar {
+  margin: 10px 0 14px 0;
+}
+
+.report-toolbar .btn {
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.report-explainer {
+  color: #4d5b66;
+  margin-bottom: 14px;
+}
+
+.report-frame-wrap {
+  border: 1px solid var(--site-border);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--site-bg-soft);
+}
+
+.report-frame {
+  display: block;
+  width: 100%;
+  height: 80vh;
+  min-height: 480px;
+  border: 0;
+  background: #fff;
+}
+
+.report-fallback {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #5a6b78;
+}
+
+/* ---------- Small screens (phones) ---------- */
+
+@media (max-width: 640px) {
+  .site-hero {
+    padding: 22px 18px;
+  }
+
+  .site-hero h1 {
+    font-size: 24px;
+  }
+
+  .report-frame {
+    height: 70vh;
+  }
+
+  .card-grid {
+    gap: 10px;
+  }
+
+  .report-card {
+    flex: 1 1 100%;
+  }
+}

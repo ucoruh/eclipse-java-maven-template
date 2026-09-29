@@ -2,14 +2,16 @@
 
 This project produces every coverage/documentation page **twice**: once with the ecosystem's own ("native") tool,
 and once with [ReportGenerator](https://reportgenerator.io/), so you can see both side by side and understand what
-each tool adds. All of them are produced by `7-build-app.bat` / `7-build-app.sh` and linked in the menu on the left.
+each tool adds. All of them are produced by `7-build-app.bat` / `7-build-app.sh`, and every one of them also gets
+its own page **inside this site**, in a styled frame with an "Open in a new tab" and a "Download (zip)" button -
+see the **Reports** menu on the left, or click a link in the "Folder" column below.
 
 | # | What it shows | Native tool | Folder | Alternate tool | Folder |
 |---|---|---|---|---|---|
-| 1 | Did the tests pass? What did each one assert? | Maven **Surefire Report** (HTML rendering of the JUnit XML under `target/surefire-reports`) | `surefire.html` | — (single family for this template; see `docs/guide/toolchain-comparison-en.md` for the C/C++ and C# equivalents) | — |
-| 2 | Which lines/branches/methods did the tests execute? | **JaCoCo** HTML | `jacoco/index.html` | **ReportGenerator** HTML, with coverage **badges** (`assets/badge_*.svg`) and a **history** trend (`report_coverage_hist/`, kept outside `target/` so `mvn clean` does not erase it) | `coveragereport/index.html` |
-| 3 | How much of the public API has a Javadoc comment? | **coverxygen** (reads the Doxygen XML) → **lcov** `genhtml` | `coverxygen/index.html` | same `lcov.info`, rendered by **ReportGenerator** instead of `genhtml` | `coverxygen-reportgenerator/index.html` |
-| 4 | API reference (classes, methods, parameters) | **Javadoc** (the Java-ecosystem-native tool) | `apidocs/index.html` | **Doxygen** HTML (the same tool the C/C++ and mixed-language templates use, so the three course templates look alike) | `doxygen/html/index.html` |
+| 1 | Did the tests pass? What did each one assert? | Maven **Surefire Report** (HTML rendering of the JUnit XML under `target/surefire-reports`) | [`surefire.html`](reports/surefire.html) | — (single family for this template; see `docs/guide/toolchain-comparison-en.md` for the C/C++ and C# equivalents) | — |
+| 2 | Which lines/branches/methods did the tests execute? | **JaCoCo** HTML | [`jacoco/index.html`](reports/jacoco.html) | **ReportGenerator** HTML, with coverage **badges** (`assets/badge_*.svg`) and a **history** trend (`report_coverage_hist/`, kept outside `target/` so `mvn clean` does not erase it) | [`coveragereport/index.html`](reports/coveragereport.html) |
+| 3 | How much of the public API has a Javadoc comment? | **coverxygen** (reads the Doxygen XML) → **lcov** `genhtml` | [`coverxygen/index.html`](reports/coverxygen.html) | same `lcov.info`, rendered by **ReportGenerator** instead of `genhtml`, plus a documentation-coverage **badge** (`assets/badge_doccoverage.svg`) | [`coverxygen-reportgenerator/index.html`](reports/coverxygen-reportgenerator.html) |
+| 4 | API reference (classes, methods, parameters) | **Javadoc** (the Java-ecosystem-native tool) | [`apidocs/index.html`](reports/javadoc.html) | **Doxygen** HTML (the same tool the C/C++ and mixed-language templates use, so the three course templates look alike) | [`doxygen/html/index.html`](reports/doxygen.html) |
 
 ## Why two tools per page?
 
@@ -48,14 +50,16 @@ console output top to bottom — every step prints what it is about to do before
 
 Bu proje her kapsama/dokümantasyon sayfasını **iki kez** üretir: bir kez ekosistemin kendi ("native") aracıyla, bir
 kez de [ReportGenerator](https://reportgenerator.io/) ile — böylece ikisini yan yana görüp her aracın ne kattığını
-anlayabilirsiniz. Hepsi `7-build-app.bat` / `7-build-app.sh` tarafından üretilir ve soldaki menüde bağlantılıdır.
+anlayabilirsiniz. Hepsi `7-build-app.bat` / `7-build-app.sh` tarafından üretilir; her biri ayrıca bu sitenin
+içinde, çerçeveli kendi sayfasında da gösterilir — soldaki **Reports** menüsüne veya aşağıdaki "Klasör" sütunundaki
+bağlantıya bakın.
 
 | # | Ne gösterir? | Native araç | Klasör | Alternatif araç | Klasör |
 |---|---|---|---|---|---|
-| 1 | Testler geçti mi? Her biri neyi doğruladı? | Maven **Surefire Report** (`target/surefire-reports` altındaki JUnit XML'in HTML hali) | `surefire.html` | — | — |
-| 2 | Testler hangi satır/dal/metotları çalıştırdı? | **JaCoCo** HTML | `jacoco/index.html` | **ReportGenerator** HTML, kapsama **rozetleri** (`assets/badge_*.svg`) ve **geçmiş** (history) trendiyle (`report_coverage_hist/`, `target/` dışında tutulur ki `mvn clean` silmesin) | `coveragereport/index.html` |
-| 3 | Genel API'nin ne kadarında Javadoc yorumu var? | **coverxygen** (Doxygen XML'ini okur) → **lcov** `genhtml` | `coverxygen/index.html` | aynı `lcov.info`, `genhtml` yerine **ReportGenerator** ile | `coverxygen-reportgenerator/index.html` |
-| 4 | API referansı (sınıflar, metotlar, parametreler) | **Javadoc** (Java ekosisteminin kendi aracı) | `apidocs/index.html` | **Doxygen** HTML (C/C++ ve karma dil şablonlarının da kullandığı araç; üç ders şablonu böylece birbirine benzer) | `doxygen/html/index.html` |
+| 1 | Testler geçti mi? Her biri neyi doğruladı? | Maven **Surefire Report** (`target/surefire-reports` altındaki JUnit XML'in HTML hali) | [`surefire.html`](reports/surefire.html) | — | — |
+| 2 | Testler hangi satır/dal/metotları çalıştırdı? | **JaCoCo** HTML | [`jacoco/index.html`](reports/jacoco.html) | **ReportGenerator** HTML, kapsama **rozetleri** (`assets/badge_*.svg`) ve **geçmiş** (history) trendiyle (`report_coverage_hist/`, `target/` dışında tutulur ki `mvn clean` silmesin) | [`coveragereport/index.html`](reports/coveragereport.html) |
+| 3 | Genel API'nin ne kadarında Javadoc yorumu var? | **coverxygen** (Doxygen XML'ini okur) → **lcov** `genhtml` | [`coverxygen/index.html`](reports/coverxygen.html) | aynı `lcov.info`, `genhtml` yerine **ReportGenerator** ile, artı bir doküman-kapsama **rozeti** (`assets/badge_doccoverage.svg`) | [`coverxygen-reportgenerator/index.html`](reports/coverxygen-reportgenerator.html) |
+| 4 | API referansı (sınıflar, metotlar, parametreler) | **Javadoc** (Java ekosisteminin kendi aracı) | [`apidocs/index.html`](reports/javadoc.html) | **Doxygen** HTML (C/C++ ve karma dil şablonlarının da kullandığı araç; üç ders şablonu böylece birbirine benzer) | [`doxygen/html/index.html`](reports/doxygen.html) |
 
 ## Neden her sayfa için iki araç?
 

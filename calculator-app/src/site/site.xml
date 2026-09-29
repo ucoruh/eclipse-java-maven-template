@@ -39,9 +39,8 @@
 		<!-- Add any additional meta tags, CSS files, or JavaScript files -->
 
 		<menu name="Overview">
-				<item name="Introduction" href="index.html" />
+				<item name="Home" href="index.html" />
 				<item name="README.md" href="readme.html" />
-				<item name="Overview Markdown" href="overview.html" />
 				<item name="Which report is which?" href="tool-catalog.html" />
 				<item name="Project Info" href="project-info.html" />
 				<item name="Project Summary" href="summary.html" />
@@ -53,6 +52,7 @@
 				<item name="Source Code" href="scm.html" />
 				<item name="Source Xref" href="./xref/index.html" />
 				<item name="Test Source Xref" href="./xref-test/index.html" />
+				<item name="Test Javadoc" href="./testapidocs/index.html" />
 				<item name="Dependencies" href="dependency-info.html" />
 				<item name="Issue Tracker" href="issue-management.html" />
 				<item name="Distribution Management" href="distribution-management.html" />
@@ -66,30 +66,22 @@
 				<item name="All Generated Reports" href="project-reports.html" />
 		</menu>
 
-		<menu name="Unit Tests">
-				<item name="Surefire Report (native)" href="surefire.html" />
-		</menu>
-
-		<menu name="Code Coverage">
-				<item name="JaCoCo HTML (native)" href="./jacoco/index.html" />
-				<item name="ReportGenerator HTML + badges + history" href="./coveragereport/index.html" />
-		</menu>
-
-		<menu name="Documentation Coverage">
-				<item name="Coverxygen + genhtml (native)" href="./coverxygen/index.html" />
-				<item name="Coverxygen + ReportGenerator" href="./coverxygen-reportgenerator/index.html" />
-		</menu>
-
-		<menu name="API Docs">
-				<item name="Javadoc (ecosystem-native)" href="./apidocs/index.html" />
-				<item name="Doxygen HTML" href="./doxygen/html/index.html" />
-		</menu>
-
-		<menu name="Code Quality">
-				<item name="Checkstyle" href="checkstyle.html" />
-				<item name="PMD" href="pmd.html" />
-				<item name="CPD (copy/paste detector)" href="cpd.html" />
-				<item name="SpotBugs" href="spotbugs.html" />
+		<!-- Every HTML report embedded in a styled iframe page (title + one-line
+			explanation + "Open in a new tab" + "Download (zip)"), see
+			src/site/markdown/reports/*.md and docs/guide/workflow-en.md
+			("Showing an HTML report inside your site"). -->
+		<menu name="Reports">
+				<item name="Unit Tests: Surefire (native)" href="reports/surefire.html" />
+				<item name="Coverage: JaCoCo (native)" href="reports/jacoco.html" />
+				<item name="Coverage: ReportGenerator" href="reports/coveragereport.html" />
+				<item name="Doc Coverage: genhtml (native)" href="reports/coverxygen.html" />
+				<item name="Doc Coverage: ReportGenerator" href="reports/coverxygen-reportgenerator.html" />
+				<item name="API Docs: Javadoc (native)" href="reports/javadoc.html" />
+				<item name="API Docs: Doxygen" href="reports/doxygen.html" />
+				<item name="Code Quality: Checkstyle" href="reports/checkstyle.html" />
+				<item name="Code Quality: PMD" href="reports/pmd.html" />
+				<item name="Code Quality: CPD" href="reports/cpd.html" />
+				<item name="Code Quality: SpotBugs" href="reports/spotbugs.html" />
 		</menu>
 
 		<footer><![CDATA[All rights reserved.]]></footer>

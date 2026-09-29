@@ -58,7 +58,7 @@
 	<description>Maven Example Template Project</description>
 	<organization>
 		<name>Recep Tayyip Erdogan University</name>
-		<url>www.erdogan.edu.tr</url>
+		<url>https://www.erdogan.edu.tr</url>
 	</organization>
 	<!-- Environment Settings -->
 	<issueManagement>
@@ -69,7 +69,7 @@
 		<system>Github</system>
 		<notifiers>
 			<notifier>
-				<address>ugur.coruh@erdogan.edu.tr</address>
+				<address>mailto:ugur.coruh@erdogan.edu.tr</address>
 				<sendOnSuccess>true</sendOnSuccess>
 				<sendOnError>true</sendOnError>
 				<sendOnFailure>true</sendOnFailure>
@@ -355,12 +355,26 @@
 				</configuration>
 				<reportSets>
 					<reportSet>
-						<!-- Main-source API docs only: test classes are package-private by
-							design (plain JUnit 5 style), so the separate "Test Javadoc" report
-							has nothing public to document and only fails. -->
+						<!-- Main-source API docs: the public API reference linked from the
+							site's "API Docs" report page. -->
 						<reports>
 							<report>javadoc</report>
 						</reports>
+					</reportSet>
+					<reportSet>
+						<id>test-javadoc</id>
+						<!-- Test classes are package-private by design (plain JUnit 5
+							style), so this report has little to document - it exists so
+							the JXR test-source cross-reference's per-class Javadoc links
+							(xref-test/**, which always point at testapidocs/**) resolve
+							instead of 404ing. <show>package</show> makes package-private
+							test classes/methods actually appear here. -->
+						<reports>
+							<report>test-javadoc</report>
+						</reports>
+						<configuration>
+							<show>package</show>
+						</configuration>
 					</reportSet>
 				</reportSets>
 			</plugin>
