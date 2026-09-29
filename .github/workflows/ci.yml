@@ -1,9 +1,13 @@
 name: Build and Test
 
-# Lean, fast feedback on every push/PR: compile + run the JUnit5 test suite
-# only. The full report/site/release pipeline lives in release.yml and only
-# runs on a version tag or a manual dispatch, so this workflow stays well
-# under a minute or two of Actions time per push.
+# Two jobs on every push/PR:
+#  - build: compile + run the JUnit5 test suite (fast, seconds).
+#  - site: the full report/site pipeline (Doxygen, ReportGenerator,
+#    coverxygen/genhtml, mvn site), uploaded as a downloadable artifact so a
+#    PR reviewer can preview the site without waiting for a release. This is
+#    the same pipeline release.yml and pages.yml run, just without publishing
+#    anything - a few minutes of Actions time per push (see release.yml's
+#    header comment for the breakdown).
 on:
   push:
   pull_request:
@@ -16,10 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up JDK 17 (Temurin)
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: "17"
@@ -30,8 +34,58 @@ jobs:
 
       - name: Upload Surefire report on failure
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: surefire-reports
           path: calculator-app/target/surefire-reports
+          retention-days: 7
+
+  site:
+    name: Build full site + every report (artifact preview)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up JDK 17 (Temurin)
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Set up .NET (for the ReportGenerator global tool)
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Set up Python (for coverxygen)
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install native tools (doxygen, lcov/genhtml, zip)
+        run: sudo apt-get update && sudo apt-get install -y doxygen lcov zip
+
+      - name: Install coverxygen
+        run: python3 -m pip install --user coverxygen
+
+      - name: Install the ReportGenerator global tool
+        run: dotnet tool install --global dotnet-reportgenerator-globaltool
+
+      - name: Put dotnet tools and the pip user base on PATH
+        run: |
+          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
+          echo "$(python3 -m site --user-base)/bin" >> "$GITHUB_PATH"
+
+      - name: Build, test, generate every report and the site
+        run: |
+          chmod +x 7-build-app.sh
+          ./7-build-app.sh
+
+      - name: Upload the site as an artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: maven-site-preview
+          path: calculator-app/target/site
           retention-days: 7

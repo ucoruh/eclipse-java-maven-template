@@ -1,0 +1,101 @@
+name: Deploy Site to GitHub Pages
+
+# Builds the full Maven site (every report, both families, landing page,
+# report iframe pages) and publishes it to the gh-pages branch, which is
+# what serves https://<owner>.github.io/<repo>/. Runs on every push to main
+# so the live site always matches main, and can also be triggered by hand.
+#
+# Private-repo note: GitHub Pages only works on a private repo with GitHub
+# Pro/Team (or the free Student Developer Pack, which grants Pro - see
+# docs/guide/releases-en.md). This workflow detects a private repository and
+# skips the deploy unless the repository variable PAGES_ON_PRIVATE is set to
+# "true", explaining why in both a ::notice annotation and the run's step
+# summary. Releases (release.yml) are unaffected - they work on Free too.
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy-pages:
+    name: Build site and deploy to gh-pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Check whether Pages should run on this (possibly private) repo
+        id: gate
+        run: |
+          if [ "${{ github.event.repository.private }}" = "true" ] && [ "${{ vars.PAGES_ON_PRIVATE }}" != "true" ]; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            MSG="This repository is private and the 'PAGES_ON_PRIVATE' repository variable is not 'true', so the GitHub Pages deploy was skipped (GitHub Pages needs GitHub Pro/Team, or the free Student Developer Pack, on a private repo). The full site is still attached to every release as site.zip - see docs/guide/releases-en.md. To enable Pages here once you have Pro: Settings -> Secrets and variables -> Actions -> Variables -> New repository variable, name PAGES_ON_PRIVATE, value true, then also turn Pages on under Settings -> Pages."
+            echo "::notice title=GitHub Pages skipped (private repo)::$MSG"
+            {
+              echo "## GitHub Pages deploy skipped"
+              echo ""
+              echo "$MSG"
+            } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "## GitHub Pages deploy"
+              echo ""
+              echo "Building the full site and publishing it to the \`gh-pages\` branch."
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Set up JDK 17 (Temurin)
+        if: steps.gate.outputs.run == 'true'
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Set up .NET (for the ReportGenerator global tool)
+        if: steps.gate.outputs.run == 'true'
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Set up Python (for coverxygen)
+        if: steps.gate.outputs.run == 'true'
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install native tools (doxygen, lcov/genhtml, zip)
+        if: steps.gate.outputs.run == 'true'
+        run: sudo apt-get update && sudo apt-get install -y doxygen lcov zip
+
+      - name: Install coverxygen
+        if: steps.gate.outputs.run == 'true'
+        run: python3 -m pip install --user coverxygen
+
+      - name: Install the ReportGenerator global tool
+        if: steps.gate.outputs.run == 'true'
+        run: dotnet tool install --global dotnet-reportgenerator-globaltool
+
+      - name: Put dotnet tools and the pip user base on PATH
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
+          echo "$(python3 -m site --user-base)/bin" >> "$GITHUB_PATH"
+
+      - name: Build, test, generate every report and the site
+        if: steps.gate.outputs.run == 'true'
+        run: |
+          chmod +x 7-build-app.sh
+          ./7-build-app.sh
+
+      - name: Deploy to gh-pages
+        if: steps.gate.outputs.run == 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./calculator-app/target/site
