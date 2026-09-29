@@ -2,132 +2,164 @@
 
 @file CalculatorAppTest.java
 @brief This file contains the test cases for the CalculatorApp class.
-@details This file includes test methods to validate the functionality of the CalculatorApp class. It uses JUnit for unit testing.
+@details This file includes test methods to validate the functionality of the CalculatorApp class. It uses JUnit 5
+         (Jupiter) for unit testing. None of these tests touch System.in: CalculatorApp#run takes its input only
+         from the argument array, so it never blocks and is safe to run from a script or CI pipeline.
 */
 package com.ucoruh.calculator;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
 /**
 
 @class CalculatorAppTest
 @brief This class represents the test class for the CalculatorApp class.
-@details The CalculatorAppTest class provides test methods to verify the behavior of the CalculatorApp class. It includes test methods for successful execution, object creation, and error handling scenarios.
+@details The CalculatorAppTest class provides test methods to verify the behavior of CalculatorApp#run for normal
+         operation, boundary/edge input (missing or extra arguments) and invalid input (non-numeric operands,
+         unknown operator, division by zero).
 @author ugur.coruh
 */
-public class CalculatorAppTest {
+class CalculatorAppTest {
 
-  /**
-   * @brief This method is executed once before all test methods.
-   * @throws Exception
-   */
-  @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
+  @Nested
+  @DisplayName("run: normal input")
+  class NormalInput {
+
+    @Test
+    @DisplayName("adds two numbers")
+    void add() {
+      assertEquals("5", CalculatorApp.run(new String[] {"2", "+", "3"}));
+    }
+
+    @Test
+    @DisplayName("subtracts two numbers")
+    void subtract() {
+      assertEquals("-1", CalculatorApp.run(new String[] {"2", "-", "3"}));
+    }
+
+    @Test
+    @DisplayName("multiplies two numbers")
+    void multiply() {
+      assertEquals("12", CalculatorApp.run(new String[] {"3", "*", "4"}));
+    }
+
+    @Test
+    @DisplayName("divides two numbers")
+    void divide() {
+      assertEquals("2.0", CalculatorApp.run(new String[] {"6", "/", "3"}));
+    }
   }
 
-  /**
-   * @brief This method is executed once after all test methods.
-   * @throws Exception
-   */
-  @AfterClass
-  public static void tearDownAfterClass() throws Exception {
+  @Nested
+  @DisplayName("run: boundary / edge input")
+  class BoundaryInput {
+
+    @Test
+    @DisplayName("no arguments prints usage instead of blocking")
+    void noArguments() {
+      assertEquals(CalculatorApp.USAGE, CalculatorApp.run(new String[] {}));
+    }
+
+    @Test
+    @DisplayName("null argument array prints usage instead of throwing")
+    void nullArguments() {
+      assertEquals(CalculatorApp.USAGE, CalculatorApp.run(null));
+    }
+
+    @Test
+    @DisplayName("too few arguments prints usage")
+    void tooFewArguments() {
+      assertEquals(CalculatorApp.USAGE, CalculatorApp.run(new String[] {"1", "+"}));
+    }
+
+    @Test
+    @DisplayName("too many arguments prints usage")
+    void tooManyArguments() {
+      assertEquals(CalculatorApp.USAGE, CalculatorApp.run(new String[] {"1", "+", "2", "3"}));
+    }
+
+    @Test
+    @DisplayName("Integer.MAX_VALUE operand is accepted")
+    void maxIntOperand() {
+      assertEquals("2147483647", CalculatorApp.run(new String[] {"2147483647", "+", "0"}));
+    }
   }
 
-  /**
-   * @brief This method is executed before each test method.
-   * @throws Exception
-   */
-  @Before
-  public void setUp() throws Exception {
+  @Nested
+  @DisplayName("run: invalid input")
+  class InvalidInput {
+
+    @Test
+    @DisplayName("non-numeric first operand is reported, not thrown")
+    void nonNumericFirstOperand() {
+      String result = CalculatorApp.run(new String[] {"abc", "+", "3"});
+      assertTrue(result.startsWith("Error: operands must be integers"));
+    }
+
+    @Test
+    @DisplayName("non-numeric second operand is reported, not thrown")
+    void nonNumericSecondOperand() {
+      String result = CalculatorApp.run(new String[] {"3", "+", "xyz"});
+      assertTrue(result.startsWith("Error: operands must be integers"));
+    }
+
+    @Test
+    @DisplayName("unknown operator is reported, not thrown")
+    void unknownOperator() {
+      String result = CalculatorApp.run(new String[] {"1", "%", "2"});
+      assertTrue(result.startsWith("Error: unknown operator"));
+    }
+
+    @Test
+    @DisplayName("division by zero is reported, not thrown")
+    void divisionByZero() {
+      assertEquals("Error: division by zero", CalculatorApp.run(new String[] {"1", "/", "0"}));
+    }
   }
 
-  /**
-   * @brief This method is executed after each test method.
-   * @throws Exception
-   */
-  @After
-  public void tearDown() throws Exception {
-  }
+  @Nested
+  @DisplayName("main: prints run()'s result and returns without reading stdin")
+  class MainMethod {
 
-  /**
-   * @brief Test method to validate the successful execution of the main method.
-   *
-   * @details This method redirects the System.in and System.out streams to simulate user input and capture the output. It calls the main method of CalculatorApp with a valid argument and asserts the expected behavior based on the output.
-   */
-  @Test
-  public void testMainSuccess() {
-    // Redirect System.in and System.out
-    InputStream originalIn = System.in;
-    PrintStream originalOut = System.out;
-    // Create a ByteArrayInputStream with the desired input
-    String input = System.lineSeparator(); // Pressing "Enter" key
-    ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
-    // Redirect System.in to the ByteArrayInputStream
-    System.setIn(inputStream);
-    // Create a ByteArrayOutputStream to capture the output
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outputStream));
-    String[] args = new String[] {"0"};
-    // Call the main method of CalculatorApp
-    CalculatorApp.main(args);
-    // Restore original System.in and System.out
-    System.setIn(originalIn);
-    System.setOut(originalOut);
-    // Assert the desired behavior based on the output
-    assertTrue(true);
-  }
+    private final PrintStream originalOut = System.out;
+    private ByteArrayOutputStream capturedOut;
 
-  /**
-   * @brief Test method to validate the object creation of CalculatorApp.
-   *
-   * @details This method creates an instance of the CalculatorApp class and asserts the successful creation of the object.
-   */
-  @Test
-  public void testMainObject() {
-    // Creating an instance of CalculatorApp
-    CalculatorApp app = new CalculatorApp();
-    // Asserting the successful creation of the object
-    assertTrue(true);
-  }
+    @BeforeEach
+    void redirectOut() {
+      capturedOut = new ByteArrayOutputStream();
+      System.setOut(new PrintStream(capturedOut, true, StandardCharsets.UTF_8));
+    }
 
-  /**
-   * @brief Test method to validate the error handling of the main method.
-   *
-   * @details This method redirects the System.in and System.out streams to simulate user input and capture the output. It calls the main method of CalculatorApp with an invalid argument and asserts the expected behavior based on the output.
-   */
-  @Test
-  public void testMainError() {
-    // Redirect System.in and System.out
-    InputStream originalIn = System.in;
-    PrintStream originalOut = System.out;
-    // Create a ByteArrayInputStream with the desired input
-    String input = System.lineSeparator(); // Pressing "Enter" key
-    ByteArrayInputStream inputStream = new ByteArrayInputStream(input.getBytes());
-    // Redirect System.in to the ByteArrayInputStream
-    System.setIn(inputStream);
-    // Create a ByteArrayOutputStream to capture the output
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    System.setOut(new PrintStream(outputStream));
-    String[] args = new String[] {"1"};
-    // Call the main method of CalculatorApp
-    CalculatorApp.main(args);
-    // Restore original System.in and System.out
-    System.setIn(originalIn);
-    System.setOut(originalOut);
-    // Assert the desired behavior based on the output
-    assertTrue(true);
-  }
+    @AfterEach
+    void restoreOut() {
+      System.setOut(originalOut);
+    }
 
+    @Test
+    @DisplayName("prints the computed result and exits without waiting for input")
+    void printsResult() {
+      // System.in is intentionally left untouched: main() must complete without
+      // ever reading from it.
+      CalculatorApp.main(new String[] {"4", "*", "5"});
+      assertEquals("20", capturedOut.toString(StandardCharsets.UTF_8).trim());
+    }
+
+    @Test
+    @DisplayName("prints the usage message for invalid arguments and exits")
+    void printsUsageForInvalidArguments() {
+      CalculatorApp.main(new String[] {"not-enough-args"});
+      assertEquals(CalculatorApp.USAGE, capturedOut.toString(StandardCharsets.UTF_8).trim());
+    }
+  }
 }

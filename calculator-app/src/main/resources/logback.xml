@@ -1,5 +1,8 @@
 <configuration>
+  <!-- Logs go to stderr, not stdout: CalculatorApp's actual result is the only
+       thing printed to stdout, so scripts can safely capture/parse it. -->
   <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <target>System.err</target>
     <encoder>
       <pattern>%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
     </encoder>
