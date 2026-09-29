@@ -65,7 +65,8 @@ echo -----------------------------------------------------------
 where gh >nul 2>&1
 if errorlevel 1 (
     echo [ERROR] GitHub CLI "gh" not found. Fix: choco install gh -y
-    exit /b 1
+    if "%DRYRUN%"=="1" echo [DRY RUN] Continuing without gh - a real release needs it.
+    if "%DRYRUN%"=="0" exit /b 1
 )
 gh auth status >nul 2>&1
 if errorlevel 1 (
@@ -73,7 +74,8 @@ if errorlevel 1 (
     echo Fix: gh auth login
     echo ^(see docs\guide\releases-en.md for a step-by-step walkthrough,
     echo including the GitHub Student Developer Pack^)
-    exit /b 1
+    if "%DRYRUN%"=="1" echo [DRY RUN] Continuing without gh - a real release needs it.
+    if "%DRYRUN%"=="0" exit /b 1
 )
 
 echo -----------------------------------------------------------

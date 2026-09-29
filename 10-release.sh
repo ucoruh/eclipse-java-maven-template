@@ -43,13 +43,13 @@ fi
 echo "-----------------------------------------------------------"
 echo "2. Check the GitHub CLI is installed and logged in"
 echo "-----------------------------------------------------------"
-command -v gh >/dev/null 2>&1 || { echo "[ERROR] GitHub CLI 'gh' not found - see docs/guide/releases-en.md." >&2; exit 1; }
+command -v gh >/dev/null 2>&1 || { echo "[ERROR] GitHub CLI 'gh' not found - see docs/guide/releases-en.md." >&2; [ "$DRYRUN" = "1" ] || exit 1; }
 if ! gh auth status >/dev/null 2>&1; then
     echo "[ERROR] gh is not logged in to GitHub." >&2
     echo "Fix: gh auth login" >&2
     echo "(see docs/guide/releases-en.md for a step-by-step walkthrough," >&2
     echo " including the GitHub Student Developer Pack)" >&2
-    exit 1
+    if [ "$DRYRUN" = "1" ]; then echo "[DRY RUN] Continuing without gh - a real release needs it."; else exit 1; fi
 fi
 
 echo "-----------------------------------------------------------"
