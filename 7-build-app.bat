@@ -132,13 +132,18 @@ if not defined GENHTML (
         exit /b 1
     )
 )
-where perl >nul 2>&1
-if errorlevel 1 (
-    echo [ERROR] perl not found on PATH ^(genhtml is a Perl script^).
+rem genhtml is a Perl script. The perl that ships with Git (Git\usr\bin\perl.exe, often first on PATH)
+rem cannot read Windows paths ("genhtml: ERROR: cannot read C:/..."), so pick a Windows-native perl.
+set "PERL="
+for /f "delims=" %%P in ('where perl 2^>nul ^| findstr /V /I /L /C:"\usr\bin"') do if not defined PERL set "PERL=%%P"
+if not defined PERL (
+    echo [ERROR] No Windows-native perl found - genhtml needs one.
+    echo         The perl that ships with Git cannot read Windows paths.
     echo Fix: choco install strawberryperl -y
     exit /b 1
 )
-call perl "%GENHTML%" --legend --title "Documentation Coverage Report" "calculator-app\target\site\coverxygen\lcov.info" -o "calculator-app\target\site\coverxygen"
+echo Using perl: %PERL%
+call "%PERL%" "%GENHTML%" --legend --title "Documentation Coverage Report" "calculator-app\target\site\coverxygen\lcov.info" -o "calculator-app\target\site\coverxygen"
 if errorlevel 1 (
     echo [ERROR] genhtml failed - see the output above.
     exit /b 1
