@@ -1,5 +1,25 @@
 # eclipse-java-maven-template
 
+## Start here: step-by-step guides (English / Türkçe)
+
+This README below is a **historical build log** - a "how this template was originally put together" narrative,
+kept for background. It still uses the original tutorial's numbers (Java 8, JUnit 4, older plugin versions); the
+**current, maintained instructions** live in `docs/guide/` - start there:
+
+| Topic | English | Türkçe |
+|---|---|---|
+| Install everything (Windows + Linux/WSL) | [install-en.md](docs/guide/install-en.md) | [install-tr.md](docs/guide/install-tr.md) |
+| Use this template | [use-template-en.md](docs/guide/use-template-en.md) | [use-template-tr.md](docs/guide/use-template-tr.md) |
+| From a project topic to your own project | [from-topic-en.md](docs/guide/from-topic-en.md) | [from-topic-tr.md](docs/guide/from-topic-tr.md) |
+| Daily workflow (branch/commit/push/CI, reports) | [workflow-en.md](docs/guide/workflow-en.md) | [workflow-tr.md](docs/guide/workflow-tr.md) |
+| Private repo: releases and the site | [releases-en.md](docs/guide/releases-en.md) | [releases-tr.md](docs/guide/releases-tr.md) |
+| Troubleshooting | [troubleshooting-en.md](docs/guide/troubleshooting-en.md) | [troubleshooting-tr.md](docs/guide/troubleshooting-tr.md) |
+| Reports across the 3 course templates | [toolchain-comparison-en.md](docs/guide/toolchain-comparison-en.md) | [toolchain-comparison-tr.md](docs/guide/toolchain-comparison-tr.md) |
+
+The current toolchain (see `calculator-app/pom.xml`): **Java 17**, **JUnit 5 (Jupiter)**, current Maven plugin
+versions, JaCoCo, ReportGenerator, Doxygen, Javadoc and the rest of the `mvn site` reporting set - all pinned to
+today's stable releases and re-verified by running every numbered script end to end (see `docs/guide/`).
+
 # Overview
 
 You will generate eclipse maven project with Junit4 from CLI and. Also you will generate jar and then you will run your application. For more information you can check examples [Maven – Maven in 5 Minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html) and [TheNEXUS | A Community Project](https://books.sonatype.com/mvnref-book/reference/index.html)
