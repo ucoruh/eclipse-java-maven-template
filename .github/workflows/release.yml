@@ -1,224 +1,93 @@
-name: Maven Java Release with Test Coverage Control
+name: Release
 
+# Full pipeline: build, both coverage-report families, both doc-coverage
+# families, API docs (Javadoc + Doxygen), Maven site, then a GitHub Release
+# with everything attached. This is the CI alternative to running
+# 10-release.bat / 10-release.sh locally (see docs/guide/releases-en.md).
+#
+# It only runs on a version tag push or a manual dispatch - never on every
+# push/PR - so it does not eat into GitHub Actions' free minutes
+# (2,000 min/month on Free, 3,000 on Pro) on routine commits. A typical run
+# takes roughly 4-6 minutes (Maven build+test, Doxygen, ReportGenerator,
+# coverxygen/genhtml, mvn site).
 on:
   push:
-    #branches:
-    #  - main
     tags:
-      - 'v*'
-  pull_request:
-    branches:
-      - main
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      deploy_pages:
+        description: >
+          Also deploy target/site to GitHub Pages. Only works if Pages is
+          enabled on this repo - on a private repo that needs GitHub
+          Pro/Team (or the free Student Developer Pack). See
+          docs/guide/releases-en.md.
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
-  build:
-    name: Check and Generate Release
+  build-and-release:
+    name: Build, package reports, create release
     runs-on: ubuntu-latest
-    permissions:
-        contents: read
-        issues: read
-        checks: write
-        pull-requests: write
     steps:
-   
-      - name: Configure Long Paths for Git
-        #run: sudo git config --global core.longpaths true
-        run: sudo git config --system core.longpaths true
-        shell: bash
-        
-      - name: Checkout Source Code from Github
-        uses: actions/checkout@v3
-        
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v3
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Setup Java
-        uses: actions/setup-java@v3
+      - name: Set up JDK 17 (Temurin)
+        uses: actions/setup-java@v4
         with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
-          java-version: '17'
+          distribution: temurin
+          java-version: "17"
+          cache: maven
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Set up .NET (for the ReportGenerator global tool)
+        uses: actions/setup-dotnet@v4
         with:
-          python-version: '3.x'
-          
-      - name: Install Doxygen
-        run: sudo apt-get install doxygen -y
-        shell: bash
-          
-      - name: Install LCOV
-        run: sudo apt-get install lcov
-        shell: bash
-        
+          dotnet-version: "8.0.x"
+
+      - name: Set up Python (for coverxygen)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install native tools (doxygen, lcov/genhtml, zip)
+        run: sudo apt-get update && sudo apt-get install -y doxygen lcov zip
+
       - name: Install coverxygen
-        run: pip3 install coverxygen
-        shell: bash
-        
-      - name: Install libxml2-utils
-        run: sudo apt-get install -y libxml2-utils
-        shell: bash
+        run: python3 -m pip install --user coverxygen
 
-      - name: Perform Maven clean, test, and packaging
-        run: mvn clean test package
-        working-directory: ./calculator-app
+      - name: Install the ReportGenerator global tool
+        run: dotnet tool install --global dotnet-reportgenerator-globaltool
 
-      - name: Generate Folders
+      - name: Put dotnet tools and the pip user base on PATH
         run: |
-            currentDir=$(pwd)
-            mkdir -p $currentDir/target/site/assets
-            mkdir -p $currentDir/target/site/coverxygen
-            mkdir -p $currentDir/target/site/doxygen
-            mkdir -p $currentDir/target/site/coveragereport
-        working-directory: ./calculator-app
-                
-      - name: Check Test Coverage
+          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
+          echo "$(python3 -m site --user-base)/bin" >> "$GITHUB_PATH"
+
+      - name: Build, test, generate every report and the site
         run: |
-          # Parse the JaCoCo XML report and check coverage percentage
-          covered=$(xmllint --xpath "string(//counter[@type='INSTRUCTION']/@covered)" target/site/jacoco/jacoco.xml)
-          missed=$(xmllint --xpath "string(//counter[@type='INSTRUCTION']/@missed)" target/site/jacoco/jacoco.xml)
-          total=$((covered + missed))
-          coverage_percentage=$(awk "BEGIN { print ($covered / $total) * 100 }")
-          # Check if coverage is 100%
-          if (( $(echo "$coverage_percentage == 100" | bc -l) )); then
-            echo "Test coverage is 100%!"
-          else
-            echo "Test coverage is not 100%."
-            exit 1  # Fail the GitHub Actions workflow
-          fi
-          echo "Coverage Percentage: $coverage_percentage"
-          echo "Covered: $covered"
-          echo "Missed: $missed"
-        working-directory: ./calculator-app
+          chmod +x 7-build-app.sh
+          ./7-build-app.sh
 
-      - name: Install ReportGenerator
-        run: dotnet tool install -g dotnet-reportgenerator-globaltool
-        
-      - name: Generate Doxygen HTML and XML Documentation
-        run: doxygen Doxyfile
-        shell: bash
-
-      - name: Generate ReportGenerator HTML Report
-        run: | 
-          reportgenerator "-reports:target/site/jacoco/jacoco.xml" "-sourcedirs:src/main/java" "-targetdir:target/site/coveragereport" -reporttypes:Html
-          reportgenerator "-reports:target/site/jacoco/jacoco.xml" "-sourcedirs:src/main/java" "-targetdir:target/site/coveragereport" -reporttypes:Badges
-        working-directory: ./calculator-app
-
-      - name: Run Coverxygen
+      - name: Zip the site (release/site.zip)
         run: |
-            currentDir=$(pwd)
-            mkdir -p $currentDir/calculator-app/target/site/coverxygen
-            python -m coverxygen --xml-dir $currentDir/calculator-app/target/site/doxygen/xml --src-dir $currentDir --format lcov --output $currentDir/calculator-app/target/site/coverxygen/lcov.info --prefix $currentDir/calculator-app/
-        
-      - name: Run genhtml
-        run: genhtml ./calculator-app/target/site/coverxygen/lcov.info --legend --title "Documentation Coverage Report" -o calculator-app/target/site/coverxygen
+          rm -f release/site.zip
+          (cd calculator-app/target/site && zip -rq ../../../release/site.zip .)
 
-      - name: Copy Folders
-        run: |
-            cp "calculator-app/target/site/coveragereport/badge_combined.svg" "assets/badge_combined.svg"
-            cp "calculator-app/target/site/coveragereport/badge_combined.svg" "assets/badge_combined.svg"
-            cp "calculator-app/target/site/coveragereport/badge_branchcoverage.svg" "assets/badge_branchcoverage.svg"
-            cp "calculator-app/target/site/coveragereport/badge_linecoverage.svg" "assets/badge_linecoverage.svg"
-            cp "calculator-app/target/site/coveragereport/badge_methodcoverage.svg" "assets/badge_methodcoverage.svg"    
-            cp "assets/rteu_logo.jpg" "calculator-app/src/site/resources/images/rteu_logo.jpg"
-            cp README.md "calculator-app/src/site/markdown/readme.md"
-            cp -r ./assets/ ./calculator-app/src/site/resources
-        shell: bash
+      - name: Create GitHub Release with every report attached
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release/*
+          generate_release_notes: true
 
-      - name: Perform Maven site generation
-        run: mvn site
-        working-directory: ./calculator-app
-
-      #- name: Archive Coverage Report
-      #  uses: actions/upload-artifact@v2
-      #  with:
-      #    name: coverage-report
-      #    path: coveragereport
-          
-      - name: Get Commit Summary
-        id: commit_summary
-        run: echo "::set-output name=summary::$(git log --format=%B -n 10 ${{ github.sha }})"
-
-      - name: Create Release
-        id: create_common_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+      - name: Deploy site to GitHub Pages (manual dispatch only)
+        if: github.event_name == 'workflow_dispatch' && inputs.deploy_pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            Changes in this release:
-            ${{ steps.commit_summary.outputs.summary }}
-            
-            Asst. Prof. Dr. Ugur CORUH
-          draft: false
-          prerelease: false
-                
-      - name: Compress Test Coverage Report
-        run: tar -czvf test-coverage-report.tar.gz -C calculator-app/target/site/coveragereport .
-        
-      - name: Compress Doc Coverage Report
-        run: tar -czvf doc-coverage-report.tar.gz -C calculator-app/target/site/coverxygen .
-
-      - name: Compress Doxygen Documentation
-        run: tar -czvf app-documents.tar.gz -C calculator-app/target/site/doxygen .
-                
-      - name: Compress Web Site
-        run: tar -czvf app-website.tar.gz -C calculator-app/target/site .
-        
-      - name: Upload release asset
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./calculator-app/target/calculator-app-1.0-SNAPSHOT.jar
-          asset_name: calculator.jar
-          asset_content_type: application/jar
-        env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
-          
-      - name: Upload Test Coverage Report
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./test-coverage-report.tar.gz
-          asset_name: test-coverage-report.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
-          
-      - name: Upload Doc Coverage Report
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./doc-coverage-report.tar.gz
-          asset_name: doc-coverage-report.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
-          
-      - name: Upload Doxygen Documentation
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./app-documents.tar.gz
-          asset_name: app-documents.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
-          
-      - name: Upload Web Site
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_common_release.outputs.upload_url }}
-          asset_path: ./app-website.tar.gz
-          asset_name: app-website.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
-          
-      - name: Deploy Web Site
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.MAVEN_TEMPLATE_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./calculator-app/target/site

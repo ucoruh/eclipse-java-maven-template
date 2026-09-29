@@ -1,0 +1,37 @@
+name: Build and Test
+
+# Lean, fast feedback on every push/PR: compile + run the JUnit5 test suite
+# only. The full report/site/release pipeline lives in release.yml and only
+# runs on a version tag or a manual dispatch, so this workflow stays well
+# under a minute or two of Actions time per push.
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: mvn clean test package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Build and test
+        run: mvn -B -f calculator-app/pom.xml clean test package
+
+      - name: Upload Surefire report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: calculator-app/target/surefire-reports
+          retention-days: 7
