@@ -4,7 +4,8 @@ set -e
 cd "$(dirname "$0")"
 
 # This installs exactly what this repo's own scripts use on Linux/WSL:
-#   astyle, doxygen, graphviz (optional), lcov (genhtml), curl
+#   astyle, doxygen, graphviz (optional), lcov (genhtml), curl, zip (per-report
+#   download bundles in target/site/downloads/, see 7-build-app.sh)
 #   -> via apt-get, only if missing
 #   reportgenerator (dotnet tool) -> 7-build-app.sh
 #   coverxygen (python3 pip package) -> 7-build-app.sh
@@ -28,8 +29,9 @@ if command -v apt-get >/dev/null 2>&1; then
     install_apt graphviz dot
     install_apt lcov genhtml
     install_apt curl
+    install_apt zip
 else
-    echo "[ERROR] apt-get not found. Install astyle, doxygen, graphviz, lcov and curl" >&2
+    echo "[ERROR] apt-get not found. Install astyle, doxygen, graphviz, lcov, curl and zip" >&2
     echo "        with your distribution's package manager." >&2
     exit 1
 fi

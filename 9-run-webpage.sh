@@ -15,7 +15,10 @@ open_url() {
 }
 
 if [ "$1" = "--serve" ]; then
-    echo "Running a live Maven site server (rebuilds from src/site on demand)..."
+    echo "Running a live Maven site dev server (rebuilds pages from src/site on"
+    echo "demand). Only useful while editing site.xml/markdown - the report"
+    echo "pages need a full '7-build-app.sh' run first so their iframes have"
+    echo "something to point at."
     echo "Open http://localhost:9000/ - Use CTRL+C to stop."
     open_url "http://localhost:9000/"
     mvn -f calculator-app/pom.xml site:run
@@ -25,8 +28,23 @@ else
         echo "[ERROR] $INDEX not found. Build it first: ./7-build-app.sh" >&2
         exit 1
     fi
-    echo "Opening the already-built static site in your default browser..."
-    open_url "file://$(pwd)/$INDEX"
+    PORT="${2:-8000}"
+    PYTHON=""
+    if command -v python3 >/dev/null 2>&1; then
+        PYTHON=python3
+    elif command -v python >/dev/null 2>&1; then
+        PYTHON=python
+    else
+        echo "[ERROR] Neither python3 nor python was found on PATH." >&2
+        echo "        Install Python 3, or use './9-run-webpage.sh --serve' instead." >&2
+        exit 1
+    fi
+    echo "Serving the already-built static site with a local HTTP server."
+    echo "(Report pages use an <iframe> - most browsers block iframes on a"
+    echo "file:// page, so this must be served over http://, not opened directly.)"
+    echo "Open http://localhost:$PORT/ - Use CTRL+C to stop."
+    open_url "http://localhost:$PORT/"
+    "$PYTHON" -m http.server "$PORT" --directory "calculator-app/target/site"
 fi
 
 echo "Operation Completed!"

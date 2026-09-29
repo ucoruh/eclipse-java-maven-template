@@ -21,6 +21,7 @@ if exist "calculator-app\target\site\coverxygen" rd /S /Q "calculator-app\target
 if exist "calculator-app\target\site\coverxygen-reportgenerator" rd /S /Q "calculator-app\target\site\coverxygen-reportgenerator"
 if exist "calculator-app\target\site\coveragereport" rd /S /Q "calculator-app\target\site\coveragereport"
 if exist "calculator-app\target\site\doxygen" rd /S /Q "calculator-app\target\site\doxygen"
+if exist "calculator-app\target\site\downloads" rd /S /Q "calculator-app\target\site\downloads"
 if exist "release" rd /S /Q "release"
 mkdir "release"
 
@@ -146,9 +147,9 @@ if errorlevel 1 (
 echo -----------------------------------------------------------
 echo 8. ReportGenerator on the same lcov.info (documentation coverage,
 echo    ReportGenerator family - shows the exact same data as step 7,
-echo    rendered differently)
+echo    rendered differently) plus a doc-coverage badge for the landing page
 echo -----------------------------------------------------------
-call reportgenerator "-reports:calculator-app\target\site\coverxygen\lcov.info" "-targetdir:calculator-app\target\site\coverxygen-reportgenerator" "-historydir:report_doc_coverage_hist" -reporttypes:Html
+call reportgenerator "-reports:calculator-app\target\site\coverxygen\lcov.info" "-targetdir:calculator-app\target\site\coverxygen-reportgenerator" "-historydir:report_doc_coverage_hist" "-reporttypes:Html;Badges"
 if errorlevel 1 (
     echo [ERROR] reportgenerator failed on the coverxygen lcov.info - see the output above.
     exit /b 1
@@ -161,6 +162,9 @@ copy /Y "calculator-app\target\site\coveragereport\badge_combined.svg" "assets\b
 copy /Y "calculator-app\target\site\coveragereport\badge_branchcoverage.svg" "assets\badge_branchcoverage.svg" >nul
 copy /Y "calculator-app\target\site\coveragereport\badge_linecoverage.svg" "assets\badge_linecoverage.svg" >nul
 copy /Y "calculator-app\target\site\coveragereport\badge_methodcoverage.svg" "assets\badge_methodcoverage.svg" >nul
+if exist "calculator-app\target\site\coverxygen-reportgenerator\badge_combined.svg" (
+    copy /Y "calculator-app\target\site\coverxygen-reportgenerator\badge_combined.svg" "assets\badge_doccoverage.svg" >nul
+)
 
 copy /Y "assets\rteu_logo.jpg" "calculator-app\src\site\resources\images\rteu_logo.jpg" >nul
 robocopy "assets" "calculator-app\src\site\resources\assets" /E >nul
@@ -169,6 +173,15 @@ if errorlevel 8 (
     exit /b 1
 )
 copy /Y README.md "calculator-app\src\site\markdown\readme.md" >nul
+rem README.md's docs/guide/*.md and LICENSE links are relative on purpose (best
+rem for GitHub's own rendering); rewrite them to absolute GitHub blob URLs in
+rem the SITE's copy only, since docs/guide/*.md and LICENSE are not part of the
+rem generated site (the site's readme.html would otherwise link to 404s).
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$p='calculator-app\src\site\markdown\readme.md'; (Get-Content $p -Raw) -replace '\]\(docs/guide/', '](https://github.com/ucoruh/eclipse-java-maven-template/blob/main/docs/guide/' -replace '\]\(LICENSE\)', '](https://github.com/ucoruh/eclipse-java-maven-template/blob/main/LICENSE)' | Set-Content -NoNewline $p"
+if errorlevel 1 (
+    echo [ERROR] Failed to rewrite relative links in the site's copy of README.md.
+    exit /b 1
+)
 
 echo -----------------------------------------------------------
 echo 10. Maven site: project info, Surefire report, JaCoCo, Javadoc,
@@ -182,7 +195,40 @@ if errorlevel 1 (
 )
 
 echo -----------------------------------------------------------
-echo 11. Package the jar and every report family into release\
+echo 11. Bundle each report into calculator-app\target\site\downloads\*.zip
+echo     - this is what the "Download (zip)" button on every reports\*.html
+echo     page links to (see docs\guide\workflow-en.md). Self-contained
+echo     directory reports are zipped as-is; single-file reports (surefire,
+echo     checkstyle, pmd, cpd, spotbugs) are bundled with the shared site
+echo     css/images so they still look right when opened outside the site.
+echo -----------------------------------------------------------
+if exist "calculator-app\target\site\downloads" rd /S /Q "calculator-app\target\site\downloads"
+mkdir "calculator-app\target\site\downloads"
+
+call tar -a -cf "calculator-app\target\site\downloads\jacoco.zip" -C "calculator-app\target\site\jacoco" .
+call tar -a -cf "calculator-app\target\site\downloads\coveragereport.zip" -C "calculator-app\target\site\coveragereport" .
+call tar -a -cf "calculator-app\target\site\downloads\coverxygen.zip" -C "calculator-app\target\site\coverxygen" .
+call tar -a -cf "calculator-app\target\site\downloads\coverxygen-reportgenerator.zip" -C "calculator-app\target\site\coverxygen-reportgenerator" .
+call tar -a -cf "calculator-app\target\site\downloads\javadoc.zip" -C "calculator-app\target\site\apidocs" .
+call tar -a -cf "calculator-app\target\site\downloads\doxygen.zip" -C "calculator-app\target\site\doxygen\html" .
+
+set "BUNDLE_TMP=%TEMP%\eclipse-java-maven-template-report-bundle"
+for %%F in (surefire checkstyle pmd cpd spotbugs) do (
+    if exist "%BUNDLE_TMP%" rd /S /Q "%BUNDLE_TMP%"
+    mkdir "%BUNDLE_TMP%"
+    if exist "calculator-app\target\site\%%F.html" (
+        copy /Y "calculator-app\target\site\%%F.html" "%BUNDLE_TMP%\index.html" >nul
+        robocopy "calculator-app\target\site\css" "%BUNDLE_TMP%\css" /E >nul
+        robocopy "calculator-app\target\site\images" "%BUNDLE_TMP%\images" /E >nul
+        call tar -a -cf "calculator-app\target\site\downloads\%%F.zip" -C "%BUNDLE_TMP%" .
+    ) else (
+        echo [WARN] calculator-app\target\site\%%F.html not found - skipping its download bundle.
+    )
+)
+if exist "%BUNDLE_TMP%" rd /S /Q "%BUNDLE_TMP%"
+
+echo -----------------------------------------------------------
+echo 12. Package the jar and every report family into release\
 echo -----------------------------------------------------------
 if not exist "calculator-app\target\calculator-app-1.0-SNAPSHOT.jar" (
     echo [ERROR] calculator-app-1.0-SNAPSHOT.jar was not produced by "mvn package".
@@ -195,6 +241,14 @@ call tar -czvf "release\test-jacoco-report.tar.gz" -C "calculator-app\target\sit
 call tar -czvf "release\test-coverage-report.tar.gz" -C "calculator-app\target\site\coveragereport" .
 call tar -czvf "release\application-documentation.tar.gz" -C "calculator-app\target\site\doxygen" .
 call tar -czvf "release\doc-coverage-report.tar.gz" -C "calculator-app\target\site\coverxygen" .
+call tar -czvf "release\doc-coverage-reportgenerator-report.tar.gz" -C "calculator-app\target\site\coverxygen-reportgenerator" .
+call tar -czvf "release\api-docs-javadoc.tar.gz" -C "calculator-app\target\site\apidocs" .
+if not exist "release\test-results-surefire" mkdir "release\test-results-surefire"
+robocopy "calculator-app\target\surefire-reports" "release\test-results-surefire\xml" /E >nul
+copy /Y "calculator-app\target\site\downloads\surefire.zip" "release\test-results-surefire\surefire-report.zip" >nul 2>nul
+call tar -czvf "release\test-results-surefire.tar.gz" -C "release\test-results-surefire" .
+rd /S /Q "release\test-results-surefire"
+call git archive --format=tar.gz --output="release\source-code.tar.gz" HEAD
 call tar -czvf "release\application-site.tar.gz" -C "calculator-app\target\site" .
 
 echo ....................
@@ -202,6 +256,7 @@ echo Operation Completed!
 echo ....................
 echo Jar:               calculator-app\target\calculator-app-1.0-SNAPSHOT.jar
 echo Site:              calculator-app\target\site\index.html
+echo Report downloads:  calculator-app\target\site\downloads\
 echo Release packages:  release\
 
 rem CI runners set CI=true; skip the interactive pause there so the script

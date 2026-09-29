@@ -77,12 +77,16 @@ NOTES_FILE="$(mktemp --suffix=.md)"
 cat > "$NOTES_FILE" <<EOF
 # $VERSION
 
-Built locally with 7-build-app.bat / 7-build-app.sh.
+Built locally with 7-build-app.bat / 7-build-app.sh. This Java template's runnable jar is portable bytecode -
+application-binary.tar.gz runs unmodified on Windows, Linux and macOS with any JDK 17+.
 
-- application-binary.tar.gz - the runnable jar
+- application-binary.tar.gz - the runnable jar (cross-platform)
+- source-code.tar.gz - the source tree at this commit (git archive)
+- test-results-surefire.tar.gz - raw JUnit XML plus the rendered Surefire report
 - test-jacoco-report.tar.gz / test-coverage-report.tar.gz - unit-test coverage, native (JaCoCo) and ReportGenerator families
-- doc-coverage-report.tar.gz - documentation coverage (coverxygen, both genhtml and ReportGenerator)
+- doc-coverage-report.tar.gz / doc-coverage-reportgenerator-report.tar.gz - documentation coverage, native (genhtml) and ReportGenerator families
 - application-documentation.tar.gz - Doxygen API docs
+- api-docs-javadoc.tar.gz - Javadoc API docs
 - application-site.tar.gz / site.zip - the full Maven site (unzip site.zip and open index.html)
 EOF
 

@@ -21,6 +21,7 @@ rm -rf calculator-app/target/site/coverxygen
 rm -rf calculator-app/target/site/coverxygen-reportgenerator
 rm -rf calculator-app/target/site/coveragereport
 rm -rf calculator-app/target/site/doxygen
+rm -rf calculator-app/target/site/downloads
 rm -rf release
 mkdir -p release
 
@@ -89,12 +90,12 @@ genhtml --legend --title "Documentation Coverage Report" \
 echo "-----------------------------------------------------------"
 echo "8. ReportGenerator on the same lcov.info (documentation coverage,"
 echo "   ReportGenerator family - shows the exact same data as step 7,"
-echo "   rendered differently)"
+echo "   rendered differently) plus a doc-coverage badge for the landing page"
 echo "-----------------------------------------------------------"
 reportgenerator "-reports:calculator-app/target/site/coverxygen/lcov.info" \
     "-targetdir:calculator-app/target/site/coverxygen-reportgenerator" \
     "-historydir:report_doc_coverage_hist" \
-    -reporttypes:Html \
+    "-reporttypes:Html;Badges" \
     || fail "reportgenerator failed on the coverxygen lcov.info - see the output above."
 
 echo "-----------------------------------------------------------"
@@ -104,11 +105,22 @@ cp "calculator-app/target/site/coveragereport/badge_combined.svg" "assets/badge_
 cp "calculator-app/target/site/coveragereport/badge_branchcoverage.svg" "assets/badge_branchcoverage.svg"
 cp "calculator-app/target/site/coveragereport/badge_linecoverage.svg" "assets/badge_linecoverage.svg"
 cp "calculator-app/target/site/coveragereport/badge_methodcoverage.svg" "assets/badge_methodcoverage.svg"
+if [ -f "calculator-app/target/site/coverxygen-reportgenerator/badge_combined.svg" ]; then
+    cp "calculator-app/target/site/coverxygen-reportgenerator/badge_combined.svg" "assets/badge_doccoverage.svg"
+fi
 
 cp "assets/rteu_logo.jpg" "calculator-app/src/site/resources/images/rteu_logo.jpg"
 mkdir -p "calculator-app/src/site/resources/assets"
 cp -r assets/. "calculator-app/src/site/resources/assets/"
 cp README.md "calculator-app/src/site/markdown/readme.md"
+# README.md's docs/guide/*.md and LICENSE links are relative on purpose (best
+# for GitHub's own rendering); rewrite them to absolute GitHub blob URLs in
+# the SITE's copy only, since docs/guide/*.md and LICENSE are not part of the
+# generated site (the site's readme.html would otherwise link to 404s).
+sed -i \
+    -e 's#](docs/guide/#](https://github.com/ucoruh/eclipse-java-maven-template/blob/main/docs/guide/#g' \
+    -e 's#](LICENSE)#](https://github.com/ucoruh/eclipse-java-maven-template/blob/main/LICENSE)#g' \
+    "calculator-app/src/site/markdown/readme.md"
 
 echo "-----------------------------------------------------------"
 echo "10. Maven site: project info, Surefire report, JaCoCo, Javadoc,"
@@ -119,7 +131,46 @@ mvn -f calculator-app/pom.xml site \
     || fail "'mvn site' failed - see the Maven output above."
 
 echo "-----------------------------------------------------------"
-echo "11. Package the jar and every report family into release/"
+echo "11. Bundle each report into calculator-app/target/site/downloads/*.zip"
+echo "    - this is what the 'Download (zip)' button on every reports/*.html"
+echo "    page links to (see docs/guide/workflow-en.md). Self-contained"
+echo "    directory reports are zipped as-is; single-file reports (surefire,"
+echo "    checkstyle, pmd, cpd, spotbugs) are bundled with the shared site"
+echo "    css/images so they still look right when opened outside the site."
+echo "-----------------------------------------------------------"
+command -v zip >/dev/null 2>&1 || fail "zip not found. Install it: sudo apt-get install -y zip"
+rm -rf calculator-app/target/site/downloads
+mkdir -p calculator-app/target/site/downloads
+
+zip_dir() { # zip_dir <source-dir> <target-zip>
+    (cd "$1" && zip -rq "$OLDPWD/$2" .)
+}
+zip_dir calculator-app/target/site/jacoco calculator-app/target/site/downloads/jacoco.zip
+zip_dir calculator-app/target/site/coveragereport calculator-app/target/site/downloads/coveragereport.zip
+zip_dir calculator-app/target/site/coverxygen calculator-app/target/site/downloads/coverxygen.zip
+zip_dir calculator-app/target/site/coverxygen-reportgenerator calculator-app/target/site/downloads/coverxygen-reportgenerator.zip
+zip_dir calculator-app/target/site/apidocs calculator-app/target/site/downloads/javadoc.zip
+zip_dir calculator-app/target/site/doxygen/html calculator-app/target/site/downloads/doxygen.zip
+
+bundle_tmp="$(mktemp -d)"
+trap 'rm -rf "$bundle_tmp"' EXIT
+for f in surefire checkstyle pmd cpd spotbugs; do
+    rm -rf "$bundle_tmp"
+    mkdir -p "$bundle_tmp"
+    if [ -f "calculator-app/target/site/$f.html" ]; then
+        cp "calculator-app/target/site/$f.html" "$bundle_tmp/index.html"
+        cp -r calculator-app/target/site/css "$bundle_tmp/css"
+        cp -r calculator-app/target/site/images "$bundle_tmp/images"
+        zip_dir "$bundle_tmp" "calculator-app/target/site/downloads/$f.zip"
+    else
+        echo "[WARN] calculator-app/target/site/$f.html not found - skipping its download bundle."
+    fi
+done
+rm -rf "$bundle_tmp"
+trap - EXIT
+
+echo "-----------------------------------------------------------"
+echo "12. Package the jar and every report family into release/"
 echo "-----------------------------------------------------------"
 [ -f "calculator-app/target/calculator-app-1.0-SNAPSHOT.jar" ] \
     || fail "calculator-app-1.0-SNAPSHOT.jar was not produced by 'mvn package'."
@@ -128,6 +179,14 @@ tar -czvf release/test-jacoco-report.tar.gz -C calculator-app/target/site/jacoco
 tar -czvf release/test-coverage-report.tar.gz -C calculator-app/target/site/coveragereport .
 tar -czvf release/application-documentation.tar.gz -C calculator-app/target/site/doxygen .
 tar -czvf release/doc-coverage-report.tar.gz -C calculator-app/target/site/coverxygen .
+tar -czvf release/doc-coverage-reportgenerator-report.tar.gz -C calculator-app/target/site/coverxygen-reportgenerator .
+tar -czvf release/api-docs-javadoc.tar.gz -C calculator-app/target/site/apidocs .
+mkdir -p release/test-results-surefire/xml
+cp -r calculator-app/target/surefire-reports/. release/test-results-surefire/xml/
+cp calculator-app/target/site/downloads/surefire.zip release/test-results-surefire/surefire-report.zip 2>/dev/null || true
+tar -czvf release/test-results-surefire.tar.gz -C release/test-results-surefire .
+rm -rf release/test-results-surefire
+git archive --format=tar.gz --output=release/source-code.tar.gz HEAD
 tar -czvf release/application-site.tar.gz -C calculator-app/target/site .
 
 echo "...................."
@@ -135,4 +194,5 @@ echo "Operation Completed!"
 echo "...................."
 echo "Jar:               calculator-app/target/calculator-app-1.0-SNAPSHOT.jar"
 echo "Site:              calculator-app/target/site/index.html"
+echo "Report downloads:  calculator-app/target/site/downloads/"
 echo "Release packages:  release/"

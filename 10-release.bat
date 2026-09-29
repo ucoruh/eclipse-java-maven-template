@@ -110,12 +110,17 @@ dir /b "release"
 set "NOTES_FILE=%TEMP%\release-notes-%VERSION%.md"
 > "%NOTES_FILE%" echo # %VERSION%
 >> "%NOTES_FILE%" echo.
->> "%NOTES_FILE%" echo Built locally with 7-build-app.bat / 7-build-app.sh.
+>> "%NOTES_FILE%" echo Built locally with 7-build-app.bat / 7-build-app.sh. This Java template's runnable jar is
+>> "%NOTES_FILE%" echo portable bytecode - application-binary.tar.gz runs unmodified on Windows, Linux and macOS
+>> "%NOTES_FILE%" echo with any JDK 17+.
 >> "%NOTES_FILE%" echo.
->> "%NOTES_FILE%" echo - application-binary.tar.gz - the runnable jar
+>> "%NOTES_FILE%" echo - application-binary.tar.gz - the runnable jar ^(cross-platform^)
+>> "%NOTES_FILE%" echo - source-code.tar.gz - the source tree at this commit ^(git archive^)
+>> "%NOTES_FILE%" echo - test-results-surefire.tar.gz - raw JUnit XML plus the rendered Surefire report
 >> "%NOTES_FILE%" echo - test-jacoco-report.tar.gz / test-coverage-report.tar.gz - unit-test coverage, native ^(JaCoCo^) and ReportGenerator families
->> "%NOTES_FILE%" echo - doc-coverage-report.tar.gz - documentation coverage ^(coverxygen, both genhtml and ReportGenerator^)
+>> "%NOTES_FILE%" echo - doc-coverage-report.tar.gz / doc-coverage-reportgenerator-report.tar.gz - documentation coverage, native ^(genhtml^) and ReportGenerator families
 >> "%NOTES_FILE%" echo - application-documentation.tar.gz - Doxygen API docs
+>> "%NOTES_FILE%" echo - api-docs-javadoc.tar.gz - Javadoc API docs
 >> "%NOTES_FILE%" echo - application-site.tar.gz / site.zip - the full Maven site ^(unzip site.zip and open index.html^)
 
 if "%DRYRUN%"=="1" (
