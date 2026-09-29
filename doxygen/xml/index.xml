@@ -1,18 +1,26 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.1" xml:lang="en-US">
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.8" xml:lang="en-US">
   <compound refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator" kind="class"><name>com::ucoruh::calculator::Calculator</name>
     <member refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator_1abb2bcc3d207814ed074f454e4b3c9e7a" kind="variable"><name>logger</name></member>
     <member refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator_1ab94ad739d94c9ee89d18b6fa2494385b" kind="function"><name>add</name></member>
+    <member refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator_1ac5a019aa7492ecb8c815593827d44086" kind="function"><name>subtract</name></member>
+    <member refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator_1a9f74005423cfb7177c044572881d9a2a" kind="function"><name>multiply</name></member>
+    <member refid="classcom_1_1ucoruh_1_1calculator_1_1Calculator_1a1fb56b3a8ef020e387e906555ebe1f7e" kind="function"><name>divide</name></member>
   </compound>
   <compound refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp" kind="class"><name>com::ucoruh::calculator::CalculatorApp</name>
     <member refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_1a754304e5193588f7da28fd0d1a5781b1" kind="variable"><name>logger</name></member>
+    <member refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_1ad8cc461bd5d3e254c0b5e189fdfcbaf2" kind="variable"><name>USAGE</name></member>
+    <member refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_1a4bbe2ad2a40ecb8783ea7060c49fac67" kind="function"><name>CalculatorApp</name></member>
     <member refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_1a9e90eda7a6e66cc9a4a4d228878fb152" kind="function"><name>main</name></member>
+    <member refid="classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_1ab331c1c3d673a157d738778c2a422dd1" kind="function"><name>run</name></member>
   </compound>
   <compound refid="namespacecom" kind="namespace"><name>com</name>
   </compound>
   <compound refid="namespacecom_1_1ucoruh" kind="namespace"><name>com::ucoruh</name>
   </compound>
   <compound refid="namespacecom_1_1ucoruh_1_1calculator" kind="namespace"><name>com::ucoruh::calculator</name>
+  </compound>
+  <compound refid="namespacejava_1_1lang" kind="namespace"><name>java::lang</name>
   </compound>
   <compound refid="Calculator_8java" kind="file"><name>Calculator.java</name>
   </compound>

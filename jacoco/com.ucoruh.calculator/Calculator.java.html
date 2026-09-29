@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Calculator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">calculator-app</a> &gt; <a href="index.source.html" class="el_package">com.ucoruh.calculator</a> &gt; <span class="el_source">Calculator.java</span></div><h1>Calculator.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang=""><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Calculator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">calculator-app</a> &gt; <a href="index.source.html" class="el_package">com.ucoruh.calculator</a> &gt; <span class="el_source">Calculator.java</span></div><h1>Calculator.java</h1><pre class="source lang-java linenums">/**
 
 @file Calculator.java
 @brief This file serves as a demonstration file for the Calculator class.
@@ -39,12 +39,54 @@ import ch.qos.logback.classic.Logger;
    * @return The sum of `a` and `b`.
    */
   public int add(int a, int b) {
-    // Logging an informational message
-<span class="fc" id="L43">    logger.info(&quot;Logging message&quot;);</span>
-    // Logging an error message
-<span class="fc" id="L45">    logger.error(&quot;Error message&quot;);</span>
-    // Returning the sum of `a` and `b`
-<span class="fc" id="L47">    return a + b;</span>
+<span class="fc" id="L42">    logger.info(&quot;add({}, {})&quot;, a, b);</span>
+<span class="fc" id="L43">    return a + b;</span>
+  }
+
+  /**
+   * @brief Calculates the difference between two integers.
+   *
+   * @param a The value to subtract from.
+   * @param b The value to subtract.
+   * @return The result of `a` minus `b`.
+   */
+  public int subtract(int a, int b) {
+<span class="fc" id="L54">    logger.info(&quot;subtract({}, {})&quot;, a, b);</span>
+<span class="fc" id="L55">    return a - b;</span>
+  }
+
+  /**
+   * @brief Calculates the product of two integers.
+   *
+   * @param a The first integer value.
+   * @param b The second integer value.
+   * @return The product of `a` and `b`.
+   */
+  public int multiply(int a, int b) {
+<span class="fc" id="L66">    logger.info(&quot;multiply({}, {})&quot;, a, b);</span>
+<span class="fc" id="L67">    return a * b;</span>
+  }
+
+  /**
+   * @brief Divides one integer by another.
+   *
+   * @details Division is performed as floating point division so that, for
+   *          example, dividing 1 by 3 does not silently truncate to 0.
+   *
+   * @param a The dividend.
+   * @param b The divisor.
+   * @return The result of `a` divided by `b`.
+   * @throws ArithmeticException if `b` is zero.
+   */
+  public double divide(int a, int b) {
+<span class="fc" id="L82">    logger.info(&quot;divide({}, {})&quot;, a, b);</span>
+
+<span class="fc bfc" id="L84" title="All 2 branches covered.">    if (b == 0) {</span>
+<span class="fc" id="L85">      logger.error(&quot;divide by zero requested for dividend {}&quot;, a);</span>
+<span class="fc" id="L86">      throw new ArithmeticException(&quot;Division by zero&quot;);</span>
+    }
+
+<span class="fc" id="L89">    return (double) a / (double) b;</span>
   }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

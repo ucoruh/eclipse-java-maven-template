@@ -1,0 +1,70 @@
+\doxysection{Calculator\+App.\+java}
+\hypertarget{CalculatorApp_8java_source}{}\label{CalculatorApp_8java_source}\index{calculator-\/app/src/main/java/com/ucoruh/calculator/CalculatorApp.java@{calculator-\/app/src/main/java/com/ucoruh/calculator/CalculatorApp.java}}
+\mbox{\hyperlink{CalculatorApp_8java}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00012}00012\ \textcolor{keyword}{package\ }com.ucoruh.calculator;}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00014}00014\ \textcolor{keyword}{import}\ org.slf4j.LoggerFactory;}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00016}00016\ \textcolor{keyword}{import}\ ch.qos.logback.classic.Logger;}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00030}\mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp}{00030}}\ \textcolor{keyword}{public}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp}{CalculatorApp}}\ \{}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00034}00034\ \ \ \textcolor{keyword}{private}\ \textcolor{keyword}{static}\ \textcolor{keyword}{final}\ Logger\ logger\ =\ (Logger)\ LoggerFactory.getLogger(\mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp}{CalculatorApp}}.class);}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00040}00040\ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{final}\ String\ USAGE\ =\ \textcolor{stringliteral}{"{}Usage:\ CalculatorApp\ <number>\ <+|-\/|*|/>\ <number>"{}};}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00042}00042\ \ \ \textcolor{keyword}{private}\ \mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp}{CalculatorApp}}()\ \{}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00043}00043\ \ \ \ \ \textcolor{comment}{//\ Utility/entry-\/point\ class:\ not\ meant\ to\ be\ instantiated.}}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00044}00044\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00056}\mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_a9e90eda7a6e66cc9a4a4d228878fb152}{00056}}\ \ \ \textcolor{keyword}{public}\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classcom_1_1ucoruh_1_1calculator_1_1CalculatorApp_a9e90eda7a6e66cc9a4a4d228878fb152}{main}}(String[]\ args)\ \{}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00057}00057\ \ \ \ \ System.out.println(run(args));}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00058}00058\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00077}00077\ \ \ \textcolor{keyword}{static}\ String\ run(String[]\ args)\ \{}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00078}00078\ \ \ \ \ \textcolor{keywordflow}{if}\ (args\ ==\ \textcolor{keyword}{null}\ ||\ args.length\ !=\ 3)\ \{}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00079}00079\ \ \ \ \ \ \ logger.warn(\textcolor{stringliteral}{"{}Expected\ 3\ arguments,\ got\ \{\}"{}},\ args\ ==\ \textcolor{keyword}{null}\ ?\ 0\ :\ args.length);}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00080}00080\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ USAGE;}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00081}00081\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00083}00083\ \ \ \ \ \textcolor{keyword}{final}\ \textcolor{keywordtype}{int}\ left;}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00084}00084\ \ \ \ \ \textcolor{keyword}{final}\ \textcolor{keywordtype}{int}\ right;}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00086}00086\ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00087}00087\ \ \ \ \ \ \ left\ =\ Integer.parseInt(args[0]);}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00088}00088\ \ \ \ \ \ \ right\ =\ Integer.parseInt(args[2]);}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00089}00089\ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (NumberFormatException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00090}00090\ \ \ \ \ \ \ logger.error(\textcolor{stringliteral}{"{}Invalid\ operand:\ \{\}"{}},\ e.toString());}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00091}00091\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Error:\ operands\ must\ be\ integers.\ "{}}\ +\ USAGE;}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00092}00092\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00094}00094\ \ \ \ \ String\ operator\ =\ args[1];}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00095}00095\ \ \ \ \ Calculator\ calculator\ =\ \textcolor{keyword}{new}\ Calculator();}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00097}00097\ \ \ \ \ \textcolor{keywordflow}{switch}\ (operator)\ \{}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00098}00098\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}+"{}}:}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ String.valueOf(calculator.add(left,\ right));}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00101}00101\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}-\/"{}}:}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ String.valueOf(calculator.subtract(left,\ right));}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00104}00104\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}*"{}}:}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ String.valueOf(calculator.multiply(left,\ right));}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00107}00107\ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{stringliteral}{"{}/"{}}:}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00108}00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ String.valueOf(calculator.divide(left,\ right));}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00110}00110\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (ArithmeticException\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ logger.error(\textcolor{stringliteral}{"{}Division\ by\ zero\ requested"{}});}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Error:\ division\ by\ zero"{}};}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00113}00113\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00115}00115\ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00116}00116\ \ \ \ \ \ \ \ \ logger.warn(\textcolor{stringliteral}{"{}Unknown\ operator:\ \{\}"{}},\ operator);}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00117}00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Error:\ unknown\ operator\ '"{}}\ +\ operator\ +\ \textcolor{stringliteral}{"{}'.\ "{}}\ +\ USAGE;}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00118}00118\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00119}00119\ \ \ \}}
+\DoxyCodeLine{\Hypertarget{CalculatorApp_8java_source_l00120}00120\ \}}
+
+\end{DoxyCode}
