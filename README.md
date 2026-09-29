@@ -5,8 +5,11 @@ docs, a full `mvn site`, and numbered `.bat`/`.sh` scripts that take you from a 
 documented, releasable project. Use it as the starting point for a CEN207/CEN206/CEN429-style term project (see
 [from-topic-en.md](docs/guide/from-topic-en.md) / [from-topic-tr.md](docs/guide/from-topic-tr.md)).
 
+[![Build and Test](https://github.com/ucoruh/eclipse-java-maven-template/actions/workflows/ci.yml/badge.svg)](https://github.com/ucoruh/eclipse-java-maven-template/actions/workflows/ci.yml)
+[![Pages](https://github.com/ucoruh/eclipse-java-maven-template/actions/workflows/pages.yml/badge.svg)](https://ucoruh.github.io/eclipse-java-maven-template/)
 [![Release](https://github.com/ucoruh/eclipse-java-maven-template/actions/workflows/release.yml/badge.svg)](https://github.com/ucoruh/eclipse-java-maven-template/actions/workflows/release.yml)
 [![GitHub release badge](https://badgen.net/github/release/ucoruh/eclipse-java-maven-template)](https://github.com/ucoruh/eclipse-java-maven-template/releases/latest)
+[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-blue)](LICENSE)
 ![Windows badge](assets/badge-windows.svg)
 ![Ubuntu badge](assets/badge-ubuntu.svg)
 ![macOS badge](assets/badge-macos.svg)
@@ -17,6 +20,10 @@ documented, releasable project. Use it as the starting point for a CEN207/CEN206
 ![Branch Coverage](assets/badge_branchcoverage.svg)
 ![Line Coverage](assets/badge_linecoverage.svg)
 ![Method Coverage](assets/badge_methodcoverage.svg)
+
+**Documentation coverage** (Javadoc-comment coverage of the public API, ReportGenerator family):
+
+![Doc coverage](assets/badge_doccoverage.svg)
 
 ## Quick start
 
@@ -62,17 +69,26 @@ setup, `7`-`10` are the ones you use every day.
 | 5 | `5-format-code` | Formats every `.java` file with Astyle (`astyle-options.txt`, `--mode=java`). |
 | 7 | `7-build-app` | **The main script.** `mvn clean test package`, JaCoCo, Doxygen, ReportGenerator (coverage + doc-coverage), coverxygen + `genhtml`, `mvn site`, and packages everything into `release/`. |
 | 8 | `8-run-app` | Runs the built jar: `8-run-app <number> <+\|-\|*\|/> <number>` (a demo `6 * 7` if you pass no arguments). |
-| 9 | `9-run-webpage` | Opens the already-built static site. Pass `--serve` for a live `mvn site:run` dev server instead. |
+| 9 | `9-run-webpage` | Serves the already-built static site (with every report) over a local HTTP server at <http://localhost:8000/> - required for the report pages' `<iframe>`s, which most browsers block under `file://`. Pass `--serve` for a live `mvn site:run` dev server instead. |
 | 10 | `10-release` | Builds everything, zips the site, and publishes a GitHub Release with the GitHub CLI. `--dry-run` to preview without publishing. See [releases-en.md](docs/guide/releases-en.md). |
 
 Utilities: `delete_desktop_ini` (removes Google Drive's `desktop.ini` litter), `init-submodules` /
 `update-submodules` (no-ops today - this template has no submodules, kept for parity with the C/C++ template).
 
+## Live site
+
+**<https://ucoruh.github.io/eclipse-java-maven-template/>** - the landing page above, the full menu, and every
+report below, each in its own framed page. Rebuilt and redeployed on every push to `main` by
+`.github/workflows/pages.yml`.
+
 ## Reports and where they land
 
 Everything below is produced by `7-build-app` into `calculator-app/target/site/` (gitignored, not committed) and
 explained in full, with what each one shows and why there are two families, on the site's own **"Which report is
-which?"** page (`calculator-app/src/site/markdown/tool-catalog.md`, bilingual EN+TR) - open it via `9-run-webpage`.
+which?"** page (`calculator-app/src/site/markdown/tool-catalog.md`, bilingual EN+TR). Open the site with
+`9-run-webpage` (serves it over a local HTTP server, required for the report pages' `<iframe>`s) and use the
+**Reports** menu - each entry there is that report shown inline, with "Open in a new tab" and "Download (zip)"
+buttons.
 
 | Report | Native | Other family |
 |---|---|---|
@@ -82,8 +98,9 @@ which?"** page (`calculator-app/src/site/markdown/tool-catalog.md`, bilingual EN
 | API docs | `apidocs/index.html` (Javadoc) | `doxygen/html/index.html` |
 | Code quality | `checkstyle.html`, `pmd.html`, `cpd.html`, `spotbugs.html` | - |
 
-`10-release` additionally packages all of the above into `release/*.tar.gz` plus `release/site.zip` (the whole
-site as a single downloadable file - see below).
+`10-release` (and `.github/workflows/release.yml`) additionally package all of the above into `release/*.tar.gz`
+(one clearly named asset per report/family, plus the jar, the source tree and `site.zip` - the whole site as a
+single downloadable file) - see [releases-en.md](docs/guide/releases-en.md).
 
 ## Guides (English / Türkçe)
 
@@ -101,10 +118,13 @@ Everything a student needs, written for someone who has never used this toolchai
 
 ## Private repositories: releases and the site, in short
 
-Your repo is private, and GitHub Free does not run Pages on a private repo - but Releases do, so `10-release`
-publishes every report plus `site.zip` (unzip -> open `index.html`) as a GitHub Release instead.
-Add your instructor as a collaborator so they can see it. Full walkthrough (including the free GitHub Student
-Developer Pack, which does enable Pages): [releases-en.md](docs/guide/releases-en.md) /
+This template repository is public, so its own site above deploys automatically. **Your** clone/fork for a course
+project is most likely private, and GitHub Free does not run Pages on a private repo - but Releases do, so
+`10-release` (or a pushed `vX.Y.Z` tag, via `release.yml`) publishes every report plus `site.zip`
+(unzip -> open `index.html`) as a GitHub Release instead; `pages.yml` detects the private repo and skips its
+deploy with an explanation, unless you set the `PAGES_ON_PRIVATE` repository variable after getting GitHub Pro
+(e.g. via the free GitHub Student Developer Pack). Add your instructor as a collaborator so they can see your
+private releases. Full walkthrough: [releases-en.md](docs/guide/releases-en.md) /
 [releases-tr.md](docs/guide/releases-tr.md).
 
 ## Also in this repository

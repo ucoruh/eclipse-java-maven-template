@@ -71,9 +71,13 @@ Linux/WSL:
 ./9-run-webpage.sh
 ```
 
-`9-run-webpage` zaten derlenmiş statik siteyi açar. `--serve` geçirirseniz bunun yerine
-<http://localhost:9000/>'da, `src/site/*`'i anlık olarak yeniden derleyen canlı bir Maven site sunucusu çalışır
-(`site.xml`'i veya `src/site/markdown/` altındaki markdown sayfalarını düzenlerken kullanışlıdır).
+`9-run-webpage`, zaten derlenmiş statik siteyi (tüm raporlarıyla) yerel bir HTTP sunucusu üzerinden yayınlar ve
+<http://localhost:8000/> adresini açar - çoğu sayfa için düz bir `file://` bağlantısı da işe yarardı, ama rapor
+sayfaları bir `<iframe>` kullanır ve çoğu tarayıcı `file://`'dan çerçevelenmiş bir sayfayı yüklemeyi reddeder.
+`--serve` geçirirseniz bunun yerine <http://localhost:9000/>'da, `src/site/*`'i anlık olarak yeniden derleyen canlı
+bir Maven site sunucusu çalışır (`site.xml`'i veya `src/site/markdown/` altındaki markdown sayfalarını
+düzenlerken kullanışlıdır, ama `7-build-app`'in kopyaladığı ekstra rapor klasörlerini içermez - sitenin tamamını
+görmek için varsayılan modu kullanın).
 
 ## 7. Şimdi kendi projeniz yapın
 

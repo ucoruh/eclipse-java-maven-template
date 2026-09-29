@@ -26,10 +26,15 @@ Bir `site.zip` yerine (veya ona ek olarak) canlı bir Pages URL'si istiyorsanız
 3. Onay birkaç dakikadan birkaç güne kadar sürebilir - ilk release'inizden önce beklemeyin; bu arada
    `site.zip`'i kullanın.
 4. Onaylandıktan sonra hesabınızda GitHub Pro olur. Deponuzda: **Settings -> Pages -> Source**, etkinleştirin
-   (branch ya da Actions tabanlı, seçiminize göre).
-5. Ancak o zaman `release.yml`'in elle tetiklemesini **"Also deploy target/site to GitHub Pages"** işaretli
-   çalıştırın (bakınız [workflow-tr.md](workflow-tr.md)) - Pages henüz etkinleştirilmemişse zararsızca başarısız
-   olur.
+   (branch ya da Actions tabanlı, seçiminize göre - `.github/workflows/pages.yml` `gh-pages` dalına yayınlar, o
+   yüzden "Deploy from a branch" -> `gh-pages` sorunsuz çalışır).
+5. `pages.yml`'e artık Pro olan bu özel deponuzda çalışmasına izin verin: **Settings -> Secrets and variables ->
+   Actions -> Variables sekmesi -> New repository variable**, ad `PAGES_ON_PRIVATE`, değer `true`. Bunu yapmazsanız
+   `pages.yml` her push'ta dağıtımı atlar ve nedenini çalıştırmanın özetinde açıklar (bakınız
+   [workflow-tr.md](workflow-tr.md)) - bu bilerek böyledir, sıradan bir Free katmanlı özel klon Actions dakikalarını
+   zaten başarısız olacak bir Pages dağıtımı denemesiyle harcamasın diye.
+6. `main`'e push edin (ya da **Actions** sekmesinden `pages.yml`'i elle yeniden çalıştırın) - site bir iki dakika
+   sonra `https://<kullanıcı-adınız>.github.io/<deponuz>/` adresinde canlı olur.
 
 ## Eğitmeni katkıcı olarak ekleyin
 

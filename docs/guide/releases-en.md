@@ -26,9 +26,15 @@ If you want a live Pages URL instead of (or in addition to) `site.zip`:
 3. Approval can take anywhere from a few minutes to a few days - do not wait on it before your first release;
    use `site.zip` in the meantime.
 4. Once approved, your account has GitHub Pro. On your repo: **Settings -> Pages -> Source**, enable it (branch
-   or Actions-based, your choice).
-5. Only then run `release.yml`'s manual dispatch with **"Also deploy target/site to GitHub Pages"** checked (see
-   [workflow-en.md](workflow-en.md)) - it will fail harmlessly if Pages is not enabled yet.
+   or Actions-based, your choice - `.github/workflows/pages.yml` publishes to the `gh-pages` branch, so "Deploy
+   from a branch" -> `gh-pages` works out of the box).
+5. Tell `pages.yml` it is allowed to run on your now-Pro-enabled private repo: **Settings -> Secrets and
+   variables -> Actions -> Variables tab -> New repository variable**, name `PAGES_ON_PRIVATE`, value `true`.
+   Without this, `pages.yml` skips the deploy on every push and explains why in the run's summary (see
+   [workflow-en.md](workflow-en.md)) - this is on purpose, so a plain Free-tier private clone never wastes Actions
+   minutes attempting a Pages deploy that would just fail.
+6. Push to `main` (or re-run `pages.yml` manually from the **Actions** tab) - the site is live at
+   `https://<your-username>.github.io/<your-repo>/` a minute or two later.
 
 ## Add the instructor as a collaborator
 

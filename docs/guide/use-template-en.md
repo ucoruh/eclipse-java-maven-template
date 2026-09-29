@@ -71,9 +71,12 @@ Linux/WSL:
 ./9-run-webpage.sh
 ```
 
-`9-run-webpage` opens the already-built static site. Pass `--serve` to instead run a live Maven site server at
-<http://localhost:9000/> that rebuilds `src/site/*` on the fly while you edit it (useful when you are editing
-`site.xml` or the markdown pages under `src/site/markdown/`).
+`9-run-webpage` serves the already-built static site (with every report) over a local HTTP server and opens
+<http://localhost:8000/> - a plain `file://` link would work for most pages, but the report pages embed an
+`<iframe>`, and most browsers refuse to load a framed page from `file://`. Pass `--serve` to instead run a live
+Maven site server at <http://localhost:9000/> that rebuilds `src/site/*` on the fly while you edit it (useful when
+you are editing `site.xml` or the markdown pages under `src/site/markdown/`, but it does not include the extra
+report folders `7-build-app` copies in - use the default mode to see the full site).
 
 ## 7. Now make it your project
 
