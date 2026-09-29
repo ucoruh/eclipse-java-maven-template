@@ -189,6 +189,39 @@ rm -rf release/test-results-surefire
 git archive --format=tar.gz --output=release/source-code.tar.gz HEAD
 tar -czvf release/application-site.tar.gz -C calculator-app/target/site .
 
+echo "-----------------------------------------------------------"
+echo "13. Write release/README.md: what every archive is, and the site URL"
+echo "    (10-release.bat/.sh and release.yml append a site.zip row to this"
+echo "    same file once they create it - this script does not produce it)"
+echo "-----------------------------------------------------------"
+# NOTE: the table is deliberately the LAST content in this file (no blank
+# line or trailing text after the last row) - 10-release.bat/.sh and
+# release.yml append one more "| site.zip | ... |" line once they create
+# site.zip, and a Markdown table only stays one table if every row is on a
+# line directly adjacent to the last one, with nothing in between.
+cat > release/README.md <<'EOF'
+# Release contents
+
+Built locally by `7-build-app.bat` / `7-build-app.sh`.
+
+Live site: https://ucoruh.github.io/eclipse-java-maven-template/
+
+See `docs/guide/releases-en.md` / `docs/guide/releases-tr.md` for how each of these is produced and how to open it.
+
+| Archive | Contents |
+|---|---|
+| `application-binary.tar.gz` | The runnable jar - portable bytecode, runs unmodified on Windows, Linux and macOS with any JDK 17+ |
+| `source-code.tar.gz` | The source tree at this commit (`git archive`) |
+| `test-results-surefire.tar.gz` | Raw JUnit XML (`surefire-reports/`) plus the rendered Surefire report, standalone |
+| `test-jacoco-report.tar.gz` | Code coverage, native family: JaCoCo HTML |
+| `test-coverage-report.tar.gz` | Code coverage, ReportGenerator family: HTML + badges + history |
+| `doc-coverage-report.tar.gz` | Documentation coverage, native family: coverxygen + `genhtml` |
+| `doc-coverage-reportgenerator-report.tar.gz` | Documentation coverage, ReportGenerator family (same data, different rendering) |
+| `application-documentation.tar.gz` | API docs: Doxygen HTML |
+| `api-docs-javadoc.tar.gz` | API docs: Javadoc HTML |
+| `application-site.tar.gz` | The full Maven site (landing page + every report page), tar.gz form |
+EOF
+
 echo "...................."
 echo "Operation Completed!"
 echo "...................."

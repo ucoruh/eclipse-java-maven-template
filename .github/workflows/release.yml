@@ -94,6 +94,41 @@ jobs:
         run: |
           rm -f release/site.zip
           (cd calculator-app/target/site && zip -rq ../../../release/site.zip .)
+          echo '| `site.zip` | The full Maven site, zipped - unzip and open `index.html` (this is how a private-repo release ships the site without GitHub Pages; see `docs/guide/releases-en.md`) |' >> release/README.md
+
+      - name: Build the release notes body (links the live site + every report page)
+        id: notes
+        run: |
+          SITE="https://${{ github.repository_owner }}.github.io/$(basename "${{ github.repository }}")"
+          {
+            echo "Live site: $SITE/"
+            echo ""
+            echo "Built by \`7-build-app.sh\` (\`.github/workflows/release.yml\`) - see \`docs/guide/releases-en.md\` for"
+            echo "what each asset is and how to open it (also in \`release/README.md\`, attached below). This Java"
+            echo "template's runnable jar is portable bytecode: the single \`application-binary.tar.gz\` runs unmodified"
+            echo "on Windows, Linux and macOS with any JDK 17+."
+            echo ""
+            echo "### Reports, on the live site"
+            echo ""
+            echo "- [Landing page]($SITE/)"
+            echo "- [Which report is which?]($SITE/tool-catalog.html)"
+            echo "- [Unit tests: Surefire]($SITE/reports/surefire.html)"
+            echo "- [Coverage: JaCoCo (native)]($SITE/reports/jacoco.html)"
+            echo "- [Coverage: ReportGenerator]($SITE/reports/coveragereport.html)"
+            echo "- [Doc coverage: genhtml (native)]($SITE/reports/coverxygen.html)"
+            echo "- [Doc coverage: ReportGenerator]($SITE/reports/coverxygen-reportgenerator.html)"
+            echo "- [API docs: Javadoc (native)]($SITE/reports/javadoc.html)"
+            echo "- [API docs: Doxygen]($SITE/reports/doxygen.html)"
+            echo "- [Code quality: Checkstyle]($SITE/reports/checkstyle.html)"
+            echo "- [Code quality: PMD]($SITE/reports/pmd.html)"
+            echo "- [Code quality: CPD]($SITE/reports/cpd.html)"
+            echo "- [Code quality: SpotBugs]($SITE/reports/spotbugs.html)"
+          } > "$RUNNER_TEMP/release-notes.md"
+          {
+            echo "body<<NOTESEOF"
+            cat "$RUNNER_TEMP/release-notes.md"
+            echo "NOTESEOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: List release assets in the step summary
         run: |
@@ -115,9 +150,4 @@ jobs:
           tag_name: ${{ steps.version.outputs.version }}
           files: release/*
           generate_release_notes: true
-          body: |
-            Site (once Pages has deployed this commit): https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
-
-            Built by `7-build-app.sh` (`.github/workflows/release.yml`) - see `docs/guide/releases-en.md` for what
-            each asset is and how to open it. This Java template's runnable jar is portable bytecode: the single
-            `application-binary.tar.gz` runs unmodified on Windows, Linux and macOS with any JDK 17+.
+          body: ${{ steps.notes.outputs.body }}
