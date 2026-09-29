@@ -964,3 +964,14 @@ coverage*[.json, .xml, .info]
 /calculator-app/src/site/resources/assets/.gitkeep
 /calculator-app/src/site/resources/assets
 /calculator-app/src/site/resources/images/rteu_logo.jpg
+
+# --- Course-template generated outputs (see docs/guide/) ---
+# 7-build-app.bat / .sh output: packaged jar + every report family, zipped for release.
+/release/
+# 10-release.bat / .sh output.
+/release.local/
+# ReportGenerator -historydir: coverage trend across builds. Kept outside target/
+# on purpose so `mvn clean` does not erase it; not committed (local/CI-only state).
+/report_coverage_hist/
+/report_doc_coverage_hist/
+# VERSION file for 10-release.bat / .sh is tracked; nothing else under release tooling is.
