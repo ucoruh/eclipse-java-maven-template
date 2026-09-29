@@ -18,6 +18,10 @@ if exist "%HOOKS_DIR%\pre-commit" (
 
 REM Copy pre-commit to .git/hooks directory and rename it to pre-commit
 copy "pre-commit" "%HOOKS_DIR%\pre-commit"
+if errorlevel 1 (
+    echo [ERROR] Could not copy pre-commit into %HOOKS_DIR%.
+    exit /b 1
+)
 
 REM Backup current pre-push script if it exists
 if exist "%HOOKS_DIR%\pre-push" (
@@ -27,8 +31,12 @@ if exist "%HOOKS_DIR%\pre-push" (
 
 REM Copy pre-push to .git/hooks directory and rename it to pre-push
 copy "pre-push" "%HOOKS_DIR%\pre-push"
+if errorlevel 1 (
+    echo [ERROR] Could not copy pre-push into %HOOKS_DIR%.
+    exit /b 1
+)
 
 echo Scripts has been copied successfully.
 
-pause
+if not defined CI pause
 

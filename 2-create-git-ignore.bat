@@ -24,8 +24,25 @@ set OUTPUT_FILE=.gitignore
 REM Set the running folder to the current working folder
 cd /d "%~dp0"
 
+rem NOTE: this is a ONE-TIME bootstrap script for starting a brand new repo
+rem from nothing (see README.md "Repository Setup"). Running it again on this
+rem template overwrites .gitignore's project-specific additions (target/,
+rem release/, report_*_hist/, README badge exceptions) with the generic
+rem toptal.com template - do not run it here; it is documented for reference
+rem only.
+
+where curl >nul 2>&1
+if errorlevel 1 (
+    echo [ERROR] curl not found on PATH. Fix: choco install curl -y
+    exit /b 1
+)
+
 REM Download the API results using curl
-curl -s -o %OUTPUT_FILE% %API_URL%
+curl -sf -o %OUTPUT_FILE% %API_URL%
+if errorlevel 1 (
+    echo [ERROR] Could not download %API_URL% - check your network connection.
+    exit /b 1
+)
 
 echo Downloaded .gitignore file from %API_URL% and saved as %OUTPUT_FILE%
 
@@ -33,6 +50,8 @@ REM Append '**/desktop.ini' to .gitignore
 echo **/desktop.ini >> %OUTPUT_FILE%
 
 echo Appended '**/desktop.ini' to %OUTPUT_FILE%
+echo Remember to re-add this template's project-specific .gitignore entries
+echo (see docs/guide/use-template-en.md) after regenerating from the API.
 
-pause
+if not defined CI pause
 

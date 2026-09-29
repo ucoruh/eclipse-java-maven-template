@@ -18,4 +18,4 @@ for /r %%i in (desktop.ini) do (
 )
 
 echo ::: DELETE OPERATION COMPLETED ::::
-pause
+if not defined CI pause

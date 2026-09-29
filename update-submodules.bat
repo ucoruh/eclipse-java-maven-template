@@ -20,4 +20,4 @@ for /r %%i in (desktop.ini) do (
 git submodule update --remote --merge
 
 echo ::: UPDATE SUBMODULES COMPLETED ::::
-pause
+if not defined CI pause

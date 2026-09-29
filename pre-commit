@@ -37,7 +37,15 @@ fi
 
 FILES=$(git diff --cached --name-only --diff-filter=ACMRTUXB | grep -E "\.(cs|java|c|cpp|h)$")
 for FILE in $FILES; do
-    FORMATTED=$( "$ASTYLE" $OPTIONS < "$FILE" 2>&1 )
+    # Reading from stdin (`<`) hides the filename from astyle, so it cannot
+    # infer the language from the extension - pick the right --mode
+    # explicitly, otherwise Java/C# files get formatted with C/C++ defaults.
+    case "$FILE" in
+        *.java) MODE="--mode=java" ;;
+        *.cs) MODE="--mode=cs" ;;
+        *) MODE="--mode=c" ;;
+    esac
+    FORMATTED=$( "$ASTYLE" $MODE $OPTIONS < "$FILE" 2>&1 )
     if [ $? -ne 0 ]; then
         echo "[!] Error formatting $FILE:" >&2
         echo "$FORMATTED" >&2

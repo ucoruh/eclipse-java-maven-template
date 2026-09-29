@@ -20,4 +20,4 @@ if %errorlevel%==0 (
     powershell Set-ExecutionPolicy RemoteSigned -scope CurrentUser
 )
 
-pause
+if not defined CI pause

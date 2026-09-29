@@ -21,6 +21,9 @@ done
 
 echo ":::: DELETE OPERATION COMPLETED ::::"
 
-# Wait for user input before exiting
-read -p "Press any key to continue..." -n1 -s
-echo
+# Wait for user input before exiting, but never in CI/non-interactive runs
+# (CI=true is set by GitHub Actions and by this repo's own test runs).
+if [ -z "$CI" ] && [ -t 0 ]; then
+    read -p "Press any key to continue..." -n1 -s
+    echo
+fi

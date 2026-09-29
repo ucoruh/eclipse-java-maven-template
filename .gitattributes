@@ -1,0 +1,14 @@
+# Force LF for Linux/WSL scripts regardless of a Windows checkout's
+# core.autocrlf setting. Without this, a student with the common
+# core.autocrlf=true Windows Git setup gets CRLF line endings in .sh files on
+# checkout, which breaks them under WSL/bash ("bad interpreter", or every line
+# failing on a trailing \r) even though the repository itself stores LF.
+*.sh text eol=lf
+
+# Batch files are native to cmd.exe with CRLF; keep that on checkout.
+*.bat text eol=crlf
+
+# Avoid mangling pre-commit/pre-push (they run in bash, including in Git for
+# Windows' own bash), and keep the shebang scripts free of \r too.
+pre-commit text eol=lf
+pre-push text eol=lf
