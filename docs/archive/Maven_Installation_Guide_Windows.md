@@ -1,3 +1,6 @@
+> Kept for reference only (original, unmaintained walkthrough). For current install instructions, see
+> [`docs/guide/install-en.md`](../guide/install-en.md) / [`docs/guide/install-tr.md`](../guide/install-tr.md).
+
 # How to Install Maven on Windows
 
 ## Introduction

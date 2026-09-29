@@ -1,3 +1,7 @@
+> Kept for reference only (original, unmaintained walkthrough with a screenshot path local to the author's own
+> machine). For current install instructions, see [`docs/guide/install-en.md`](../guide/install-en.md) /
+> [`docs/guide/install-tr.md`](../guide/install-tr.md).
+
 # How to Install Java on Windows
 
 Introduction
