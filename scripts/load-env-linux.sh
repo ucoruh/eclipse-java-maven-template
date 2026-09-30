@@ -19,9 +19,16 @@ case "$(uname -m)" in
     *) export ARCH=x64 ;;
 esac
 [ -n "$PROJECT_NAME" ] && [ -n "$VERSION" ] || { echo "[ERROR] PROJECT_NAME/VERSION missing in project.env." >&2; return 1 2>/dev/null || exit 1; }
-# a per-user toolchain installed by 4-install-tools-linux.sh (no sudo) is picked up automatically
-for d in "$HOME"/tools/apache-maven-*/bin "$HOME/.dotnet" "$HOME/.dotnet/tools" "$HOME/.local/bin"; do
-    [ -d "$d" ] && case ":$PATH:" in *":$d:"*) ;; *) PATH="$d:$PATH" ;; esac
+# A per-user toolchain installed by 4-install-tools-linux.sh (no sudo) is picked up automatically.
+# DOTNET_ROOT is only set when a real .NET install lives in ~/.dotnet: "dotnet tool install --global"
+# also creates ~/.dotnet/tools, and pointing DOTNET_ROOT at a folder without the runtime would break
+# ReportGenerator ("You must install .NET to run this application").
+for d in "$HOME"/tools/apache-maven-*/bin "$HOME/.dotnet/tools" "$HOME/.local/bin"; do
+    if [ -d "$d" ]; then case ":$PATH:" in *":$d:"*) ;; *) PATH="$d:$PATH" ;; esac; fi
 done
-[ -d "$HOME/.dotnet" ] && export DOTNET_ROOT="$HOME/.dotnet"
+if [ -x "$HOME/.dotnet/dotnet" ]; then
+    export DOTNET_ROOT="$HOME/.dotnet"
+    case ":$PATH:" in *":$HOME/.dotnet:"*) ;; *) PATH="$HOME/.dotnet:$PATH" ;; esac
+fi
 export PATH
+return 0 2>/dev/null || true
