@@ -1,195 +1,689 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/api/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/api/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/api/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/api/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/downloads/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/downloads/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/downloads/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/downloads/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/maven-site/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/maven-site/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/maven-site/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/maven-site/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/from-topic-en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/from-topic/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/from-topic/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/from-topic/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/from-topic-tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/install/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/install/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/install/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/install-en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/releases/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/releases/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/releases/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/install-tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/showcase/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/showcase/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/showcase/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/releases-en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/standard/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/standard/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/standard/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/releases-tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/toolchain-comparison/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/toolchain-comparison/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/toolchain-comparison/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/showcase-en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/troubleshooting/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/troubleshooting/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/showcase-tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/use-template/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/use-template/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/use-template/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/standard-en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/which-report/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/which-report/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/which-report/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/standard-tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/workflow/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/workflow/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/workflow/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/toolchain-comparison-en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/native/apidocs/legal/jquery/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/native/apidocs/legal/jquery/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/native/apidocs/legal/jquery/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/toolchain-comparison-tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/native/apidocs/legal/jqueryUI/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/native/apidocs/legal/jqueryUI/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/native/apidocs/legal/jqueryUI/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/troubleshooting-en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/native/testapidocs/legal/jquery/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/native/testapidocs/legal/jquery/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/native/testapidocs/legal/jquery/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/troubleshooting-tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/native/testapidocs/legal/jqueryUI/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/native/testapidocs/legal/jqueryUI/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/native/testapidocs/legal/jqueryUI/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/use-template-en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/use-template-tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/which-report/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-doxygen/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-doxygen/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-doxygen/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/workflow-en/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-javadoc/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-javadoc/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-javadoc/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/guide/workflow-tr/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-javadoc/html/legal/jquery/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-javadoc/html/legal/jquery/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-javadoc/html/legal/jquery/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/native/apidocs/legal/jquery/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-javadoc/html/legal/jqueryUI/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-javadoc/html/legal/jqueryUI/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-javadoc/html/legal/jqueryUI/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/native/apidocs/legal/jqueryUI/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-testjavadoc/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-testjavadoc/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-testjavadoc/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/native/testapidocs/legal/jquery/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-testjavadoc/html/legal/jquery/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-testjavadoc/html/legal/jquery/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-testjavadoc/html/legal/jquery/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/native/testapidocs/legal/jqueryUI/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-testjavadoc/html/legal/jqueryUI/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-testjavadoc/html/legal/jqueryUI/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-testjavadoc/html/legal/jqueryUI/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-xref-jxr/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-xref-jxr/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-xref-jxr/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-xreftest-jxr/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-xreftest-jxr/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-xreftest-jxr/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-doxygen/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/coverage-jacoco/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/coverage-jacoco/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/coverage-jacoco/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-javadoc/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/coverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/coverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/coverage-reportgenerator/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-javadoc/html/legal/jquery/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/doccoverage-lcov/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/doccoverage-lcov/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/doccoverage-lcov/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-javadoc/html/legal/jqueryUI/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/doccoverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/doccoverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/doccoverage-reportgenerator/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/coverage-jacoco/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/tests-junit2html/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/tests-junit2html/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/tests-junit2html/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/coverage-reportgenerator/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/doccoverage-lcov/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-doxygen/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-doxygen/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-doxygen/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/doccoverage-reportgenerator/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-javadoc/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-javadoc/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-javadoc/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/tests-junit2html/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-javadoc/html/legal/jquery/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-javadoc/html/legal/jquery/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-javadoc/html/legal/jquery/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-javadoc/html/legal/jqueryUI/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-javadoc/html/legal/jqueryUI/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-javadoc/html/legal/jqueryUI/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-doxygen/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-testjavadoc/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-testjavadoc/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-testjavadoc/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-javadoc/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-testjavadoc/html/legal/jquery/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-testjavadoc/html/legal/jquery/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-testjavadoc/html/legal/jquery/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-javadoc/html/legal/jquery/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-testjavadoc/html/legal/jqueryUI/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-testjavadoc/html/legal/jqueryUI/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-testjavadoc/html/legal/jqueryUI/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-javadoc/html/legal/jqueryUI/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-xref-jxr/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-xref-jxr/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-xref-jxr/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/coverage-jacoco/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-xreftest-jxr/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-xreftest-jxr/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-xreftest-jxr/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/coverage-reportgenerator/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/coverage-jacoco/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/coverage-jacoco/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/coverage-jacoco/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/doccoverage-lcov/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/coverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/coverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/coverage-reportgenerator/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/doccoverage-reportgenerator/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/doccoverage-lcov/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/doccoverage-lcov/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/doccoverage-lcov/"/>
     </url>
     <url>
-         <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/tests-junit2html/</loc>
-         <lastmod>2026-09-30</lastmod>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/doccoverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/doccoverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/doccoverage-reportgenerator/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/tests-junit2html/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/tests-junit2html/"/>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/tests-junit2html/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/api/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/api/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/api/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/downloads/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/downloads/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/downloads/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/maven-site/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/maven-site/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/maven-site/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/from-topic/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/from-topic/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/from-topic/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/install/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/install/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/install/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/releases/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/releases/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/releases/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/showcase/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/showcase/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/showcase/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/standard/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/standard/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/standard/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/toolchain-comparison/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/toolchain-comparison/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/toolchain-comparison/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/troubleshooting/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/troubleshooting/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/troubleshooting/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/use-template/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/use-template/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/use-template/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/which-report/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/which-report/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/which-report/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/workflow/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/workflow/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/guide/workflow/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/native/apidocs/legal/jquery/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/native/apidocs/legal/jquery/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/native/apidocs/legal/jquery/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/native/apidocs/legal/jqueryUI/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/native/apidocs/legal/jqueryUI/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/native/apidocs/legal/jqueryUI/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/native/testapidocs/legal/jquery/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/native/testapidocs/legal/jquery/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/native/testapidocs/legal/jquery/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/native/testapidocs/legal/jqueryUI/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/native/testapidocs/legal/jqueryUI/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/native/testapidocs/legal/jqueryUI/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-doxygen/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-doxygen/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-doxygen/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-javadoc/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-javadoc/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-javadoc/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-javadoc/html/legal/jquery/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-javadoc/html/legal/jquery/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-javadoc/html/legal/jquery/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-javadoc/html/legal/jqueryUI/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-javadoc/html/legal/jqueryUI/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-javadoc/html/legal/jqueryUI/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-testjavadoc/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-testjavadoc/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-testjavadoc/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-testjavadoc/html/legal/jquery/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-testjavadoc/html/legal/jquery/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-testjavadoc/html/legal/jquery/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-testjavadoc/html/legal/jqueryUI/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-testjavadoc/html/legal/jqueryUI/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-testjavadoc/html/legal/jqueryUI/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-xref-jxr/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-xref-jxr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-xref-jxr/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-xreftest-jxr/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/api-xreftest-jxr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/api-xreftest-jxr/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/coverage-jacoco/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/coverage-jacoco/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/coverage-jacoco/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/coverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/coverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/coverage-reportgenerator/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/doccoverage-lcov/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/doccoverage-lcov/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/doccoverage-lcov/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/doccoverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/doccoverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/doccoverage-reportgenerator/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/tests-junit2html/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/linux/tests-junit2html/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/linux/tests-junit2html/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-doxygen/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-doxygen/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-doxygen/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-javadoc/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-javadoc/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-javadoc/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-javadoc/html/legal/jquery/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-javadoc/html/legal/jquery/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-javadoc/html/legal/jquery/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-javadoc/html/legal/jqueryUI/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-javadoc/html/legal/jqueryUI/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-javadoc/html/legal/jqueryUI/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-testjavadoc/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-testjavadoc/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-testjavadoc/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-testjavadoc/html/legal/jquery/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-testjavadoc/html/legal/jquery/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-testjavadoc/html/legal/jquery/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-testjavadoc/html/legal/jqueryUI/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-testjavadoc/html/legal/jqueryUI/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-testjavadoc/html/legal/jqueryUI/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-xref-jxr/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-xref-jxr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-xref-jxr/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-xreftest-jxr/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/api-xreftest-jxr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/api-xreftest-jxr/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/coverage-jacoco/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/coverage-jacoco/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/coverage-jacoco/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/coverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/coverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/coverage-reportgenerator/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/doccoverage-lcov/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/doccoverage-lcov/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/doccoverage-lcov/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/doccoverage-reportgenerator/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/doccoverage-reportgenerator/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/doccoverage-reportgenerator/"/>
+    </url>
+    <url>
+        <loc>https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/tests-junit2html/</loc>
+        <lastmod>2026-09-30</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="tr" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/reports/windows/tests-junit2html/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ucoruh.github.io/eclipse-java-maven-template/reports/windows/tests-junit2html/"/>
     </url>
 </urlset>

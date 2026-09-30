@@ -1,0 +1,2185 @@
+
+<!doctype html>
+<html lang="tr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Java 17, Maven, JUnit 5, JaCoCo, ReportGenerator, Doxygen, Javadoc and a full site - the starting point for a term project.">
+      
+      
+      
+        <link rel="canonical" href="https://ucoruh.github.io/eclipse-java-maven-template/tr/guide/troubleshooting/">
+      
+      
+        <link rel="prev" href="../toolchain-comparison/">
+      
+      
+        <link rel="next" href="../../reports/">
+      
+      
+        
+          <link rel="alternate" href="../../../guide/troubleshooting/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="tr">
+        
+      
+      
+      <link rel="icon" href="../../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Sorun giderme - Calculator - Java + Maven ders şablonu</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="deep-orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sorun-giderme" class="md-skip">
+          Ana içeriğe geç
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Başlık">
+    <a href="../../" title="Calculator - Java + Maven ders şablonu" class="md-header__button md-logo" aria-label="Calculator - Java + Maven ders şablonu" data-md-component="logo">
+      
+  <img src="../../../assets/rteu_logo.jpg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Calculator - Java + Maven ders şablonu
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sorun giderme
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="deep-orange"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Dil seç">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../guide/troubleshooting/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="tr" class="md-select__link">
+              Türkçe
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Ara" placeholder="Ara" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Ara">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Temizle" aria-label="Temizle" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Arama başlatılıyor
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/ucoruh/eclipse-java-maven-template" title="Depoya git" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ucoruh/eclipse-java-maven-template
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Sekmeler" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Ana sayfa
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../install/" class="md-tabs__link">
+          
+  
+  
+  Kılavuz
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reports/" class="md-tabs__link">
+          
+  
+  
+  Raporlar
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../api/" class="md-tabs__link">
+          
+  
+  
+  API belgeleri
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../downloads/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  İndirmeler
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../maven-site/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Maven sitesi (native)
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigasyon" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Calculator - Java + Maven ders şablonu" class="md-nav__button md-logo" aria-label="Calculator - Java + Maven ders şablonu" data-md-component="logo">
+      
+  <img src="../../../assets/rteu_logo.jpg" alt="logo">
+
+    </a>
+    Calculator - Java + Maven ders şablonu
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/ucoruh/eclipse-java-maven-template" title="Depoya git" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    ucoruh/eclipse-java-maven-template
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ana sayfa
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kılavuz
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Kılavuz
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Araçları kurun
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../use-template/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Şablonu kullanın
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../from-topic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Proje konusundan kendi projenize
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Günlük çalışma ve raporlar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../showcase/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GitHub Pages olmadan projenizi gösterin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releases/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sürümler ve özel depolar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../standard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Adlandırma standardı ve site kuralları
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../toolchain-comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Araç zinciri karşılaştırması
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sorun giderme
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Raporlar
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Raporlar
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genel bakış
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../which-report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hangi rapor hangisi?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Windows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genel bakış
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/tests-junit2html/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Birim testleri (junit2html)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/coverage-jacoco/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kapsama - JaCoCo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/coverage-reportgenerator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kapsama - ReportGenerator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/doccoverage-lcov/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dokümantasyon kapsaması - genhtml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/doccoverage-reportgenerator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dokümantasyon kapsaması - ReportGenerator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genel bakış
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/tests-junit2html/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Birim testleri (junit2html)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/coverage-jacoco/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kapsama - JaCoCo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/coverage-reportgenerator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kapsama - ReportGenerator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/doccoverage-lcov/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dokümantasyon kapsaması - genhtml
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/doccoverage-reportgenerator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dokümantasyon kapsaması - ReportGenerator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API belgeleri
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API belgeleri
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Genel bakış
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Windows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/api-doxygen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doxygen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/api-javadoc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Javadoc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/api-testjavadoc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Javadoc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/api-xref-jxr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaynak çapraz başvurusu (JXR)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/windows/api-xreftest-jxr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test kaynağı çapraz başvurusu (JXR)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/api-doxygen/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doxygen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/api-javadoc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Javadoc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/api-testjavadoc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test Javadoc
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/api-xref-jxr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kaynak çapraz başvurusu (JXR)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reports/linux/api-xreftest-jxr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Test kaynağı çapraz başvurusu (JXR)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../downloads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    İndirmeler
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../maven-site/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maven sitesi (native)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="İçindekiler">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="sorun-giderme">Sorun giderme<a class="headerlink" href="#sorun-giderme" title="Permanent link">&para;</a></h1>
+<p>Bu şablonun kendi betiklerinin gerçekten karşılaştığı hata mesajları ve tam düzeltmeleri. Hatanız burada yoksa
+betiğin yazdırdığı <code>[ERROR] ...</code> satırını okuyun - <code>6-build-and-test-*</code>, <code>7-build-all-*</code> ve <code>10-release-*</code> içindeki her başarısızlık noktası
+"bir şeyler ters gitti" demek yerine somut bir düzeltme yazdırır.</p>
+<table>
+<thead>
+<tr>
+<th>Hata mesajı (ya da belirti)</th>
+<th>Neden</th>
+<th>Düzeltme</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'7-build-all-windows.bat' is not recognized as an internal or external command</code> (bir betiği başka bir betikten, ya da başındaki <code>.\</code>/<code>\</code> olmadan bir kabuktan çağırırken)</td>
+<td>Bazı makinelerde <code>NoDefaultCurrentDirectoryInExePath=1</code> ayarlıdır; bu hem <code>cmd.exe</code>'nin hem de PowerShell'in çıplak bir dosya adı için geçerli klasörü aramasını durdurur.</td>
+<td>Bir betiği her zaman açık bir yolla çağırın: PowerShell'de <code>.\7-build-all-windows.bat</code>, başka bir <code>.bat</code>'in İÇİNDEN <code>"%~dp07-build-all-windows.bat"</code> (<code>10-release-windows.bat</code>'in <code>7-build-all-windows.bat</code>'i çağırmak için yaptığı tam olarak budur).</td>
+</tr>
+<tr>
+<td><code>tar</code>'dan <code>*.jar: Cannot stat: No such file or directory</code></td>
+<td><code>cmd.exe</code> <code>*.jar</code>'ı genişletmez; <code>tar</code> gerçek dosya adı yerine <code>'*.jar'</code> dizesini alır.</td>
+<td>Dosyayı açıkça adlandırın (<code>tar ... -C calculator-app\target calculator-app-1.1.0.jar</code>). <code>assemble.py</code> her şeyi Python ile paketler, betikler bu hataya düşmez; yalnızca kendi <code>tar</code> komutlarınızda karşılaşırsınız.</td>
+</tr>
+<tr>
+<td><code>rd /S /Q</code>'nun yazdırdığı <code>The system cannot find the file specified.</code></td>
+<td>Henüz var olmayan bir klasörde (örn. hiçbir rapor üretilmeden önceki ilk çalıştırma) <code>rd</code>, sessizce hiçbir şey yapmak yerine hata verir.</td>
+<td>Koruyun: <code>if exist "klasör" rd /S /Q "klasör"</code>. Linux'ta <code>rm -rf</code>'de böyle bir sorun yoktur - eksik bir yol sessiz bir no-op'tur.</td>
+</tr>
+<tr>
+<td><code>genhtml: ERROR: no valid records found in tracefile ...\lcov.info</code> ve dosya 0 bayt</td>
+<td><code>coverxygen</code>'e giden <code>--prefix</code> argümanı <code>"...\calculator-app\"</code> olarak, yani kapanış çift tırnağının hemen ÖNÜNDE bir <strong>ters eğik çizgi</strong> ile tırnaklanmıştı. Windows'un argüman ayrıştırıcısı <code>\"</code>'yi kapanış tırnağı değil, kaçışlanmış (escaped) bir tırnak karakteri olarak görür, bu yüzden ondan sonraki her argümanı sessizce yutar ve <code>coverxygen</code> kaynak dizini olmadan çalışıp boş bir dosya üretir.</td>
+<td>Tırnaklanmış bir Windows komut satırı argümanını asla ters eğik çizgiyle bitirmeyin. Bunun yerine ileri eğik çizgi kullanın (<code>"...\calculator-app/"</code> sorunsuzdur), ya da önce ters eğik çizgileri ileri eğik çizgiye çevirmek için <code>%VAR:\=/%</code> kullanın (<code>7-build-all-windows.bat</code>'in yaptığı budur), ya da argümanda boşluk yoksa hiç tırnaklamayın.</td>
+</tr>
+<tr>
+<td><code>Can't open perl script "genhtml": No such file or directory</code></td>
+<td>Chocolatey <code>lcov</code> kurulumundan gelen <code>genhtml</code>'in <strong><code>.exe</code> uzantısı yoktur</strong> - bir Perl betiğidir. cmd.exe'nin <code>where genhtml</code>'i bir şey bulduğunu bildirir, ama çıplak <code>genhtml</code> kelimesini çalıştırmak işe yaramaz; gerçek yolu çözüp <code>perl "&lt;yol&gt;"</code>'u açıkça çalıştırmanız gerekir.</td>
+<td><code>7-build-all-windows.bat</code>, <code>where genhtml</code>'den çözülen yolu yakalar ve <code>perl "&lt;o yol&gt;" ...</code>'u açıkça çağırır. Linux'ta <code>genhtml</code> normal, doğrudan çalıştırılabilir bir komuttur - Perl sarmalayıcı gerekmez.</td>
+</tr>
+<tr>
+<td>Dokümantasyon-kapsama raporu sessizce boş; <code>coverxygen</code> hiçbir şey üretmiyor ve açıkça yanlış bir şey yazdırmıyor</td>
+<td>PATH'teki düz <code>python</code>, <code>coverxygen</code> paketine sahip olmayan alakasız bir kuruluma (örn. bir grafik uygulamasının gömülü Python 2.7'si) çözülmüştü, bu yüzden <code>python -m coverxygen</code> modülü bulamadı ve betik bunu kontrol etmiyordu.</td>
+<td>Belirli, bilinen-iyi bir yorumlayıcıyı çağırın: <code>py -3.12 -m coverxygen ...</code> (<code>py</code> başlatıcısı, <code>python</code>'ın neye işaret ettiğinden bağımsız olarak istediğiniz kesin sürümü seçer). <code>7-build-all-windows.bat</code> önce <code>py -3.12 -c "import coverxygen"</code>'i kontrol eder ve eksikse sessizce hiçbir şey üretmek yerine somut bir hata yazdırır.</td>
+</tr>
+<tr>
+<td><a id="farkli-bir-python-once-calisiyor"></a><code>where python</code> beklemediğiniz bir Python gösteriyor (Inkscape, GIMP, eski bir 2.7, ...)</td>
+<td>Birçok geliştirme-dışı uygulama kendi gömülü Python'unu getirir ve genellikle gerçek kurulumunuzun önünde <code>PATH</code>'e ekler.</td>
+<td>Betiklerinizde ya da kendi araçlarınızda çıplak <code>python</code>/<code>pip</code>'e güvenmeyin. Belirsizliğe yer bırakmayan <code>py -3.12</code>'yi (Python Launcher for Windows) kullanın, ya da <code>where python</code>'ı kontrol edip çıplak <code>python</code>'ın etkileşimli kullanım için çalışmasını istiyorsanız <code>PATH</code>'i yeniden sıralayın.</td>
+</tr>
+<tr>
+<td><code>mvn</code>, <code>maven-enforcer-plugin</code>'den <code>requireJavaVersion</code> / <code>requireMavenVersion</code> hakkında bir mesajla başarısız oluyor</td>
+<td><code>JAVA_HOME</code>/<code>PATH</code>'iniz 17'den eski bir JDK'ya işaret ediyor, ya da Maven'ınız 3.8'den eski.</td>
+<td>JDK 17+ kurun/işaret edin (<code>java -version</code> 17 veya üzerini göstermeli) ve Maven 3.8+ (<code>mvn -version</code>). Bu projenin <code>pom.xml</code>'i bunu kasıtlı olarak zorunlu kılar, böylece derlemenin derinliklerinde kafa karıştırıcı bir derleme hatası yerine bu açık mesajı alırsınız.</td>
+</tr>
+<tr>
+<td><code>mvn site</code>, "Test Javadoc" raporunda başarısız oluyor: <code>error: No public or protected classes found to document</code></td>
+<td><code>maven-javadoc-plugin</code>'in varsayılan rapor kümesi <strong>test</strong> kaynaklarını da Javadoc'lamaya çalışır; bu şablonun test sınıfları kasıtlı olarak paket-özel (package-private) düz JUnit 5 stilindedir, bu yüzden dokümante edecek genel (public) bir şey yoktur.</td>
+<td><code>pom.xml</code>'de zaten düzeltildi: <code>maven-javadoc-plugin</code> için <code>&lt;reportSets&gt;</code> yalnızca ana-kaynak <code>javadoc</code> raporunu ister, <code>test-javadoc</code>'u değil. Kendi raporlama eklentilerinizi eklerseniz test kaynaklarında aynı "genel üye yok" hatasına dikkat edin.</td>
+</tr>
+<tr>
+<td><code>maven-shade-plugin</code>, <code>Discovered module-info.class. Shading will break its strong encapsulation.</code> uyarısı veriyor</td>
+<td><code>logback-classic</code>/<code>logback-core</code> (1.6.x) bir <code>module-info.class</code> taşır; shading (birçok jar'ı tek jar'da birleştirme) bu modül tanımlayıcısıyla uyumsuzdur.</td>
+<td><code>pom.xml</code>'de zaten düzeltildi: bir shade <code>&lt;filter&gt;</code>, <code>module-info.class</code>'ı uber jar'dan hariç tutar. Kalan <code>overlapping resource: META-INF/MANIFEST.MF</code> uyarısı normal shade-plugin davranışıdır (her jar'ın bir manifest'i vardır) ve zararsızdır.</td>
+</tr>
+<tr>
+<td>Bir <code>desktop.ini</code> dosyası sürekli yeniden ortaya çıkıyor / <code>git status</code>'ta görünüyor</td>
+<td>Bu depo Google Drive for Desktop içinde yaşıyor, o da yönettiği her klasöre gizli bir <code>desktop.ini</code> bırakır.</td>
+<td><code>scriptsdelete-desktop-ini-windows.bat</code> / <code>.sh</code>'yi çalıştırın (<code>init-submodules</code>/<code>update-submodules</code> tarafından da otomatik yapılır). Zaten <code>.gitignore</code>'dadır ama Drive, indeksten silindikten sonra dosyayı yeniden oluşturabilir.</td>
+</tr>
+<tr>
+<td>Windows'ta 260 karakterden uzun yollar başarısız oluyor (<code>git</code>, <code>mvn</code> ya da bir eklenti şikayet ediyor)</td>
+<td>Windows'un klasik <code>MAX_PATH</code> sınırı, derin bir Maven/Doxygen/JaCoCo çıktı ağacı ile uzun bir Google Drive yolunun birleşimi.</td>
+<td><code>git config --system core.longpaths true</code> (CI iş akışı Actions çalıştırıcısının eşdeğerini zaten yapıyor); Windows 10/11'de, git dışında hâlâ karşılaşıyorsanız Group Policy/registry'de uzun yolları da etkinleştirin (<code>LongPathsEnabled</code>). Google Drive içinde derin bir yerde değil, daha kısa bir yolda derlemek (örn. Drive içine derin gömülü yerine <code>%TEMP%\tmpl-run\&lt;depo&gt;</code>) bunu tamamen önler - bakınız <a href="../install/">install.md</a>'deki Drive notu.</td>
+</tr>
+<tr>
+<td>Bir derleme adımı dosyanın "başka bir işlem tarafından kullanımda" olduğu hatasıyla başarısız oluyor, ya da yazmalar sessizce etkisiz kalıyor</td>
+<td>Antivirüs ya da Google Drive for Desktop, <code>target/</code> altındaki bir dosyayı kilitliyor ya da derleme ortasında yeniden eşitliyor.</td>
+<td>Betiği yeniden çalıştırın (bunlar neredeyse her zaman geçicidir); sürerse, Google Drive klasörünün doğrudan içinde değil, yerel, eşitlenmeyen bir klasörde derleyin (<code>%TEMP%\tmpl-run\&lt;depo&gt;</code> / <code>~/tmpl-run/&lt;depo&gt;</code>) ve politikanız izin veriyorsa derleme/çıktı klasörleriniz için bir antivirüs istisnası ekleyin.</td>
+</tr>
+<tr>
+<td><a id="wsl-g-yi-goremiyor"></a><code>WSL cannot see G:\...</code> / Google Drive yolunuz bir Ubuntu/WSL terminalinden görünmüyor</td>
+<td>WSL2, gerçek yerel diskleri bağladığı gibi (<code>/mnt/c</code>, sadece gerçek yerel <code>G:</code> sürücüsü için çalışır, Google Drive'ın sanal dosya sistemi için değil) rastgele eşlenmiş/sanal sürücüleri otomatik bağlamaz.</td>
+<td>Önce depoyu yerel bir klasöre kopyalayın: PowerShell'den <code>robocopy "G:\...\eclipse-java-maven-template" "$env:TEMP\tmpl-run\eclipse-java-maven-template" /E</code>; ardından WSL'den <code>cp -r "/mnt/c/Users/&lt;siz&gt;/AppData/Local/Temp/tmpl-run/eclipse-java-maven-template" ~/tmpl-run/</code> ve orada derleyin. WSL'den test etmek istediğiniz her betik için aynısını yapın.</td>
+</tr>
+<tr>
+<td><code>mvn site</code>, <code>Site model ... is still using the old pre-version 2.0.0 model. You MUST migrate ...</code> yazdırıyor</td>
+<td><code>maven-site-plugin</code>'in (henüz beta olan) 4.x hattında gelecek bir decoration-model değişikliği hakkında bilgilendirici bir uyarı.</td>
+<td>Kararlı <code>maven-site-plugin</code> 3.x hattına sabitliyken (bu proje kasıtlı olarak 4.0.0 beta yerine 3.22.0 kullanır) görmezden gelmek güvenlidir. 4.x kararlı bir sürüme ulaştığında yeniden kontrol edin.</td>
+</tr>
+<tr>
+<td><code>9-open-site-*</code> çalıştırırken <code>Address already in use</code> / <code>OSError: [Errno 98]</code></td>
+<td>Bir başka sunucu (önceki bir <code>9-open-site</code> ya da <code>mkdocs serve</code>) portu hâlâ dinliyor.</td>
+<td>Eski terminali kapatın ya da başka port seçin: <code>9-open-site-windows.bat 8080</code> / <code>./9-open-site-linux.sh 8080</code>.</td>
+</tr>
+<tr>
+<td><code>9-open-site-*</code> Python'u bulamadığını söylüyor</td>
+<td>PATH'te Python 3 yok ya da yalnız yanlış olanı var.</td>
+<td>Python 3.12 kurun (<a href="../install/">install.md</a>); <code>scripts/detect-python-*</code> <code>py -3.12</code>, <code>py -3.13</code>, ... ve <code>python3</code> dener.</td>
+</tr>
+<tr>
+<td>Bir rapor sayfasındaki <code>&lt;iframe&gt;</code>, <code>file://</code> ile açıldığında boş kalıyor</td>
+<td>Çoğu tarayıcı <code>file://</code>'dan çerçevelenmiş bir sayfayı yüklemeyi reddeder.</td>
+<td>Siteyi her zaman <code>9-open-site-*</code> ile (<code>http://localhost:8000/</code> adresi) açın, <code>index.html</code>'e çift tıklamayın.</td>
+</tr>
+<tr>
+<td><a id="dotnet-root"></a><code>reportgenerator</code>, <code>A fatal error occurred. The required library ... could not be found</code> / <code>You must install .NET to run this application</code> ile başarısız oluyor / doğru SDK kurulu olmasına rağmen eksik bir framework sürümü söylüyor (Linux/WSL)</td>
+<td><code>reportgenerator</code> bir .NET "apphost" çalıştırılabilirdir; çalışma zamanını yalnızca <code>PATH</code> ile değil, <code>DOTNET_ROOT</code> ortam değişkeni üzerinden çözer. Birden fazla .NET SDK'sı olan bir makinede (örn. <code>$HOME/.dotnet</code> altındaki daha yeni kullanıcı-bazlı kurulumun yanında önceden kurulu eski bir 3.1) <code>dotnet</code> PATH'te doğru yeri gösterse bile apphost, <code>DOTNET_ROOT</code> olmadan yanlış - ya da hiç - çalışma zamanı çözebilir.</td>
+<td><code>export DOTNET_ROOT="$HOME/.dotnet"</code> (<code>PATH</code> export'unun yanında) - <code>4-install-tools-linux.sh</code>, SDK'yı kurduktan sonra tam olarak bu satırı yazdırır.</td>
+</tr>
+<tr>
+<td><code>dotnet tool update --global dotnet-reportgenerator-globaltool</code>, <code>error NU1202: Package ... is not compatible with netcoreapp3.1</code> ile başarısız oluyor</td>
+<td>Aktif <code>dotnet</code>, daha yeni bir framework hedefleyen bir tool paketini (ReportGenerator 5.5+, net8.0/9.0/10.0 hedefler) geri yükleyemeyen eski bir SDK (örn. 3.1).</td>
+<td>Önce bir .NET SDK 8+'a kurun/geçin (<code>4-install-tools-linux.sh</code> bunu özellikle kontrol eder ve gerekirse kullanıcı bazında bir tane kurar), ardından tool kurulumunu/güncellemesini yeniden çalıştırın.</td>
+</tr>
+<tr>
+<td>Bir <code>.sh</code> betiği <code>bad interpreter: /bin/bash^M: no such file or directory</code> ile başarısız oluyor, ya da gayet normal görünen bir betik için <code>bash -n script.sh</code> <code>unexpected end of file</code> bildiriyor</td>
+<td>Dosyada <strong>CRLF</strong> satır sonları var (her <code>\n</code>'den önce bir <code>\r</code>) - Windows'ta düzenlemeden sonra yaygındır, ya da bu deponun <code>.gitattributes</code>'ı var olmadan önce <code>core.autocrlf=true</code> ile checkout edilmişse. Shebang'ın satır sonundan hemen önceki ya da kapanış <code>done</code>/<code>fi</code>'den hemen önceki bir <code>\r</code>, bash'in dosyayı yanlış ayrıştırmasına neden olabilir.</td>
+<td>Bu deponun <code>.gitattributes</code>'ı <code>*.sh</code>'yi (ve <code>pre-commit</code>/<code>pre-push</code>'u) checkout'ta LF'ye zorlar, bu yüzden taze bir <code>git clone</code> etkilenmez. Yine de karşılaşırsanız (örn. clone yerine dosyaları elle kopyaladıysanız), dosyayı yeniden dönüştürün: Linux/WSL'de <code>sed -i 's/\r$//' script.sh</code>, ya da Windows'ta satır sonları LF'ye ayarlı bir editörde açın.</td>
+</tr>
+<tr>
+<td><code>gh release create</code> 403/404 veriyor ya da <code>10-release-*</code> "gh is not logged in" ile duruyor</td>
+<td>oturum yok, yanlış hesap ya da yazma erişimi yok</td>
+<td>Bkz. <a href="../releases/#troubleshooting">releases.md</a>.</td>
+</tr>
+<tr>
+<td>Bir betik ötekini çağırırken <code>'6-build-and-test-windows.bat' is not recognized</code></td>
+<td>ilk satıra bakın: geçerli klasör aranmaz</td>
+<td>betikler birbirini <code>call .\6-build-and-test-windows.bat</code> ile çağırır; kendinizinkini de öyle çağırın</td>
+</tr>
+<tr>
+<td><code>mkdocs build --strict</code> <code>A reference to 'guide/xyz.md' is included in the 'nav' configuration, which is not found</code> ile başarısız</td>
+<td><code>mkdocs.yml</code> <code>nav:</code> içinde yazılı bir sayfa yok (yazım hatası ya da üretilen rapor sayfası - <code>assemble.py site</code> çalışmadı)</td>
+<td>önce <code>py -3.12 scripts/assemble.py site</code> çalıştırın (<code>7-build-all-*</code> yapar) ya da <code>nav:</code> yolunu düzeltin</td>
+</tr>
+<tr>
+<td><code>No module named material</code> / <code>No module named junit2htmlreport</code> / <code>No module named coverxygen</code></td>
+<td>betikleri çalıştıran Python, paketleri kurduğunuz Python değil</td>
+<td><code>py -3.12 -m pip install --user -r requirements.txt</code> (Windows) ya da <code>python3 -m pip install --user -r requirements.txt</code> (Linux); <code>4-install-tools-*</code> yapar</td>
+</tr>
+<tr>
+<td>Yeni Ubuntu/Debian'da Python paketlerini kurarken <code>error: externally-managed-environment</code></td>
+<td>PEP 668: sistem Python'u <code>pip install --user</code>'ı reddeder</td>
+<td><code>python3 -m pip install --user --break-system-packages -r requirements.txt</code> (<code>4-install-tools-linux.sh</code>'nin yedek yolu) ya da sanal ortam kullanın</td>
+</tr>
+<tr>
+<td><code>mvn</code> derliyor ama jar <code>calculator-app-1.0-SNAPSHOT.jar</code> adlı ve betikler <code>calculator-app-1.1.0.jar</code>'ı bulamıyor</td>
+<td>Maven <code>-Drevision</code> olmadan başlatıldı (örn. Eclipse'ten) ve <code>pom.xml</code> varsayılanı <code>project.env</code>'den farklı</td>
+<td>betikler üzerinden derleyin (<code>-Drevision=&lt;VERSION&gt;</code> geçirirler) ya da <code>pom.xml</code> <code>&lt;revision&gt;</code>'ını <code>project.env</code> <code>VERSION</code>'ına eşit tutun</td>
+</tr>
+<tr>
+<td><code>reports/&lt;platform&gt;/...</code> klasörleri var ama sitedeki bir rapor sayfası <em>Not available in this build</em> diyor</td>
+<td>o rapor (ya da tüm platform) bu makinede derlenmedi</td>
+<td>o platform için <code>7-build-all-&lt;platform&gt;</code> çalıştırın; CI'da ikisi de derlenip birleştirilir</td>
+</tr>
+<tr>
+<td>CI: <code>check-links</code> <code>[BROKEN] ...</code> bildiriyor</td>
+<td>SİTE sayfalarımızdan birindeki bağlantı olmayan bir dosyayı gösteriyor (üçüncü taraf rapor klasörleri yalnızca uyarı üretir)</td>
+<td>iletide adı geçen Markdown dosyasındaki bağlantıyı düzeltip yeniden derleyin</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Başa dön
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Altbilgi" >
+        
+          
+          <a href="../toolchain-comparison/" class="md-footer__link md-footer__link--prev" aria-label="Önceki: Araç zinciri karşılaştırması">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Önceki
+              </span>
+              <div class="md-ellipsis">
+                Araç zinciri karşılaştırması
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../reports/" class="md-footer__link md-footer__link--next" aria-label="Sonraki: Genel bakış">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Sonraki
+              </span>
+              <div class="md-ellipsis">
+                Genel bakış
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      RTEU - Dr. Ugur Coruh. Licensed under AGPL-3.0.
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.footer", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Kopyaland\u0131", "clipboard.copy": "Kopyala", "search.result.more.one": "Bu sayfada 1 tane daha", "search.result.more.other": "Bu sayfada # tane daha", "search.result.none": "E\u015fle\u015fen dok\u00fcman bulunamad\u0131", "search.result.one": "1 dok\u00fcman bulundu", "search.result.other": "# dok\u00fcman bulundu", "search.result.placeholder": "Aramaya ba\u015flamak i\u00e7in yaz\u0131n", "search.result.term.missing": "Eksik", "select.version": "Versiyon se\u00e7"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

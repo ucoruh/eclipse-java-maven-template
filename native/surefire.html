@@ -42,9 +42,10 @@ Calculator App
         <a class="dropdown-toggle" data-toggle="dropdown">Development <b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li><a href="scm.html">Source Code</a></li>
-            <li><a href="xref/index.html">Source Xref</a></li>
-            <li><a href="xref-test/index.html">Test Source Xref</a></li>
-            <li><a href="testapidocs/index.html">Test Javadoc</a></li>
+            <li><a href="frames/xref.html">Source Xref</a></li>
+            <li><a href="frames/xref-test.html">Test Source Xref</a></li>
+            <li><a href="frames/javadoc.html">Javadoc</a></li>
+            <li><a href="frames/testjavadoc.html">Test Javadoc</a></li>
             <li><a href="dependency-info.html">Dependencies</a></li>
             <li><a href="issue-management.html">Issue Tracker</a></li>
             <li><a href="distribution-management.html">Distribution Management</a></li>
@@ -64,12 +65,31 @@ Calculator App
         <a class="dropdown-toggle" data-toggle="dropdown">Reports <b class="caret"></b></a>
         <ul class="dropdown-menu">
             <li><a>Unit Tests: Surefire</a></li>
-            <li><a href="jacoco/index.html">Coverage: JaCoCo</a></li>
-            <li><a href="apidocs/index.html">API Docs: Javadoc</a></li>
+            <li><a href="frames/jacoco.html">Coverage: JaCoCo</a></li>
             <li><a href="checkstyle.html">Code Quality: Checkstyle</a></li>
             <li><a href="pmd.html">Code Quality: PMD</a></li>
             <li><a href="cpd.html">Code Quality: CPD</a></li>
             <li><a href="spotbugs.html">Code Quality: SpotBugs</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">Reports - Linux <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li><a href="frames/tests-junit2html-linux.html">Unit Tests: junit2html</a></li>
+            <li><a href="frames/coverage-reportgenerator-linux.html">Coverage: ReportGenerator</a></li>
+            <li><a href="frames/doccoverage-lcov-linux.html">Doc Coverage: genhtml</a></li>
+            <li><a href="frames/doccoverage-reportgenerator-linux.html">Doc Coverage: ReportGenerator</a></li>
+            <li><a href="frames/api-doxygen-linux.html">API Docs: Doxygen</a></li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">Reports - Windows <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li><a href="frames/tests-junit2html-windows.html">Unit Tests: junit2html</a></li>
+            <li><a href="frames/coverage-reportgenerator-windows.html">Coverage: ReportGenerator</a></li>
+            <li><a href="frames/doccoverage-lcov-windows.html">Doc Coverage: genhtml</a></li>
+            <li><a href="frames/doccoverage-reportgenerator-windows.html">Doc Coverage: ReportGenerator</a></li>
+            <li><a href="frames/api-doxygen-windows.html">API Docs: Doxygen</a></li>
         </ul>
       </li>
             </ul>
@@ -104,9 +124,10 @@ Calculator App
     <li><a href="./">GitHub Repository</a></li>
    <li class="nav-header">Development</li>
     <li><a href="scm.html">Source Code</a></li>
-    <li><a href="xref/index.html">Source Xref</a></li>
-    <li><a href="xref-test/index.html">Test Source Xref</a></li>
-    <li><a href="testapidocs/index.html">Test Javadoc</a></li>
+    <li><a href="frames/xref.html">Source Xref</a></li>
+    <li><a href="frames/xref-test.html">Test Source Xref</a></li>
+    <li><a href="frames/javadoc.html">Javadoc</a></li>
+    <li><a href="frames/testjavadoc.html">Test Javadoc</a></li>
     <li><a href="dependency-info.html">Dependencies</a></li>
     <li><a href="issue-management.html">Issue Tracker</a></li>
     <li><a href="distribution-management.html">Distribution Management</a></li>
@@ -118,12 +139,23 @@ Calculator App
     <li><a href="project-reports.html">All Maven Reports</a></li>
    <li class="nav-header">Reports</li>
     <li class="active"><a>Unit Tests: Surefire</a></li>
-    <li><a href="jacoco/index.html">Coverage: JaCoCo</a></li>
-    <li><a href="apidocs/index.html">API Docs: Javadoc</a></li>
+    <li><a href="frames/jacoco.html">Coverage: JaCoCo</a></li>
     <li><a href="checkstyle.html">Code Quality: Checkstyle</a></li>
     <li><a href="pmd.html">Code Quality: PMD</a></li>
     <li><a href="cpd.html">Code Quality: CPD</a></li>
     <li><a href="spotbugs.html">Code Quality: SpotBugs</a></li>
+   <li class="nav-header">Reports - Linux</li>
+    <li><a href="frames/tests-junit2html-linux.html">Unit Tests: junit2html</a></li>
+    <li><a href="frames/coverage-reportgenerator-linux.html">Coverage: ReportGenerator</a></li>
+    <li><a href="frames/doccoverage-lcov-linux.html">Doc Coverage: genhtml</a></li>
+    <li><a href="frames/doccoverage-reportgenerator-linux.html">Doc Coverage: ReportGenerator</a></li>
+    <li><a href="frames/api-doxygen-linux.html">API Docs: Doxygen</a></li>
+   <li class="nav-header">Reports - Windows</li>
+    <li><a href="frames/tests-junit2html-windows.html">Unit Tests: junit2html</a></li>
+    <li><a href="frames/coverage-reportgenerator-windows.html">Coverage: ReportGenerator</a></li>
+    <li><a href="frames/doccoverage-lcov-windows.html">Doc Coverage: genhtml</a></li>
+    <li><a href="frames/doccoverage-reportgenerator-windows.html">Doc Coverage: ReportGenerator</a></li>
+    <li><a href="frames/api-doxygen-windows.html">API Docs: Doxygen</a></li>
   </ul>
           </nav>
           <div class="well sidebar-nav">
@@ -172,7 +204,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>0.595 s</td></tr></table><br />
+<td>0.700 s</td></tr></table><br />
 <p>Note: failures are anticipated and checked for with assertions while errors are unanticipated.</p><br /></section><section><a id="Package_List"></a>
 <h2>Package List</h2>
 <p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><br />
@@ -192,7 +224,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>0.595 s</td></tr></table><br />
+<td>0.700 s</td></tr></table><br />
 <p>Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.</p><section><a id="com.ucoruh.calculator"></a>
 <h3>com.ucoruh.calculator</h3>
 <table class="table table-striped">
@@ -213,7 +245,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>0.179 s</td></tr>
+<td>0.213 s</td></tr>
 <tr class="a">
 <td><a href="#com.ucoruh.calculator.CalculatorTest$Multiply"><img src="images/icon_success_sml.gif" /></a></td>
 <td><a href="#com.ucoruh.calculator.CalculatorTest$Multiply">CalculatorTest$Multiply</a></td>
@@ -222,7 +254,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>0.008 s</td></tr>
+<td>0.006 s</td></tr>
 <tr class="b">
 <td><a href="#com.ucoruh.calculator.CalculatorTest$Divide"><img src="images/icon_success_sml.gif" /></a></td>
 <td><a href="#com.ucoruh.calculator.CalculatorTest$Divide">CalculatorTest$Divide</a></td>
@@ -231,7 +263,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>0.009 s</td></tr>
+<td>0.014 s</td></tr>
 <tr class="a">
 <td><a href="#com.ucoruh.calculator.CalculatorTest$Subtract"><img src="images/icon_success_sml.gif" /></a></td>
 <td><a href="#com.ucoruh.calculator.CalculatorTest$Subtract">CalculatorTest$Subtract</a></td>
@@ -240,7 +272,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>0.003 s</td></tr>
+<td>0.004 s</td></tr>
 <tr class="b">
 <td><a href="#com.ucoruh.calculator.CalculatorTest$Add"><img src="images/icon_success_sml.gif" /></a></td>
 <td><a href="#com.ucoruh.calculator.CalculatorTest$Add">CalculatorTest$Add</a></td>
@@ -249,7 +281,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>0.005 s</td></tr>
+<td>0.006 s</td></tr>
 <tr class="a">
 <td><a href="#com.ucoruh.calculator.CalculatorAppTest$MainMethod"><img src="images/icon_success_sml.gif" /></a></td>
 <td><a href="#com.ucoruh.calculator.CalculatorAppTest$MainMethod">CalculatorAppTest$MainMethod</a></td>
@@ -258,7 +290,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>0.357 s</td></tr>
+<td>0.398 s</td></tr>
 <tr class="b">
 <td><a href="#com.ucoruh.calculator.CalculatorAppTest$InvalidInput"><img src="images/icon_success_sml.gif" /></a></td>
 <td><a href="#com.ucoruh.calculator.CalculatorAppTest$InvalidInput">CalculatorAppTest$InvalidInput</a></td>
@@ -267,7 +299,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>0.013 s</td></tr>
+<td>0.025 s</td></tr>
 <tr class="a">
 <td><a href="#com.ucoruh.calculator.CalculatorAppTest$BoundaryInput"><img src="images/icon_success_sml.gif" /></a></td>
 <td><a href="#com.ucoruh.calculator.CalculatorAppTest$BoundaryInput">CalculatorAppTest$BoundaryInput</a></td>
@@ -276,7 +308,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>0.013 s</td></tr>
+<td>0.018 s</td></tr>
 <tr class="b">
 <td><a href="#com.ucoruh.calculator.CalculatorAppTest$NormalInput"><img src="images/icon_success_sml.gif" /></a></td>
 <td><a href="#com.ucoruh.calculator.CalculatorAppTest$NormalInput">CalculatorAppTest$NormalInput</a></td>
@@ -285,7 +317,7 @@ function toggleDisplay(elementId) {
 <td>0</td>
 <td>0</td>
 <td>100%</td>
-<td>0.008 s</td></tr></table></section><br /></section><section><a id="Test_Cases"></a>
+<td>0.016 s</td></tr></table></section><br /></section><section><a id="Test_Cases"></a>
 <h2>Test Cases</h2>
 <p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p><section><a id="com.ucoruh.calculator.CalculatorTest"></a>
 <h3>CalculatorTest</h3>
@@ -293,7 +325,7 @@ function toggleDisplay(elementId) {
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorTest.boundaryValues.28int.2C_String.2C_int.2C_int.29.5B1.5D" href="./xref-test/com/ucoruh/calculator/CalculatorTest.html">boundaryValues(int, String, int, int)[1]</a></td>
-<td>0.017 s</td></tr>
+<td>0.024 s</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorTest.boundaryValues.28int.2C_String.2C_int.2C_int.29.5B2.5D" href="./xref-test/com/ucoruh/calculator/CalculatorTest.html">boundaryValues(int, String, int, int)[2]</a></td>
@@ -307,7 +339,7 @@ function toggleDisplay(elementId) {
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorTest.24Multiply.multiplyTwoNegatives" href="./xref-test/com/ucoruh/calculator/CalculatorTest.html">multiplyTwoNegatives</a></td>
-<td>0.003 s</td></tr>
+<td>0.002 s</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorTest.24Multiply.multipliesPositiveNumbers" href="./xref-test/com/ucoruh/calculator/CalculatorTest.html">multipliesPositiveNumbers</a></td>
@@ -315,13 +347,13 @@ function toggleDisplay(elementId) {
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorTest.24Multiply.multiplyByZero" href="./xref-test/com/ucoruh/calculator/CalculatorTest.html">multiplyByZero</a></td>
-<td>0.003 s</td></tr></table></section><section><a id="com.ucoruh.calculator.CalculatorTest.24Divide"></a>
+<td>0.002 s</td></tr></table></section><section><a id="com.ucoruh.calculator.CalculatorTest.24Divide"></a>
 <h3>CalculatorTest$Divide</h3>
 <table class="table table-striped">
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorTest.24Divide.divideByZeroThrows" href="./xref-test/com/ucoruh/calculator/CalculatorTest.html">divideByZeroThrows</a></td>
-<td>0.005 s</td></tr>
+<td>0.008 s</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorTest.24Divide.zeroDividend" href="./xref-test/com/ucoruh/calculator/CalculatorTest.html">zeroDividend</a></td>
@@ -329,11 +361,11 @@ function toggleDisplay(elementId) {
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorTest.24Divide.dividesWithRemainder" href="./xref-test/com/ucoruh/calculator/CalculatorTest.html">dividesWithRemainder</a></td>
-<td>0.001 s</td></tr>
+<td>0.002 s</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorTest.24Divide.dividesEvenly" href="./xref-test/com/ucoruh/calculator/CalculatorTest.html">dividesEvenly</a></td>
-<td>0.001 s</td></tr></table></section><section><a id="com.ucoruh.calculator.CalculatorTest.24Subtract"></a>
+<td>0.002 s</td></tr></table></section><section><a id="com.ucoruh.calculator.CalculatorTest.24Subtract"></a>
 <h3>CalculatorTest$Subtract</h3>
 <table class="table table-striped">
 <tr class="a">
@@ -343,7 +375,7 @@ function toggleDisplay(elementId) {
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorTest.24Subtract.subtractResultingInNegative" href="./xref-test/com/ucoruh/calculator/CalculatorTest.html">subtractResultingInNegative</a></td>
-<td>0.001 s</td></tr></table></section><section><a id="com.ucoruh.calculator.CalculatorTest.24Add"></a>
+<td>0.002 s</td></tr></table></section><section><a id="com.ucoruh.calculator.CalculatorTest.24Add"></a>
 <h3>CalculatorTest$Add</h3>
 <table class="table table-striped">
 <tr class="a">
@@ -353,7 +385,7 @@ function toggleDisplay(elementId) {
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorTest.24Add.addsPositiveNumbers" href="./xref-test/com/ucoruh/calculator/CalculatorTest.html">addsPositiveNumbers</a></td>
-<td>0.001 s</td></tr>
+<td>0.002 s</td></tr>
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorTest.24Add.addsNegativeAndPositive" href="./xref-test/com/ucoruh/calculator/CalculatorTest.html">addsNegativeAndPositive</a></td>
@@ -363,43 +395,43 @@ function toggleDisplay(elementId) {
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24MainMethod.printsResult" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">printsResult</a></td>
-<td>0.353 s</td></tr>
+<td>0.393 s</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24MainMethod.printsUsageForInvalidArguments" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">printsUsageForInvalidArguments</a></td>
-<td>0.004 s</td></tr></table></section><section><a id="com.ucoruh.calculator.CalculatorAppTest.24InvalidInput"></a>
+<td>0.005 s</td></tr></table></section><section><a id="com.ucoruh.calculator.CalculatorAppTest.24InvalidInput"></a>
 <h3>CalculatorAppTest$InvalidInput</h3>
 <table class="table table-striped">
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24InvalidInput.nonNumericSecondOperand" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">nonNumericSecondOperand</a></td>
-<td>0.003 s</td></tr>
+<td>0.005 s</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24InvalidInput.unknownOperator" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">unknownOperator</a></td>
-<td>0.003 s</td></tr>
+<td>0.006 s</td></tr>
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24InvalidInput.nonNumericFirstOperand" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">nonNumericFirstOperand</a></td>
-<td>0.002 s</td></tr>
+<td>0.004 s</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24InvalidInput.divisionByZero" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">divisionByZero</a></td>
-<td>0.005 s</td></tr></table></section><section><a id="com.ucoruh.calculator.CalculatorAppTest.24BoundaryInput"></a>
+<td>0.010 s</td></tr></table></section><section><a id="com.ucoruh.calculator.CalculatorAppTest.24BoundaryInput"></a>
 <h3>CalculatorAppTest$BoundaryInput</h3>
 <table class="table table-striped">
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24BoundaryInput.maxIntOperand" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">maxIntOperand</a></td>
-<td>0.004 s</td></tr>
+<td>0.005 s</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24BoundaryInput.nullArguments" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">nullArguments</a></td>
-<td>0.002 s</td></tr>
+<td>0.004 s</td></tr>
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24BoundaryInput.noArguments" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">noArguments</a></td>
-<td>0.002 s</td></tr>
+<td>0.004 s</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24BoundaryInput.tooManyArguments" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">tooManyArguments</a></td>
@@ -413,15 +445,15 @@ function toggleDisplay(elementId) {
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24NormalInput.subtract" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">subtract</a></td>
-<td>0.002 s</td></tr>
+<td>0.005 s</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24NormalInput.divide" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">divide</a></td>
-<td>0.002 s</td></tr>
+<td>0.005 s</td></tr>
 <tr class="a">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24NormalInput.add" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">add</a></td>
-<td>0.002 s</td></tr>
+<td>0.004 s</td></tr>
 <tr class="b">
 <td><img src="images/icon_success_sml.gif" /></td>
 <td><a id="TC_com.ucoruh.calculator.CalculatorAppTest.24NormalInput.multiply" href="./xref-test/com/ucoruh/calculator/CalculatorAppTest.html">multiply</a></td>
