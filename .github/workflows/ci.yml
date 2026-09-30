@@ -179,12 +179,18 @@ jobs:
 
       - run: python3 -m pip install -r requirements.txt
 
-      - name: Collect the per-platform artifacts
+      - name: Collect the Windows and Linux artifacts (they keep their reports/ and release/ folders)
         uses: actions/download-artifact@v8
         with:
-          pattern: platform-*
+          pattern: platform-[wl]*
           merge-multiple: true
           path: .
+
+      - name: Collect the macOS artifact (uploaded from a single folder, so it goes into release/)
+        uses: actions/download-artifact@v8
+        with:
+          name: platform-macos
+          path: release
 
       - name: Build the MkDocs site (both platforms), check links, pack the neutral assets
         run: |
