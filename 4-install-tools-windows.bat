@@ -73,7 +73,7 @@ where gh >nul 2>&1
 if errorlevel 1 (
     choco install gh -y
 ) else (
-    echo GitHub CLI is already installed. Run "gh auth login" once - see docs\guide\releases-en.md.
+    echo GitHub CLI is already installed. Run "gh auth login" once - see docs\guide\releases.en.md.
 )
 
 echo ....................

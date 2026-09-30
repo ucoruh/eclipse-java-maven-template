@@ -6,7 +6,7 @@ cd "$(dirname "$0")"
 echo "Checking for a supported Linux/WSL package manager..."
 if command -v apt-get >/dev/null 2>&1; then
     echo "apt-get found (Debian/Ubuntu/WSL). Refreshing package lists..."
-    sudo apt-get update
+    sudo apt-get update || echo "[WARN] apt-get update reported an error (often a broken third-party source); continuing."
 elif command -v dnf >/dev/null 2>&1; then
     echo "dnf found (Fedora)."
 elif command -v pacman >/dev/null 2>&1; then

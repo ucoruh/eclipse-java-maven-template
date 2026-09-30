@@ -72,6 +72,10 @@ gh auth status
 ```
 Beklenen: `Logged in to github.com account <kullanıcı-adınız>`.
 
+**WSL'in kendi `gh` ve git kimlik bilgisi vardır** - Windows'ta oturum açmak Ubuntu'yu açmaz. WSL içinde
+`gh auth login`, ardından `gh auth setup-git` çalıştırın (özel bir depoyu WSL'den `git clone`/`git push` etmek için
+gerekir; yoksa özel depo klonu kullanıcı adı sorarak takılır).
+
 ## Kendi makinenizden sürüm yayınlamak
 
 1. `project.env` içinde `VERSION=1.2.0` yapın, commit edin.

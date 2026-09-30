@@ -17,7 +17,7 @@ command -v mvn >/dev/null 2>&1 || fail "mvn not found. Run ./4-install-tools-lin
 
 echo "[1/4] Maven: clean, compile, run the JUnit 5 tests (JaCoCo attached), package the jar"
 mvn -B -f calculator-app/pom.xml -Drevision="$VERSION" clean verify \
-    || fail "'mvn clean verify' failed - see the Maven output above (JAVA_HOME/PATH? see docs/guide/troubleshooting-en.md)."
+    || fail "'mvn clean verify' failed - see the Maven output above (JAVA_HOME/PATH? see docs/guide/troubleshooting.en.md)."
 
 echo "[2/4] Stage the build output in build/linux-release/"
 rm -rf build/linux-release

@@ -2,7 +2,7 @@
 # Build:  7-build-all-<platform>  (stages generated pages into docs/, then runs "mkdocs build -d site")
 # Edit live:  9-open-site-<platform> --edit
 # The Maven site is built separately (mvn site -> site-native/) and published under native/ - it is linked
-# from the menu but never framed (see docs/guide/standard-en.md, "Site rules").
+# from the menu but never framed (see docs/guide/standard.en.md, "Site rules").
 site_name: Calculator - Java + Maven course template
 site_description: Java 17, Maven, JUnit 5, JaCoCo, ReportGenerator, Doxygen, Javadoc and a full site - the starting point for a term project.
 site_url: https://ucoruh.github.io/eclipse-java-maven-template/

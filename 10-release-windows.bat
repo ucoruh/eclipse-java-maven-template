@@ -5,7 +5,7 @@ rem   10-release-windows.bat --dry-run   build + show the exact gh command and t
 rem   10-release-windows.bat             really publish tag v<VERSION from project.env> with every file in release\
 rem The version comes from project.env (VERSION=1.1.0 -> tag v1.1.0); edit it there, commit, then release.
 rem NOTE: a local build only holds THIS platform's assets. CI (the "v*" tag workflow) builds Windows +
-rem Linux + macOS; use this script when you want to release without CI (see docs\guide\releases-en.md).
+rem Linux + macOS; use this script when you want to release without CI (see docs\guide\releases.en.md).
 @setlocal enableextensions enabledelayedexpansion
 @cd /d "%~dp0"
 
@@ -45,7 +45,7 @@ if errorlevel 1 (
 ) else (
     gh auth status >nul 2>&1
     if errorlevel 1 (
-        echo [WARN] gh is not logged in. Fix: gh auth login   ^(see docs\guide\releases-en.md^)
+        echo [WARN] gh is not logged in. Fix: gh auth login   ^(see docs\guide\releases.en.md^)
         if "%DRYRUN%"=="0" exit /b 1
         echo [DRY RUN] Continuing without a login - a real release needs it.
     )

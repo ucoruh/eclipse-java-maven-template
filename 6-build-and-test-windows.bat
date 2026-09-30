@@ -18,7 +18,7 @@ echo [1/4] Maven: clean, compile, run the JUnit 5 tests (JaCoCo attached), packa
 call mvn -B -f "calculator-app\pom.xml" -Drevision=%VERSION% clean verify
 if errorlevel 1 (
     echo [ERROR] "mvn clean verify" failed - see the Maven output above.
-    echo         Common causes: wrong JDK on PATH ^(docs\guide\troubleshooting-en.md^), a failing test,
+    echo         Common causes: wrong JDK on PATH ^(docs\guide\troubleshooting.en.md^), a failing test,
     echo         or no network access to Maven Central on the first run.
     exit /b 1
 )

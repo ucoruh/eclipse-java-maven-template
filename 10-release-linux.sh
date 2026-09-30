@@ -5,7 +5,7 @@
 #   ./10-release-linux.sh             really publish tag v<VERSION from project.env> with every file in release/
 # The version comes from project.env (VERSION=1.1.0 -> tag v1.1.0); edit it there, commit, then release.
 # NOTE: a local build only holds THIS platform's assets. CI (the "v*" tag workflow) builds Windows +
-# Linux + macOS; use this script when you want to release without CI (see docs/guide/releases-en.md).
+# Linux + macOS; use this script when you want to release without CI (see docs/guide/releases.en.md).
 set -e
 cd "$(dirname "$0")"
 
@@ -30,10 +30,10 @@ fi
 
 echo "[2/5] Check the GitHub CLI is installed and logged in"
 if ! command -v gh >/dev/null 2>&1; then
-    echo "[WARN] GitHub CLI 'gh' not found - see docs/guide/releases-en.md."
+    echo "[WARN] GitHub CLI 'gh' not found - see docs/guide/releases.en.md."
     [ "$DRYRUN" = "1" ] && echo "[DRY RUN] Continuing without gh - a real release needs it." || exit 1
 elif ! gh auth status >/dev/null 2>&1; then
-    echo "[WARN] gh is not logged in. Fix: gh auth login   (see docs/guide/releases-en.md)"
+    echo "[WARN] gh is not logged in. Fix: gh auth login   (see docs/guide/releases.en.md)"
     [ "$DRYRUN" = "1" ] && echo "[DRY RUN] Continuing without a login - a real release needs it." || exit 1
 fi
 

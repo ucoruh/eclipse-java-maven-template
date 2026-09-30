@@ -16,7 +16,7 @@ install_apt() {
 }
 
 command -v apt-get >/dev/null 2>&1 || { echo "[ERROR] apt-get not found. Install astyle, doxygen, graphviz, lcov, curl, zip, python3-pip with your package manager, then run the pip/dotnet steps of this script by hand." >&2; exit 1; }
-sudo apt-get update
+sudo apt-get update || echo "[WARN] apt-get update reported an error (often a broken third-party source); continuing with the package lists we have."
 install_apt curl
 install_apt zip
 install_apt astyle
@@ -46,10 +46,10 @@ if ! command -v gh >/dev/null 2>&1; then
     curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
     sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
     echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
-    sudo apt-get update
+    sudo apt-get update || echo "[WARN] apt-get update reported an error; continuing."
     sudo apt-get install -y gh
 else
-    echo "GitHub CLI is already installed. Run 'gh auth login' once - see docs/guide/releases-en.md."
+    echo "GitHub CLI is already installed. Run 'gh auth login' once - see docs/guide/releases.en.md."
 fi
 
 echo "...................."

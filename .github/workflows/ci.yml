@@ -1,6 +1,6 @@
 name: CI
 
-# One workflow, four jobs (see docs/guide/standard-en.md, "CI in one picture"):
+# One workflow, four jobs (see docs/guide/standard.en.md, "CI in one picture"):
 #   windows  - 7-build-all-windows.bat --no-site : build, tests, coverage (2 families), doc coverage (2), API docs
 #   linux    - 7-build-all-linux.sh   --no-site : the same on Linux (+ the Maven site as site-native/)
 #   macos    - builds and packs the application only
@@ -10,7 +10,7 @@ name: CI
 # Cost (private repo on GitHub Free: 2,000 min/month; Windows minutes count x2, macOS x10): a full run is
 # roughly 12-20 billed minutes. Push freely to feature branches, tag only when you release. Artifacts live 7 days.
 # Private repository: Pages is skipped unless the repository variable PAGES_ON_PRIVATE is "true"
-# (GitHub Pro / Student Developer Pack) - see docs/guide/showcase-en.md and docs/guide/releases-en.md.
+# (GitHub Pro / Student Developer Pack) - see docs/guide/showcase.en.md and docs/guide/releases.en.md.
 on:
   push:
     branches: ["**"]
@@ -104,7 +104,12 @@ jobs:
           cache: pip
 
       - name: Install Doxygen, lcov (genhtml), Graphviz and zip
-        run: sudo apt-get update && sudo apt-get install -y doxygen lcov graphviz zip
+        run: |
+          # Runner images ship third-party apt sources (e.g. packages.microsoft.com) that can answer 403 and
+          # would fail "apt-get update"; we install nothing from them, so drop them and never fail on them.
+          sudo rm -f /etc/apt/sources.list.d/microsoft-prod.list /etc/apt/sources.list.d/microsoft-prod.sources
+          for i in 1 2 3; do sudo apt-get update && break || { echo "apt-get update failed (try $i/3)"; sleep 10; }; done
+          sudo apt-get install -y --no-install-recommends doxygen lcov graphviz zip
 
       - name: Install the Python packages and the ReportGenerator tool
         run: |
@@ -214,7 +219,7 @@ jobs:
           PAGES_ON_PRIVATE: ${{ vars.PAGES_ON_PRIVATE }}
           IS_MAIN: ${{ github.ref == 'refs/heads/main' }}
         run: |
-          GUIDE="https://github.com/${GITHUB_REPOSITORY}/blob/main/docs/guide/showcase-en.md"
+          GUIDE="https://github.com/${GITHUB_REPOSITORY}/blob/main/docs/guide/showcase.en.md"
           if [ "$IS_MAIN" != "true" ]; then
             echo "run=false" >> "$GITHUB_OUTPUT"
             echo "Pages deploy runs only for main (this ref: ${GITHUB_REF})." >> "$GITHUB_STEP_SUMMARY"

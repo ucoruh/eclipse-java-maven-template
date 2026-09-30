@@ -51,7 +51,7 @@ echo **/desktop.ini >> %OUTPUT_FILE%
 
 echo Appended '**/desktop.ini' to %OUTPUT_FILE%
 echo Remember to re-add this template's project-specific .gitignore entries
-echo (see docs/guide/use-template-en.md) after regenerating from the API.
+echo (see docs/guide/use-template.en.md) after regenerating from the API.
 
 if not defined CI pause
 

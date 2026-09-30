@@ -9,11 +9,9 @@ currentDir=$(pwd)
 cd "$(git rev-parse --show-toplevel)"
 
 # Deleting desktop.ini files from the project directory and removing them from the Git index
-find . -name 'desktop.ini' -print0 | while IFS= read -r -d '' file; do
-    if [ -f "$file" ]; then
-        git rm --cached --force "$file"
-        rm "$file"
-    fi
+find . -name 'desktop.ini' -type f | while IFS= read -r file; do
+    git rm --cached --force --quiet "$file" 2>/dev/null
+    rm -f "$file"
 done
 
 # Return to the original directory

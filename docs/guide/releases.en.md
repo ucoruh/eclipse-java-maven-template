@@ -73,6 +73,10 @@ gh auth status
 ```
 Expected: `Logged in to github.com account <your-username>`.
 
+**WSL has its own `gh` and its own git credentials** - logging in on Windows does not log in Ubuntu. Inside WSL run
+`gh auth login` and then `gh auth setup-git` (this lets `git clone`/`git push` of a private repository work without a
+password prompt; without it a private clone from WSL just hangs asking for a username).
+
 ## Publishing a release from your machine
 
 1. Edit `project.env` (`VERSION=1.2.0`), commit.
