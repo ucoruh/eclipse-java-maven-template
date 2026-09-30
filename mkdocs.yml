@@ -1,0 +1,124 @@
+# MkDocs Material = the MAIN site of this template (same look and menu as the course sites).
+# Build:  7-build-all-<platform>  (stages generated pages into docs/, then runs "mkdocs build -d site")
+# Edit live:  9-open-site-<platform> --edit
+# The Maven site is built separately (mvn site -> site-native/) and published under native/ - it is linked
+# from the menu but never framed (see docs/guide/standard-en.md, "Site rules").
+site_name: Calculator - Java + Maven course template
+site_description: Java 17, Maven, JUnit 5, JaCoCo, ReportGenerator, Doxygen, Javadoc and a full site - the starting point for a term project.
+site_url: https://ucoruh.github.io/eclipse-java-maven-template/
+repo_url: https://github.com/ucoruh/eclipse-java-maven-template
+repo_name: ucoruh/eclipse-java-maven-template
+edit_uri: edit/main/docs/
+docs_dir: docs
+site_dir: site
+copyright: RTEU - Dr. Ugur Coruh. Licensed under AGPL-3.0.
+
+theme:
+  name: material
+  language: en
+  logo: assets/rteu_logo.jpg
+  favicon: assets/favicon.png
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: deep orange
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: deep orange
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+
+extra_css:
+  - stylesheets/extra.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+validation:
+  omitted_files: info
+  absolute_links: info
+  unrecognized_links: warn
+  anchors: info
+
+not_in_nav: |
+  /archive/
+
+exclude_docs: |
+  archive/
+  desktop.ini
+  **/desktop.ini
+
+nav:
+  - Home: index.md
+  - Guide (EN):
+      - Install the tools: guide/install-en.md
+      - Use the template: guide/use-template-en.md
+      - From a project topic to your project: guide/from-topic-en.md
+      - Daily workflow and reports: guide/workflow-en.md
+      - Showing your project without GitHub Pages: guide/showcase-en.md
+      - Releases and private repositories: guide/releases-en.md
+      - Naming standard and site rules: guide/standard-en.md
+      - Toolchain comparison: guide/toolchain-comparison-en.md
+      - Troubleshooting: guide/troubleshooting-en.md
+  - Kılavuz (TR):
+      - Araçları kurun: guide/install-tr.md
+      - Şablonu kullanın: guide/use-template-tr.md
+      - Proje konusundan kendi projenize: guide/from-topic-tr.md
+      - Günlük çalışma ve raporlar: guide/workflow-tr.md
+      - GitHub Pages olmadan projenizi gösterin: guide/showcase-tr.md
+      - Sürümler ve özel depolar: guide/releases-tr.md
+      - Adlandırma standardı ve site kuralları: guide/standard-tr.md
+      - Araç zinciri karşılaştırması: guide/toolchain-comparison-tr.md
+      - Sorun giderme: guide/troubleshooting-tr.md
+  - Reports:
+      - Overview: reports/index.md
+      - Which report is which?: guide/which-report.md
+      - Windows:
+          - Overview: reports/windows/index.md
+          - Unit tests (junit2html): reports/windows/tests-junit2html/index.md
+          - Coverage - JaCoCo: reports/windows/coverage-jacoco/index.md
+          - Coverage - ReportGenerator: reports/windows/coverage-reportgenerator/index.md
+          - Doc coverage - genhtml: reports/windows/doccoverage-lcov/index.md
+          - Doc coverage - ReportGenerator: reports/windows/doccoverage-reportgenerator/index.md
+      - Linux:
+          - Overview: reports/linux/index.md
+          - Unit tests (junit2html): reports/linux/tests-junit2html/index.md
+          - Coverage - JaCoCo: reports/linux/coverage-jacoco/index.md
+          - Coverage - ReportGenerator: reports/linux/coverage-reportgenerator/index.md
+          - Doc coverage - genhtml: reports/linux/doccoverage-lcov/index.md
+          - Doc coverage - ReportGenerator: reports/linux/doccoverage-reportgenerator/index.md
+  - API docs:
+      - Overview: api.md
+      - Doxygen - Windows: reports/windows/api-doxygen/index.md
+      - Javadoc - Windows: reports/windows/api-javadoc/index.md
+      - Doxygen - Linux: reports/linux/api-doxygen/index.md
+      - Javadoc - Linux: reports/linux/api-javadoc/index.md
+  - Downloads: downloads.md
+  - Maven site (native): maven-site.md

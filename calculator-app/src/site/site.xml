@@ -40,8 +40,7 @@
 
 		<menu name="Overview">
 				<item name="Home" href="index.html" />
-				<item name="README.md" href="readme.html" />
-				<item name="Which report is which?" href="tool-catalog.html" />
+				<item name="Main site (MkDocs)" href="../index.html" />
 				<item name="Project Info" href="project-info.html" />
 				<item name="Project Summary" href="summary.html" />
 				<item name="Project Team" href="team.html" />
@@ -63,21 +62,15 @@
 				<item name="Build Dependencies" href="dependencies.html" />
 				<item name="Plugin Management" href="plugin-management.html" />
 				<item name="Build Plugins" href="plugins.html" />
-				<item name="All Generated Reports" href="project-reports.html" />
+				<item name="All Maven Reports" href="project-reports.html" />
 		</menu>
 
-		<!-- Every HTML report embedded in a styled iframe page (title + one-line
-			explanation + "Open in a new tab" + "Download (zip)"), see
-			src/site/markdown/reports/*.md and docs/guide/workflow-en.md
-			("Showing an HTML report inside your site"). -->
+		<!-- Maven-generated reports only. Standalone reports (JaCoCo/ReportGenerator/Doxygen/Javadoc/
+			junit2html, per platform) live in the MkDocs site, which frames them; this site is never framed. -->
 		<menu name="Reports">
-				<item name="Unit Tests: Surefire (native)" href="surefire.html" />
-				<item name="Coverage: JaCoCo (native)" href="reports/jacoco.html" />
-				<item name="Coverage: ReportGenerator" href="reports/coveragereport.html" />
-				<item name="Doc Coverage: genhtml (native)" href="reports/coverxygen.html" />
-				<item name="Doc Coverage: ReportGenerator" href="reports/coverxygen-reportgenerator.html" />
-				<item name="API Docs: Javadoc (native)" href="reports/javadoc.html" />
-				<item name="API Docs: Doxygen" href="reports/doxygen.html" />
+				<item name="Unit Tests: Surefire" href="surefire.html" />
+				<item name="Coverage: JaCoCo" href="jacoco/index.html" />
+				<item name="API Docs: Javadoc" href="apidocs/index.html" />
 				<item name="Code Quality: Checkstyle" href="checkstyle.html" />
 				<item name="Code Quality: PMD" href="pmd.html" />
 				<item name="Code Quality: CPD" href="cpd.html" />

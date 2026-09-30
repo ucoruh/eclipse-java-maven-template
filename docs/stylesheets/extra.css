@@ -1,0 +1,50 @@
+/* Calm primary colour shared by the three course templates (Java / C++ / C#). */
+:root {
+  --md-primary-fg-color: #2f5d8a;
+  --md-primary-fg-color--light: #4a7bab;
+  --md-primary-fg-color--dark: #1f4266;
+  --md-primary-bg-color: #ffffff;
+  --md-primary-bg-color--light: #ffffffb3;
+}
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #2b4f75;
+}
+
+/* Landing hero */
+.hero {
+  background: linear-gradient(135deg, #2f5d8a 0%, #1f4266 100%);
+  color: #fff;
+  padding: 2rem 2rem 1.6rem;
+  border-radius: .5rem;
+  margin: 0 0 1.5rem;
+}
+.hero h1 { color: #fff; margin: 0 0 .4rem; font-weight: 700; }
+.hero p { color: #e7eef5; max-width: 46rem; }
+.hero .md-button { margin: .25rem .4rem .25rem 0; color: #fff; border-color: #fff; }
+.hero .md-button--primary { background: #e8791a; border-color: #e8791a; color: #fff; }
+.badge-row img { margin: 0 .3rem .3rem 0; height: 20px; vertical-align: middle; }
+
+/* Report pages: toolbar + explainer + full-height frame */
+.report-toolbar { margin: .5rem 0 1rem; }
+.report-toolbar .md-button { margin-right: .4rem; }
+.report-explainer { max-width: 50rem; }
+.report-frame-wrap {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .4rem;
+  overflow: hidden;
+  background: #fff;
+}
+.report-frame {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 15rem);
+  min-height: 520px;
+  border: 0;
+}
+.report-fallback { font-size: .8rem; color: var(--md-default-fg-color--light); }
+
+/* Phone width: give the frame more of the screen */
+@media (max-width: 44.9375em) {
+  .hero { padding: 1.2rem 1rem; }
+  .report-frame { height: calc(100vh - 12rem); min-height: 420px; }
+}
