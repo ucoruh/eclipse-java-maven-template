@@ -2257,6 +2257,9 @@ Linux/WSL: <code>gh --version</code> - yoksa <code>4-install-tools-linux.sh</cod
 <div class="highlight"><pre><span></span><code>gh<span class="w"> </span>auth<span class="w"> </span>status
 </code></pre></div>
 Beklenen: <code>Logged in to github.com account &lt;kullanıcı-adınız&gt;</code>.</p>
+<p><strong>WSL'in kendi <code>gh</code> ve git kimlik bilgisi vardır</strong> - Windows'ta oturum açmak Ubuntu'yu açmaz. WSL içinde
+<code>gh auth login</code>, ardından <code>gh auth setup-git</code> çalıştırın (özel bir depoyu WSL'den <code>git clone</code>/<code>git push</code> etmek için
+gerekir; yoksa özel depo klonu kullanıcı adı sorarak takılır).</p>
 <h2 id="kendi-makinenizden-surum-yaynlamak">Kendi makinenizden sürüm yayınlamak<a class="headerlink" href="#kendi-makinenizden-surum-yaynlamak" title="Permanent link">&para;</a></h2>
 <ol>
 <li><code>project.env</code> içinde <code>VERSION=1.2.0</code> yapın, commit edin.</li>

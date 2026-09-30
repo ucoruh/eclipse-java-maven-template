@@ -2258,6 +2258,9 @@ Choose <strong>GitHub.com -&gt; HTTPS -&gt; Login with a web browser</strong>, t
 <div class="highlight"><pre><span></span><code>gh<span class="w"> </span>auth<span class="w"> </span>status
 </code></pre></div>
 Expected: <code>Logged in to github.com account &lt;your-username&gt;</code>.</p>
+<p><strong>WSL has its own <code>gh</code> and its own git credentials</strong> - logging in on Windows does not log in Ubuntu. Inside WSL run
+<code>gh auth login</code> and then <code>gh auth setup-git</code> (this lets <code>git clone</code>/<code>git push</code> of a private repository work without a
+password prompt; without it a private clone from WSL just hangs asking for a username).</p>
 <h2 id="publishing-a-release-from-your-machine">Publishing a release from your machine<a class="headerlink" href="#publishing-a-release-from-your-machine" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Edit <code>project.env</code> (<code>VERSION=1.2.0</code>), commit.</li>
