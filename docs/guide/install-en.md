@@ -10,19 +10,19 @@ can copy-paste; the "expected output" line tells you what a working install look
 | JDK 17 (or 21) | compile and run Java, JUnit 5 needs 17+ | everything |
 | Maven 3.8+ | build, test, package, site | everything |
 | Git | clone, hooks, releases | everything |
-| Doxygen | API docs (2nd family) + input for documentation coverage | `7-build-app` |
-| lcov (`genhtml`) | renders the documentation-coverage report (native family) | `7-build-app` |
-| Python 3.12 + `coverxygen` | turns Doxygen's XML into the lcov.info documentation-coverage source | `7-build-app` |
-| .NET SDK + ReportGenerator global tool | coverage/doc-coverage HTML, badges, history (2nd family) | `7-build-app` |
+| Doxygen | API docs (2nd family) + input for documentation coverage | `7-build-all-*` |
+| lcov (`genhtml`) + a Windows-native Perl | renders the documentation-coverage report (native family) | `7-build-all-*` |
+| Python 3.12 + the packages in `requirements.txt` (`coverxygen`, `junit2html`, `mkdocs-material`) | documentation-coverage source, the unit-test HTML report, the main site | `6-build-and-test-*`, `7-build-all-*` |
+| .NET SDK + ReportGenerator global tool | coverage/doc-coverage HTML, badges, history (2nd family) | `7-build-all-*` |
 | Astyle | code formatting | `5-format-code`, the pre-commit hook |
-| GitHub CLI (`gh`) | publish a release from your machine | `10-release` |
+| GitHub CLI (`gh`) | publish a release from your machine | `10-release-*` |
 
 ## Windows
 
 ### 1. Package managers
 
 ```batch
-3-install-package-manager.bat
+3-install-package-manager-windows.bat
 ```
 
 Installs [Chocolatey](https://chocolatey.org/) and [Scoop](https://scoop.sh/) if you do not already have them.
@@ -30,8 +30,11 @@ Installs [Chocolatey](https://chocolatey.org/) and [Scoop](https://scoop.sh/) if
 ### 2. Everything else
 
 ```batch
-4-install-required-apps.bat
+4-install-tools-windows.bat
 ```
+
+(Run it in an **administrator** terminal; it installs JDK 17, Maven, Astyle, Doxygen, Graphviz, lcov, Strawberry Perl, the
+ReportGenerator tool, the Python packages and the GitHub CLI - each only if missing.)
 
 This script checks each tool first and only installs what is missing, so it is safe to re-run. Verify each tool
 afterwards:
@@ -59,7 +62,7 @@ Expected: a version number, e.g. `1.9.7`.
 where genhtml
 ```
 Expected: a path such as `C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml`. This file has **no `.exe`
-extension** - it is a Perl script, so `7-build-app.bat` always runs it as `perl "<path>\genhtml" ...`, never as
+extension** - it is a Perl script, so `7-build-all-windows.bat` always runs it as `perl "<path>\genhtml" ...`, never as
 `genhtml` directly. If `perl` itself is missing: `choco install strawberryperl -y`.
 
 ```batch
@@ -77,7 +80,7 @@ Expected: a .NET SDK version (8.x or newer) and ReportGenerator's help text.
 ```batch
 gh --version
 ```
-Expected: `gh version X.Y.Z (...)`. Needed only for `10-release.bat` - see
+Expected: `gh version X.Y.Z (...)`. Needed only for `10-release-windows.bat` - see
 [releases-en.md](releases-en.md).
 
 ## Linux / WSL (Ubuntu)
@@ -86,20 +89,15 @@ If you use WSL, open an **Ubuntu terminal** (not PowerShell) for all of the comm
 Google Drive `G:` path - see [troubleshooting-en.md](troubleshooting-en.md#wsl-cannot-see-g) for how to work
 around that.
 
-### 1. Package manager
+### 1. Everything (one script)
 
 ```bash
-./3-install-package-manager.sh
+./4-install-tools-linux.sh
 ```
 
-Refreshes `apt` and installs the .NET SDK per-user (into `$HOME/.dotnet`, no `sudo` needed for that part) if it is
-missing.
-
-### 2. Everything else
-
-```bash
-./4-install-required-apps.sh
-```
+There is no separate package-manager script on Linux (`apt` is already there). The script refreshes `apt`, installs the
+native tools, and - only where `apt`'s version is too old - a per-user JDK 17, Maven 3.9 and .NET SDK (into `$HOME/tools`
+and `$HOME/.dotnet`, no `sudo` for that part), then ReportGenerator and the Python packages of `requirements.txt`.
 
 Verify:
 
@@ -127,7 +125,7 @@ export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"
 ### 3. Make the scripts executable
 
 The `.sh` scripts are committed with the executable bit set (`git update-index --chmod=+x`), so a fresh `git
-clone` should already let you run `./7-build-app.sh` directly. If you get "Permission denied":
+clone` should already let you run `./7-build-all-linux.sh` directly. If you get "Permission denied":
 
 ```bash
 chmod +x *.sh

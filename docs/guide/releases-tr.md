@@ -1,114 +1,122 @@
-# Özel depo: release'ler ve site
+# Sürümler ve özel depolar
 
-Ders deponuz **özel (private)** ve çoğu öğrencide düz bir **GitHub Free** hesabı var. Bu sayfa bunun tam olarak ne
-yapıp ne yapmadığını ve bu şablonun boşlukları nasıl aştığını açıklar.
+Ders deponuz **özeldir (private)** ve çoğu öğrencinin düz bir **GitHub Free** hesabı vardır. Bu sayfa bunun neye izin
+verip neye vermediğini ve bu şablonun boşlukları nasıl kapattığını anlatır. Proje sunumu için adım adım tarif
+[GitHub Pages olmadan projenizi gösterin](showcase-tr.md) sayfasındadır.
 
-## Free ile Pro'da ne çalışır (GitHub'ın kendi belgelerinden gerçekler)
+## Free ve Pro'da ne çalışır (GitHub belgelerinden olgular)
 
-| Özellik | GitHub Free (özel depo) | GitHub Pro / Team (ya da Pro veren Free'nin Student Developer Pack'i) |
+| Özellik | GitHub Free (özel depo) | GitHub Pro / Team (veya Pro veren ücretsiz Student Developer Pack) |
 |---|---|---|
-| **Release'ler** (bir etiket + ekli dosyalar, dosya başına 2 GiB'e, 1000 varlığa kadar) | **Çalışır.** Yalnızca siz ve eklediğiniz katkıcılara (collaborator) görünür. | Aynı, fark yok. |
-| **GitHub Pages** (canlı bir `https://<kullanici>.github.io/<depo>/` sitesi) | **Özel bir depoda çalışmaz.** | Depo için Pages etkinleştirildiğinde **çalışır**. |
-| **GitHub Actions dakikaları** | 2.000 dakika/ay, 500 MB artifact depolama | 3.000 dakika/ay, 1 GB artifact depolama |
+| **Sürümler** (etiket + eklenmiş dosyalar, dosya başına en çok 2 GiB, en çok 1000 dosya) | **Çalışır.** Sizin ve eklediğiniz ortak çalışanların görebildiği. | Aynı. |
+| **GitHub Pages** (canlı `https://<kullanıcı>.github.io/<depo>/` sitesi) | **Özel depoda çalışmaz.** | **Çalışır**, depoda Pages açıldıktan sonra. |
+| **GitHub Actions dakikaları** | ayda 2.000 dk, 500 MB artefakt alanı | ayda 3.000 dk, 1 GB artefakt alanı |
 
-Pratik sonuç: **Free'de özel bir depoda göz atılabilir bir siteyi teslim etme yolu Release'lerdir** - Pages değil.
-`10-release.bat`/`.sh` (ve `release.yml` Actions iş akışı) tam olarak bunu üretir: her rapor paketlenip bir GitHub
-Release'e eklenir, artı tüm site `site.zip` olarak sıkıştırılır, böylece indirilip hiç sunucu gerekmeden yerelde
-açılabilir (aç → `index.html`'i aç).
+Pratik sonuç: özel bir Free depoda site **yerelde** gösterilir (`7-build-all-*` + `9-open-site-*`) ve **Release**
+içinde `...-site.zip` olarak teslim edilir. Şablon deposunun kendisi herkese açıktır; sitesi
+<https://ucoruh.github.io/eclipse-java-maven-template/> adresinde canlıdır.
+
+## Sürüm dosyaları (yerel klasör = GitHub sürümü, birebir)
+
+`7-build-all-<platform>` `release/` klasörünü doldurur; `10-release-<platform>` ve CI iş akışı **tam olarak bu
+dosyaları** ekler. Adlar `<proje>-<sürüm>[-<platform>[-<mimari>]]-<içerik>[-<araç>].<uzantı>` kalıbındadır
+([Adlandırma standardı](standard-tr.md)); `calculator` 1.1.0 için:
+
+| Dosya | Nedir |
+|---|---|
+| `calculator-1.1.0-windows-x64-app.zip` | Windows için çalıştırılabilir uygulama (jar + `run.bat`) |
+| `calculator-1.1.0-linux-x64-app.tar.gz` | Linux ve WSL için aynısı (jar + `run.sh`, çalıştırma bitini korur) |
+| `calculator-1.1.0-macos-arm64-app.tar.gz` | macOS için aynısı (yalnız CI üretir) |
+| `calculator-1.1.0-<platform>-report-tests.zip` | birim test raporu (junit2html) + ham JUnit XML |
+| `calculator-1.1.0-<platform>-report-coverage-reportgenerator.zip` / `-report-coverage-jacoco.zip` | kod kapsaması, iki araç ailesi |
+| `calculator-1.1.0-<platform>-report-doccoverage-reportgenerator.zip` / `-report-doccoverage-lcov.zip` | dokümantasyon kapsaması, iki aile |
+| `calculator-1.1.0-<platform>-api-doxygen.zip` / `-api-javadoc.zip` | API belgeleri |
+| `calculator-1.1.0-site-maven.zip` | Maven sitesi (Checkstyle, PMD, CPD, SpotBugs, Surefire, JXR) |
+| `calculator-1.1.0-site.zip` | iki platformun raporlarıyla MkDocs sitesi |
+| `calculator-1.1.0-source.zip` | bu kayıttaki kaynak |
+| `ASSETS.md`, `SHA256SUMS.txt` | yukarıdakilerin site bağlantılı tablosu; sağlama toplamları |
+
+`<platform>` `windows` veya `linux`'tur. Yerel derleme **bir** platformun dosyalarını ve bağımsız olanları içerir -
+`ASSETS.md` eksikleri listeler; CI her platformu derler.
 
 ## Yine de GitHub Pages almak: Student Developer Pack
 
-Bir `site.zip` yerine (veya ona ek olarak) canlı bir Pages URL'si istiyorsanız:
+1. <https://education.github.com/pack> adresine gidip **üniversite e-posta adresinizle** başvurun.
+2. Kanıt istenirse öğrenci kimliği fotoğrafı veya öğrenci belgesi genelde yeterlidir.
+3. Onay dakikalar ile günler arası sürer - beklemeyin; yerel gösterim ve sürüm yeterlidir.
+4. Onaylanınca hesabınız GitHub Pro olur. Deponuzda: **Settings -> Pages -> Source: Deploy from a branch ->
+   `gh-pages`**. CI iş akışı ilk yayınında bu dalı oluşturur.
+5. Özel depoda yayına izin verin: **Settings -> Secrets and variables -> Actions -> Variables -> New repository
+   variable**, ad `PAGES_ON_PRIVATE`, değer `true`. Bu olmadan iş akışı özel depoda Pages yayınını **atlar** ve nedenini
+   bir bildirimde ve çalıştırma özetinde söyler (bu mesaj [GitHub Pages olmadan projenizi gösterin](showcase-tr.md)
+   sayfasına bağlanır) - bilerek: Free özel depo çalışamayacak bir yayın için dakika harcamasın.
+6. `main`'e push edin; site bir iki dakika sonra `https://<kullanıcı-adınız>.github.io/<depo-adınız>/` adresinde canlıdır.
 
-1. <https://education.github.com/pack> adresine gidin ve **üniversite e-posta adresinizle** başvurun
-   (`...@erdogan.edu.tr` ya da eşdeğeri) - GitHub'ın önce kontrol ettiği ve en hızlı onay yolu budur.
-2. Kanıt istenirse, genellikle bir öğrenci kimliği fotoğrafı ya da kayıt belgesi yeterlidir.
-3. Onay birkaç dakikadan birkaç güne kadar sürebilir - ilk release'inizden önce beklemeyin; bu arada
-   `site.zip`'i kullanın.
-4. Onaylandıktan sonra hesabınızda GitHub Pro olur. Deponuzda: **Settings -> Pages -> Source**, etkinleştirin
-   (branch ya da Actions tabanlı, seçiminize göre - `.github/workflows/pages.yml` `gh-pages` dalına yayınlar, o
-   yüzden "Deploy from a branch" -> `gh-pages` sorunsuz çalışır).
-5. `pages.yml`'e artık Pro olan bu özel deponuzda çalışmasına izin verin: **Settings -> Secrets and variables ->
-   Actions -> Variables sekmesi -> New repository variable**, ad `PAGES_ON_PRIVATE`, değer `true`. Bunu yapmazsanız
-   `pages.yml` her push'ta dağıtımı atlar ve nedenini çalıştırmanın özetinde açıklar (bakınız
-   [workflow-tr.md](workflow-tr.md)) - bu bilerek böyledir, sıradan bir Free katmanlı özel klon Actions dakikalarını
-   zaten başarısız olacak bir Pages dağıtımı denemesiyle harcamasın diye.
-6. `main`'e push edin (ya da **Actions** sekmesinden `pages.yml`'i elle yeniden çalıştırın) - site bir iki dakika
-   sonra `https://<kullanıcı-adınız>.github.io/<deponuz>/` adresinde canlı olur.
+## Eğitmeni ortak çalışan olarak ekleyin
 
-## Eğitmeni katkıcı olarak ekleyin
+**Settings -> Collaborators -> Add people**, `ucoruh`'u ekleyin, davetin kabul edilmesini bekleyin. Bu olmadan
+Sürümleriniz (ve özel depodaki her şey) eğitmene görünmez.
 
-Notlandırma özel release'lerinizi görebilmelidir. Deponuzda: **Settings -> Collaborators -> Add people**,
-`ucoruh`'u (ya da eğitmeninizin verdiği GitHub kullanıcı adını) ekleyin ve daveti kabul etmesini bekleyin. Bu
-yapılmazsa Releases sayfanız - ve depodaki her şey - eğitmen için görünmezdir.
+## GitHub CLI (`gh`) kurulumu ve oturum açma
 
-## GitHub CLI'yi (`gh`) kurmak ve giriş yapmak
+Windows: `where gh` - yoksa `choco install gh -y` (`4-install-tools-windows.bat` de yapar).
+Linux/WSL: `gh --version` - yoksa `4-install-tools-linux.sh` kurar.
 
-Windows:
-```batch
-where gh
-```
-Eksikse: `choco install gh -y` (`4-install-required-apps.bat` tarafından da yapılır).
-
-Linux/WSL:
-```bash
-gh --version
-```
-Eksikse, `4-install-required-apps.sh` `apt` ile kurar.
-
-Ardından, release aldığınız her makinede **bir kez**:
+Makine başına bir kez:
 ```bash
 gh auth login
 ```
-İstemlere yanıt verin: **GitHub.com** -> **HTTPS** -> **Login with a web browser** (en kolayı) -> gösterdiği
-tek-seferlik kodu açtığı tarayıcı sekmesine girin. Doğrulayın:
+**GitHub.com -> HTTPS -> Login with a web browser** seçin, tek kullanımlık kodu tarayıcı sekmesine yazın. Doğrulayın:
 ```bash
 gh auth status
 ```
-Beklenen çıktı `Logged in to github.com account <kullanici-adiniz>` gibi bir satır içerir.
+Beklenen: `Logged in to github.com account <kullanıcı-adınız>`.
 
-## Bir release yayımlamak
+## Kendi makinenizden sürüm yayınlamak
 
-```batch
-10-release.bat v1.0.0
-```
-ya da, depoda zaten bulunan `VERSION` dosyasını kullanarak (önce sürümü artırın):
-```batch
-10-release.bat
-```
-Her iki betik de:
-1. **kirli bir çalışma ağacında çalışmayı reddeder** - önce commit edin ya da stash'leyin, böylece bir release
-   her zaman gerçek bir commit'e karşılık gelir;
-2. `gh auth status`'u kontrol eder ve giriş yapmamışsanız tam olarak nasıl yapacağınızı söyler;
-3. tam derlemeyi çalıştırır (`7-build-app`) - jar, her iki kapsama-raporu ailesi, her iki dokümantasyon-kapsama
-   ailesi, Javadoc + Doxygen, Maven site;
-4. siteyi `release/site.zip` olarak sıkıştırır;
-5. `gh release create <sürüm> release/* --title <sürüm> --notes-file <üretilen notlar>`'ı çalıştırır.
+1. `project.env` içinde `VERSION=1.2.0` yapın, commit edin.
+2. Önce deneme - her şeyi derler ve yayınlayacağını yalnızca *yazdırır*:
+   ```batch
+   10-release-windows.bat --dry-run
+   ```
+3. Yayınlayın:
+   ```batch
+   10-release-windows.bat
+   ```
+   (Linux/WSL'de `./10-release-linux.sh`.) Betik kirli çalışma ağacını reddeder, `gh auth status` denetler,
+   `7-build-all-*` çalıştırır, sürüm notlarını yazar ve
+   `gh release create v<VERSION> release/* --title ... --notes-file build/release-notes.md` çalıştırır. Actions dakikası
+   harcanmaz.
 
-Gerçek bir projede ilk kullanımınızda **her zaman önce `--dry-run`'ı deneyin** - 1-4. adımları çalıştırır ve tam
-`gh release create` komutunu ve varlık listesini yazdırır, ama hiçbir şey yayımlamaz:
-```batch
-10-release.bat v1.0.0 --dry-run
-```
+## CI iş akışı (`.github/workflows/ci.yml`)
 
-Bu **sıfır GitHub Actions dakikası** kullanır - her şey makinenizde çalışır, yalnızca son `gh release create`
-çağrısı GitHub ile konuşur.
+Tek iş akışı, dört iş ([Adlandırma standardı](standard-tr.md#7-ci-tek-bakista)):
 
-## CI alternatifi: `release.yml`
-
-`.github/workflows/release.yml` aynı tam boru hattını, ama GitHub'ın çalıştırıcılarında, bir `v*` etiketinin
-push'lanmasıyla ya da **Actions** sekmesinden elle tetiklenmesiyle yapar. Tam araç zincirini yerel kurmak
-istemiyorsanız makul bir alternatiftir, ama Actions dakikası harcar (çalıştırma başına kabaca 4-6 dakika - iş
-akışı dosyasının üstündeki yoruma bakın) - Free'nin 2.000 dakika/ay'ında birkaç release için bu gerçek bir sorun
-değildir, ama her push'ta çalışacak şekilde bağlamayın.
-
-## Sorun giderme {#sorun-giderme}
-
-| Belirti | Düzeltme |
+| Tetikleyici | Ne olur |
 |---|---|
-| `10-release` "gh is not logged in to GitHub" ile duruyor | `gh auth login`, ardından doğrulamak için `gh auth status`. |
-| `gh release create` `HTTP 404` ile başarısız oluyor | Genellikle `gh`'nin yanlış hesaba giriş yapmış olduğu, ya da depo yolu/remote'un yanlış olduğu anlamına gelir. `gh repo view`'ın deponuzu yazdırdığını kontrol edin. |
-| `gh release create` `HTTP 403` ile başarısız oluyor | Siz (ya da `gh`'nin giriş yaptığı hesap) bu depoya yazma erişimine sahip değilsiniz - sahibi olduğunuzu ya da yazma erişimiyle (sadece okuma değil) katkıcı olarak eklendiğinizi doğrulayın. |
-| Eğitmen release'inizi göremediğini söylüyor | Onu katkıcı olarak eklemeyi unuttunuz (yukarıya bakın), ya da depo özel ve hiç davet edilmediler. |
-| `gh release create` bir varlığın çok büyük olduğundan bahsederek başarısız oluyor | GitHub'ın sınırı **dosya başına** 2 GiB'dir. `release/*.tar.gz` ve `site.zip` bu şablon için normalde birkaç MB'dir - biri şişerse, `target/`'ı kazayla kendi içine özyinelemeli paketlemediğinizi, ya da gitignore'lanması gereken üretilmiş içeriği kontrol edin. |
-| Release başarılı ama `site.zip` boş/bozuk bir sayfa açıyor | Önce tamamen çıkarın (zip görüntüleyiciden doğrudan `index.html`'i açmayın) - `css/`/`js/`/rapor alt klasörlerine göreli bağlantıların, onun yanında çıkarılmış kardeş dosyalara ihtiyacı vardır. |
+| herhangi bir dala push / pull request | `windows`, `linux`, `macos` işleri derler, test eder, rapor üretir; `site` bunları birleştirip siteyi kurar (artefakt olarak yüklenir) |
+| `main`'e push | aynısı, ayrıca `site` işi **GitHub Pages'i yayınlar** (`gh-pages` dalı) |
+| `v*` etiketi push'u (örn. `v1.1.0`; `project.env` ile aynı olmalı) | aynısı, ayrıca `site` işi yukarıdaki her dosyayla **GitHub Release'i yayınlar** |
+| elle çalıştırma (**Actions -> CI -> Run workflow**) | `main`'e push ile aynı; *release* kutusunu işaretlerseniz `v<VERSION>` de yayınlanır |
+
+**Maliyet:** tam bir çalıştırma dört işte toplam kabaca 12-20 Actions dakikasıdır (özel depolarda Windows dakikası
+iki, macOS on kat sayılır); herkese açık şablonda küçük, ama özel Free depoda (ayda 2.000 dk) bilmeye değer: özellik
+dallarına özgürce push edin, yalnızca sürüm çıkarırken etiketleyin. Artefaktlar 7 gün saklanır.
+
+**Özel depo kuralı:** iş akışı `github.event.repository.private` değerini algılar. Özel depoda `PAGES_ON_PRIVATE`
+deposu değişkeni `true` değilse Pages yayını atlanır; atlama bir `::notice` ek açıklamasında ve `$GITHUB_STEP_SUMMARY`
+içinde açıklanır ve [GitHub Pages olmadan projenizi gösterin](showcase-tr.md) sayfasına bağlanır. Sürümler her zaman
+çalışır.
+
+## Sorun giderme {#troubleshooting}
+
+| Belirti | Çözüm |
+|---|---|
+| `10-release-*` "gh is not logged in" ile duruyor | `gh auth login`, sonra `gh auth status`. |
+| `gh release create` `HTTP 404` veriyor | `gh` yanlış hesapta oturum açmış ya da uzak depo yanlış. `gh repo view` deponuzu yazdırmalı. |
+| `gh release create` `HTTP 403` veriyor | `gh`'nin kullandığı hesabın bu depoya yazma erişimi yok (sahip veya yazma yetkili ortak çalışan). |
+| `gh release create` etiket zaten var diyor | `project.env` içinde `VERSION`'ı yükseltin (etiket asla yeniden kullanılmaz), commit edin, tekrar çalıştırın. |
+| Eğitmen sürümünüzü göremiyor | `ucoruh`'u ortak çalışan ekleyin (yukarıda) ve davetin kabul edildiğinden emin olun. |
+| Bir dosya çok büyük | GitHub sınırı dosya başına 2 GiB; `target/` veya üretilmiş klasörleri arşive katmadığınızdan emin olun. |
+| CI: *tag v1.2.0 does not match project.env* | `project.env`'i `VERSION=1.2.0` yapın ve o commit'i etiketleyin. |
+| Sürüm başarılı ama `...-site.zip` boş rapor çerçeveleri gösteriyor | tamamen açın ve **sunun** (`python -m http.server --directory site`); çerçeveler `file://`'dan yüklenmez. |

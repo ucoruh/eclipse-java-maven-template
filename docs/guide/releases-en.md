@@ -1,113 +1,122 @@
-# Private repository: releases and the site
+# Releases and private repositories
 
 Your course repository is **private**, and most students have a plain **GitHub Free** account. This page explains
-exactly what that does and does not let you do, and how this template works around the gaps.
+exactly what that does and does not let you do, and how this template works around the gaps. The step-by-step
+recipe for the project presentation is in [Showing your project without GitHub Pages](showcase-en.md).
 
 ## What works on Free vs Pro (facts, from GitHub's own docs)
 
 | Feature | GitHub Free (private repo) | GitHub Pro / Team (or Free's Student Developer Pack, which grants Pro) |
 |---|---|---|
-| **Releases** (a tag + attached files, up to 2 GiB per file, up to 1000 assets) | **Works.** Visible to you and anyone you add as a collaborator. | Same, no difference. |
+| **Releases** (a tag + attached files, up to 2 GiB per file, up to 1000 assets) | **Works.** Visible to you and anyone you add as a collaborator. | Same. |
 | **GitHub Pages** (a live `https://<user>.github.io/<repo>/` site) | **Does not work on a private repo.** | **Works**, once Pages is enabled for the repo. |
 | **GitHub Actions minutes** | 2,000 minutes/month, 500 MB artifact storage | 3,000 minutes/month, 1 GB artifact storage |
 
-The practical consequence: **Releases are how you hand in a browsable site on a private Free repo** - not Pages.
-That is exactly what `10-release.bat`/`.sh` (and the `release.yml` Actions workflow) produce: every report,
-packaged, attached to a GitHub Release, plus the whole site zipped as `site.zip` so it can be downloaded and
-opened locally with no server needed (unzip -> open `index.html`).
+Practical consequence: on a private Free repo the site is shown **locally** (`7-build-all-*` + `9-open-site-*`) and
+handed in as `...-site.zip` inside the **Release**. The template repository itself is public, so its site is live at
+<https://ucoruh.github.io/eclipse-java-maven-template/>.
+
+## The release assets (local folder = GitHub release, one to one)
+
+`7-build-all-<platform>` fills `release/`; `10-release-<platform>` and the CI workflow attach **exactly those files**.
+Names follow `<project>-<version>[-<platform>[-<arch>]]-<content>[-<tool>].<ext>` (see
+[Naming standard](standard-en.md)); for `calculator` 1.1.0:
+
+| File | What it is |
+|---|---|
+| `calculator-1.1.0-windows-x64-app.zip` | the runnable application for Windows (jar + `run.bat`) |
+| `calculator-1.1.0-linux-x64-app.tar.gz` | the same for Linux and WSL (jar + `run.sh`, keeps the exec bit) |
+| `calculator-1.1.0-macos-arm64-app.tar.gz` | the same for macOS (built by CI only) |
+| `calculator-1.1.0-<platform>-report-tests.zip` | unit-test report (junit2html) + raw JUnit XML |
+| `calculator-1.1.0-<platform>-report-coverage-reportgenerator.zip` / `-report-coverage-jacoco.zip` | code coverage, both tool families |
+| `calculator-1.1.0-<platform>-report-doccoverage-reportgenerator.zip` / `-report-doccoverage-lcov.zip` | documentation coverage, both families |
+| `calculator-1.1.0-<platform>-api-doxygen.zip` / `-api-javadoc.zip` | API documentation |
+| `calculator-1.1.0-site-maven.zip` | the Maven site (Checkstyle, PMD, CPD, SpotBugs, Surefire, JXR) |
+| `calculator-1.1.0-site.zip` | the MkDocs site with both platforms' reports |
+| `calculator-1.1.0-source.zip` | the source at this commit |
+| `ASSETS.md`, `SHA256SUMS.txt` | the table of all of the above with site links; checksums |
+
+`<platform>` is `windows` or `linux`. A local build has **one** platform's files plus the neutral ones - `ASSETS.md`
+lists what is missing; CI builds every platform.
 
 ## Getting GitHub Pages anyway: the Student Developer Pack
 
-If you want a live Pages URL instead of (or in addition to) `site.zip`:
-
-1. Go to <https://education.github.com/pack> and apply with your **university e-mail address**
-   (`...@erdogan.edu.tr` or equivalent) - this is what GitHub checks first, fastest path to approval.
+1. Go to <https://education.github.com/pack> and apply with your **university e-mail address**.
 2. If asked for proof, a student ID photo or an enrollment document is usually enough.
-3. Approval can take anywhere from a few minutes to a few days - do not wait on it before your first release;
-   use `site.zip` in the meantime.
-4. Once approved, your account has GitHub Pro. On your repo: **Settings -> Pages -> Source**, enable it (branch
-   or Actions-based, your choice - `.github/workflows/pages.yml` publishes to the `gh-pages` branch, so "Deploy
-   from a branch" -> `gh-pages` works out of the box).
-5. Tell `pages.yml` it is allowed to run on your now-Pro-enabled private repo: **Settings -> Secrets and
-   variables -> Actions -> Variables tab -> New repository variable**, name `PAGES_ON_PRIVATE`, value `true`.
-   Without this, `pages.yml` skips the deploy on every push and explains why in the run's summary (see
-   [workflow-en.md](workflow-en.md)) - this is on purpose, so a plain Free-tier private clone never wastes Actions
-   minutes attempting a Pages deploy that would just fail.
-6. Push to `main` (or re-run `pages.yml` manually from the **Actions** tab) - the site is live at
-   `https://<your-username>.github.io/<your-repo>/` a minute or two later.
+3. Approval takes minutes to days - do not wait for it; the local showcase and the release are enough.
+4. Once approved your account has GitHub Pro. On your repo: **Settings -> Pages -> Source: Deploy from a branch ->
+   `gh-pages`**. The CI workflow creates that branch on its first deploy.
+5. Allow the deploy on a private repo: **Settings -> Secrets and variables -> Actions -> Variables -> New repository
+   variable**, name `PAGES_ON_PRIVATE`, value `true`. Without it the workflow **skips** the Pages deploy on a private
+   repo and says why in a notice and in the run summary (that message links to
+   [Showing your project without GitHub Pages](showcase-en.md)) - on purpose, so a Free private repo never wastes
+   minutes on a deploy that cannot work.
+6. Push to `main`; the site is live a minute or two later at `https://<your-username>.github.io/<your-repo>/`.
 
 ## Add the instructor as a collaborator
 
-Grading needs to see your private releases. On your repo: **Settings -> Collaborators -> Add people**, add
-`ucoruh` (or whichever GitHub username your instructor gives you), and wait for them to accept the invite. Without
-this, your Releases page - and everything else in the repo - is invisible to the instructor.
+**Settings -> Collaborators -> Add people**, add `ucoruh`, wait for the invitation to be accepted. Without it your
+Releases (and everything else in the private repo) are invisible to the instructor.
 
 ## Installing and logging into the GitHub CLI (`gh`)
 
-Windows:
-```batch
-where gh
-```
-If missing: `choco install gh -y` (also done by `4-install-required-apps.bat`).
+Windows: `where gh` - if missing, `choco install gh -y` (also done by `4-install-tools-windows.bat`).
+Linux/WSL: `gh --version` - if missing, `4-install-tools-linux.sh` installs it.
 
-Linux/WSL:
-```bash
-gh --version
-```
-If missing, `4-install-required-apps.sh` installs it via `apt`.
-
-Then, **once**, on each machine you release from:
+Once per machine:
 ```bash
 gh auth login
 ```
-Answer the prompts: **GitHub.com** -> **HTTPS** -> **Login with a web browser** (easiest) -> follow the one-time
-code it shows you into the browser tab it opens. Verify:
+Choose **GitHub.com -> HTTPS -> Login with a web browser**, type the one-time code in the browser tab. Verify:
 ```bash
 gh auth status
 ```
-Expected output includes a line like `Logged in to github.com account <your-username>`.
+Expected: `Logged in to github.com account <your-username>`.
 
-## Publishing a release
+## Publishing a release from your machine
 
-```batch
-10-release.bat v1.0.0
-```
-or, using the `VERSION` file already in the repo (bump it first):
-```batch
-10-release.bat
-```
-Both scripts:
-1. **refuse to run on a dirty working tree** - commit or stash first, so a release always matches a real commit;
-2. check `gh auth status` and tell you exactly how to log in if you are not;
-3. run the full build (`7-build-app`) - jar, both coverage-report families, both documentation-coverage families,
-   Javadoc + Doxygen, the Maven site;
-4. zip the site as `release/site.zip`;
-5. run `gh release create <version> release/* --title <version> --notes-file <generated notes>`.
+1. Edit `project.env` (`VERSION=1.2.0`), commit.
+2. Dry run first - builds everything and only *prints* what it would publish:
+   ```batch
+   10-release-windows.bat --dry-run
+   ```
+3. Publish:
+   ```batch
+   10-release-windows.bat
+   ```
+   (`./10-release-linux.sh` on Linux/WSL.) The script refuses a dirty working tree, checks `gh auth status`, runs
+   `7-build-all-*`, writes the release notes, and runs
+   `gh release create v<VERSION> release/* --title ... --notes-file build/release-notes.md`. No Actions minutes are used.
 
-**Always try `--dry-run` first** the first time you use it on a real project - it runs steps 1-4 and prints the
-exact `gh release create` command and the asset list, but does not publish anything:
-```batch
-10-release.bat v1.0.0 --dry-run
-```
+## The CI workflow (`.github/workflows/ci.yml`)
 
-This uses **zero GitHub Actions minutes** - everything runs on your machine, only the final `gh release create`
-call talks to GitHub.
+One workflow, four jobs (see [Naming standard](standard-en.md#7-ci-in-one-picture)):
 
-## The CI alternative: `release.yml`
+| Trigger | What happens |
+|---|---|
+| push to any branch / pull request | `windows`, `linux`, `macos` jobs build, test and produce reports; `site` merges them and builds the site (uploaded as an artifact) |
+| push to `main` | the same, and the `site` job **deploys GitHub Pages** (`gh-pages` branch) |
+| push of a `v*` tag (e.g. `v1.1.0`; must equal `project.env`) | the same, and the `site` job **publishes the GitHub Release** with every asset above |
+| manual run (**Actions -> CI -> Run workflow**) | same as a push to `main`; tick *release* to also publish `v<VERSION>` |
 
-`.github/workflows/release.yml` does the same full pipeline, but on GitHub's runners, triggered by pushing a
-`v*` tag or by a manual dispatch from the **Actions** tab. It is a reasonable alternative if you prefer not to
-install the full toolchain locally, but it does spend Actions minutes (roughly 4-6 per run - see the comment at
-the top of the workflow file) - on Free's 2,000 min/month that is not a real concern for a handful of releases,
-but do not wire it to run on every push.
+**Cost:** a full run is roughly 12-20 Actions minutes counted across the four jobs (Windows minutes count double,
+macOS ten times on private repos), which is small on the public template but worth knowing on a private Free repo
+(2,000 min/month): push to a feature branch freely, tag only when you release. Artifacts are kept for 7 days.
+
+**Private repository rule:** the workflow detects `github.event.repository.private`. On a private repo the Pages
+deploy is skipped unless the repository variable `PAGES_ON_PRIVATE` is `true`; the skip is explained in a `::notice`
+annotation and in `$GITHUB_STEP_SUMMARY` and points to [Showing your project without
+GitHub Pages](showcase-en.md). Releases always run.
 
 ## Troubleshooting {#troubleshooting}
 
 | Symptom | Fix |
 |---|---|
-| `10-release` stops at "gh is not logged in to GitHub" | `gh auth login`, then `gh auth status` to confirm. |
-| `gh release create` fails with `HTTP 404` | Usually means `gh` is authenticated against the wrong account, or the repo path/remote is wrong. Check `gh repo view` prints your repo. |
-| `gh release create` fails with `HTTP 403` | You (or the account `gh` is logged in as) do not have write access to this repo - confirm you own it or were added as a collaborator with write access, not just read. |
-| The instructor says they cannot see your release | You forgot to add them as a collaborator (see above), or the repo is private and they were never invited. |
-| `gh release create` fails mentioning an asset is too large | GitHub's limit is 2 GiB **per file**. `release/*.tar.gz` and `site.zip` are normally a few MB for this template - if one balloons, check you are not accidentally packaging `target/` recursively into itself, or generated content that should have been gitignored. |
-| Release succeeds but `site.zip` opens to a blank/broken page | Unzip it fully first (do not open `index.html` straight out of the zip viewer) - relative links to `css/`/`js/`/report subfolders need the sibling files to be extracted alongside it. |
+| `10-release-*` stops at "gh is not logged in" | `gh auth login`, then `gh auth status`. |
+| `gh release create` fails with `HTTP 404` | `gh` is logged into the wrong account, or the remote is wrong. `gh repo view` must print your repo. |
+| `gh release create` fails with `HTTP 403` | the account `gh` uses has no write access to this repo (owner or collaborator with write). |
+| `gh release create` says the tag already exists | raise `VERSION` in `project.env` (a tag is never re-used), commit, run again. |
+| The instructor cannot see your release | add `ucoruh` as a collaborator (above) and make sure the invitation was accepted. |
+| An asset is too large | GitHub's limit is 2 GiB per file; check that you are not packing `target/` or other generated folders into an archive. |
+| CI: *tag v1.2.0 does not match project.env* | edit `project.env` to `VERSION=1.2.0` and tag that commit. |
+| Release succeeds but `...-site.zip` shows empty report frames | unzip it fully and **serve** it (`python -m http.server --directory site`); frames do not load from `file://`. |

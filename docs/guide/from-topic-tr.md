@@ -6,18 +6,31 @@ konuyu buraya koyun, adımlar aynı).
 
 ## Kontrol listesi
 
-- [ ] Maven koordinatlarını (`groupId`/`artifactId`) ve Java paketini yeniden adlandırın
+- [ ] `project.env` içine adınızı yazın (`PROJECT_NAME`, `VERSION`, `GITHUB_REPO`) - proje kimliğinin TEK yeri
+- [ ] Maven `groupId`'yi ve Java paketini yeniden adlandırın
 - [ ] Kaynak klasörlerini yeni pakete uyacak şekilde yeniden adlandırın
 - [ ] `Calculator` / `CalculatorApp`'i kendi alan (domain) sınıflarınızla değiştirin
 - [ ] `pom.xml`'in `<name>`/`<description>`/`<url>`/shade `mainClass`'ını güncelleyin
 - [ ] `Doxyfile`'ın `PROJECT_NAME`/`PROJECT_BRIEF`/`INPUT`'unu güncelleyin
 - [ ] `calculator-app/src/site/site.xml`'in banner/bağlantılarını güncelleyin (ya da olduğu gibi bırakın - geneldir)
 - [ ] Her yeni modül için **önce** test yazın (normal, sınır, geçersiz girdi - aşağıya bakın)
-- [ ] Her değişiklikten sonra `7-build-app`'i çalıştırmaya devam edin ve kapsama rozetlerini/raporlarını kontrol edin
+- [ ] Her değişiklikten sonra `6-build-and-test-*` (ve push'tan önce `7-build-all-*`) çalıştırın, kapsama rozetlerini/raporlarını kontrol edin
 - [ ] `README.md`'nin başlığını ve açıklamasını güncelleyin
 - [ ] Erken ve sık commit edin (bakınız [workflow-tr.md](workflow-tr.md))
 
-## 1. Maven koordinatlarını yeniden adlandırın
+## 1. Projeyi ve Maven koordinatlarını adlandırın
+
+Önce depo kökündeki `project.env` - her betik, sürüm dosyası adları ve site onu okur:
+
+```text
+PROJECT_NAME=librarytracker
+VERSION=0.1.0
+GITHUB_REPO=<hesabiniz>/<depo-adiniz>
+```
+
+Dosyalar böylece `librarytracker-0.1.0-windows-x64-app.zip` vb. olur ([Adlandırma standardı](standard-tr.md)).
+
+Sonra `calculator-app/pom.xml`:
 
 `calculator-app/pom.xml` içinde:
 
@@ -34,9 +47,11 @@ Shade eklentisinin `mainClass`'ı yeni giriş noktası sınıfınızı gösterme
 <mainClass>com.ucoruh.librarytracker.LibraryTrackerApp</mainClass>
 ```
 
-`artifactId`'yi yeniden adlandırırsanız, `calculator-app-1.0-SNAPSHOT.jar`'ı sabit kodlayan her betiği de
-güncelleyin (`8-run-app.bat`/`.sh`, `9-run-webpage.bat`/`.sh`, `7-build-app.bat`/`.sh`'nin jar kontrolü) ve
-yukarıdaki `<mainClass>`'ı.
+**En basit ve güvenli yol: modül klasörünü ve `artifactId`'yi `calculator-app` olarak bırakın** - betikler, `Doxyfile`,
+`mkdocs.yml` ve CI o klasöre başvurur; kullanıcılarınızın gördüğü *adlar* (dosyalar, site, uygulama arşivindeki jar)
+`artifactId`'den değil `PROJECT_NAME`'den gelir. Yalnızca `groupId`, `<name>`, `<description>` ve yukarıdaki
+`<mainClass>`'ı değiştirin. (Klasörü de yeniden adlandırmakta ısrar ederseniz, depoda `calculator-app` arayın ve
+betiklerdeki, `Doxyfile`, `mkdocs.yml`, `.github/workflows/ci.yml` ve `.gitignore` içindeki her eşleşmeyi değiştirin.)
 
 ## 2. Paketi ve klasörleri yeniden adlandırın
 
@@ -81,24 +96,24 @@ normal/sınır/geçersiz durumları gruplayan `@Nested` sınıflar, `assertThrow
 
 ## 5. Doxygen'i ve siteyi güncelleyin
 
-`Doxyfile`:
+`Doxyfile` (çıktı klasörü ve `PROJECT_NUMBER` betiklerden gelir - o iki satıra dokunmayın):
 ```
 PROJECT_NAME    = "Kütüphane Kitap Takip Sistemi"
 PROJECT_BRIEF   = "Küçük bir kütüphane kataloğu ve ödünç takip sistemi"
 INPUT           = calculator-app/src/main/java
 ```
-(`calculator-app` klasör adını koruyorsanız `INPUT` olduğu gibi kalabilir; klasörün de eşleşmesini istiyorsanız
-onu da yeniden adlandırın - `git mv calculator-app library-tracker-app` - ve ardından her betik/`pom.xml`/
-`Doxyfile` referansını `calculator-app/`'e güncelleyin.)
+Site: `mkdocs.yml` (`site_name`, `site_description`, `repo_url`) ve açılış sayfası `docs/index.md`; Maven sitesi
+banner'ı (`calculator-app/src/site/site.xml`) geneldir, olduğu gibi kalabilir.
 
 ## 6. Yeniden derleyin ve kontrol edin
 
 ```batch
-7-build-app.bat
-9-run-webpage.bat
+7-build-all-windows.bat
+9-open-site-windows.bat
 ```
+(Linux/WSL'de `./7-build-all-linux.sh` ve `./9-open-site-linux.sh`.)
 Siteyi açın, **Which report is which?** sayfasını kontrol edin ve şunları doğrulayın:
-- Surefire raporu tüm yeni testlerinizi, hepsi yeşil olarak gösteriyor
+- birim test raporu tüm yeni testlerinizi, hepsi yeşil olarak gösteriyor
 - JaCoCo ve ReportGenerator ikisi de yeni sınıflarınız için gerçek kapsama sayıları gösteriyor (0% değil, ve eski
   `Calculator` sınıfı değil - o kaybolmuş olmalı)
 - Javadoc ve Doxygen ikisi de yeni sınıflarınızı yeni Javadoc yorumlarınızla gösteriyor

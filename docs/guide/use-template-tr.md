@@ -1,84 +1,94 @@
-# Bu şablonu kullanın
+# Şablonu kullanın
 
-## 1. Kendi deponuzu oluşturun
+## 1. Şablondan kendi ÖZEL deponuzu oluşturun (fork değil)
 
-GitHub'da şablon deposunu açın ve **Use this template -> Create a new repository**'ye tıklayın. Bir ad seçin
-(örn. `cen429-adiniz-proje`), **Private** bırakın (bu derste öğrenci depoları özeldir - bunun rapor/Pages için ne
-anlama geldiği için bakınız [releases-tr.md](releases-tr.md)) ve oluşturun.
+GitHub'da şablon deposunu açın, yeşil **Use this template** düğmesine (sağ üstte, **Code**'un yanında) -> **Create a
+new repository**'ye tıklayın. **Owner** olarak hesabınızı, **Repository name** olarak bir ad (örn.
+`cen207-adiniz-project`) seçin, **Private**'ı işaretleyin ve **Create repository**'ye tıklayın.
 
-Fork **etmeyin** - "Use this template" size orijinaliyle paylaşılan geçmişi olmayan bir depo verir, kendi projeniz
-için istediğiniz de tam olarak budur.
+Fork **etmeyin**: herkese açık bir deponun fork'u **özel yapılamaz**, "Use this template" ile oluşturulan depo
+yapılabilir - ve bu derste öğrenci depoları özeldir (raporlar ve Pages için anlamı
+[Sürümler ve özel depolar](releases-tr.md), yerel gösterim için
+[GitHub Pages olmadan projenizi gösterin](showcase-tr.md) sayfasındadır).
 
-## 2. Clone edin
+Sonra görmesi gerekenleri ekleyin: **Settings -> Collaborators -> Add people** -> eğitmen `ucoruh` ve takım
+arkadaşlarınız (daveti kabul etmeleri gerekir).
+
+## 2. Klonlayın
 
 ```bash
 git clone https://github.com/<hesabiniz>/<depo-adiniz>.git
 cd <depo-adiniz>
 ```
+Bu şablonda alt modül yoktur (`0-init-submodules` betiği yalnız alt modülü olan şablonlarda bulunur).
 
 ## 3. Git kancalarını yapılandırın (bir kez)
 
-Windows:
-```batch
-1-configure-git-hooks.bat
-```
-Linux/WSL:
-```bash
-./1-configure-git-hooks.sh
-```
+Windows: `1-configure-git-hooks-windows.bat`  -  Linux/WSL: `./1-configure-git-hooks-linux.sh`
 
-Bu, `pre-commit`'i (staged Java/C/C++/C# dosyalarını Astyle ile otomatik biçimlendirir, `.gitignore`, `README.md`
-veya `Doxyfile` eksikse commit'i reddeder) ve `pre-push`'u `.git/hooks/` içine kurar.
+Bu, `pre-commit` (hazırlanan Java/C/C++/C# dosyalarını Astyle ile biçimlendirir; `.gitignore`, `README.md` veya
+`Doxyfile` yoksa commit'i reddeder) ve `pre-push` kancalarını `.git/hooks/` içine kurar.
 
 ## 4. Araç zincirini kurun
 
-Daha önce yapmadıysanız [install-tr.md](install-tr.md)'yi izleyin.
+Henüz yapmadıysanız [install-tr.md](install-tr.md) sayfasını izleyin (`4-install-tools-windows.bat` /
+`./4-install-tools-linux.sh`).
 
-## 5. İlk derleme
+## 5. Projenizi `project.env` içinde adlandırın
+
+```text
+PROJECT_NAME=calculator
+VERSION=1.1.0
+GITHUB_REPO=<hesabiniz>/<depo-adiniz>
+```
+Her betik ve CI iş akışı bu dosyayı okur: dosya adları (`<PROJECT_NAME>-<VERSION>-...`), sürüm etiketi (`v<VERSION>`) ve
+site bağlantıları buradan gelir. Bkz. [Adlandırma standardı](standard-tr.md).
+
+## 6. İlk derleme
+
+Hızlı deneme (yaklaşık bir dakika): derle + birim testleri + çalıştırılabilir uygulama.
+
+Windows: `6-build-and-test-windows.bat`  -  Linux/WSL: `./6-build-and-test-linux.sh`
+
+Çıktının beklenen sonu:
+```text
+Build and tests OK.
+  jar:      build\windows-release\
+  app:      publish\windows-x64\  (run.bat)  and  release\
+  tests:    reports\windows\tests-junit2html\index.html
+```
+
+Her şey (testler, iki araç ailesiyle kapsama, API belgeleri, dokümantasyon kapsaması, iki site, `release/` klasörü):
+
+Windows: `7-build-all-windows.bat`  -  Linux/WSL: `./7-build-all-linux.sh`
+
+İlk çalıştırmada birkaç dakika sürer (Maven ve rapor araçları önbelleklerini indirir). Konsol çıktısını baştan okuyun:
+her adım `[n/9]` diye numaralıdır ve bir şey ters gidince `[ERROR]` satırı ve önerilen çözümle durur
+([troubleshooting-tr.md](troubleshooting-tr.md)). `[ERROR]` olmadan biterse şunlara sahipsiniz:
+
+- çalıştırılabilir jar: `build/<platform>-release/calculator-app-<VERSION>.jar` ve uygulama klasörü `publish/<platform>-<arch>/`
+- her rapor: `reports/<platform>/<tür>-<araç>/`
+- MkDocs sitesi: `site/index.html`, Maven sitesi: `site-native/index.html`
+- her sürüm dosyası: `release/` (`ASSETS.md` ve `SHA256SUMS.txt` ile)
+
+## 7. Çalıştırın ve siteyi açın
 
 Windows:
 ```batch
-7-build-app.bat
+8-run-app-windows.bat 6 "*" 7
+9-open-site-windows.bat
 ```
 Linux/WSL:
 ```bash
-./7-build-app.sh
+./8-run-app-linux.sh 6 "*" 7
+./9-open-site-linux.sh
 ```
+Beklenen: `6 * 7 = 42` (veya benzeri), sonra tarayıcı <http://localhost:8000/> adresini açar. Site http ile sunulur çünkü
+rapor sayfaları çerçeve kullanır ve tarayıcılar `file://` sayfalarının çerçevelerini engeller. Seçenekler:
+`9-open-site-* --maven` Maven sitesini tek başına sunar, `--edit` belge yazarken canlı yenilenen MkDocs sunucusunu
+başlatır, bir sayı başka port seçer (`9-open-site-windows.bat 8080`).
 
-Her şeyi yapan tek betik budur: `mvn clean test package`, Doxygen, her iki kapsama-raporu ailesi (native JaCoCo +
-ReportGenerator), her iki dokümantasyon-kapsama ailesi (native `genhtml` + ReportGenerator), Javadoc/JXR/
-Checkstyle/PMD/SpotBugs raporları, tam `mvn site` ve her şeyi `release/` altında paketler. İlk çalıştırmada bir-iki
-dakika sürer (Maven ve rapor araçları kendi önbelleklerini indirir), sonraki çalıştırmalarda hızlıdır. Konsol
-çıktısını baştan sona okuyun - her adım yapmadan önce ne yapacağını yazdırır ve bir şey ters gittiği an bir
-`[ERROR]` ve önerilen bir düzeltmeyle durur (düzeltme açık değilse bakınız
-[troubleshooting-tr.md](troubleshooting-tr.md)).
+## 8. Şimdi kendi projeniz yapın
 
-Bir `[ERROR]` satırı olmadan biterse şunlara sahipsinizdir:
-- çalıştırılabilir bir jar: `calculator-app/target/calculator-app-1.0-SNAPSHOT.jar`
-- tam bir rapor sitesi: `calculator-app/target/site/index.html`
-- bir release için paketlenmiş her şey: `release/*.tar.gz`
-
-## 6. Çalıştırın ve siteyi açın
-
-Windows:
-```batch
-8-run-app.bat 6 "*" 7
-9-run-webpage.bat
-```
-Linux/WSL:
-```bash
-./8-run-app.sh 6 "*" 7
-./9-run-webpage.sh
-```
-
-`9-run-webpage`, zaten derlenmiş statik siteyi (tüm raporlarıyla) yerel bir HTTP sunucusu üzerinden yayınlar ve
-<http://localhost:8000/> adresini açar - çoğu sayfa için düz bir `file://` bağlantısı da işe yarardı, ama rapor
-sayfaları bir `<iframe>` kullanır ve çoğu tarayıcı `file://`'dan çerçevelenmiş bir sayfayı yüklemeyi reddeder.
-`--serve` geçirirseniz bunun yerine <http://localhost:9000/>'da, `src/site/*`'i anlık olarak yeniden derleyen canlı
-bir Maven site sunucusu çalışır (`site.xml`'i veya `src/site/markdown/` altındaki markdown sayfalarını
-düzenlerken kullanışlıdır, ama `7-build-app`'in kopyaladığı ekstra rapor klasörlerini içermez - sitenin tamamını
-görmek için varsayılan modu kullanın).
-
-## 7. Şimdi kendi projeniz yapın
-
-Örnek `Calculator`'ı kendi proje konunuza çevirmek için [from-topic-tr.md](from-topic-tr.md) ile devam edin.
+`Calculator` örneğini kendi proje konunuza çevirmek için [from-topic-tr.md](from-topic-tr.md) ile devam edin.
+Göstermeye hazır olunca: [GitHub Pages olmadan projenizi gösterin](showcase-tr.md).

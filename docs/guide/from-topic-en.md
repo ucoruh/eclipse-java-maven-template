@@ -6,18 +6,31 @@ course project guide, the steps are the same).
 
 ## Checklist
 
-- [ ] Rename the Maven coordinates (`groupId`/`artifactId`) and the Java package
+- [ ] Set your name in `project.env` (`PROJECT_NAME`, `VERSION`, `GITHUB_REPO`) - the ONE place for the project identity
+- [ ] Rename the Maven `groupId` and the Java package
 - [ ] Rename the source folders to match the new package
 - [ ] Rename `Calculator` / `CalculatorApp` to your own domain classes
 - [ ] Update `pom.xml`'s `<name>`/`<description>`/`<url>`/shade `mainClass`
 - [ ] Update `Doxyfile`'s `PROJECT_NAME`/`PROJECT_BRIEF`/`INPUT`
 - [ ] Update `calculator-app/src/site/site.xml`'s banner/links (or leave as-is - it is generic)
 - [ ] Write tests **first** for each new module (normal, boundary, invalid input - see below)
-- [ ] Keep running `7-build-app` after every change and check the coverage badges/reports
+- [ ] Keep running `6-build-and-test-*` after every change (and `7-build-all-*` before a push) and check the coverage badges/reports
 - [ ] Update `README.md`'s title and description
 - [ ] Commit early, commit often (see [workflow-en.md](workflow-en.md))
 
-## 1. Rename the Maven coordinates
+## 1. Name the project and the Maven coordinates
+
+First `project.env` at the repository root - every script, the release asset names and the site read it:
+
+```text
+PROJECT_NAME=librarytracker
+VERSION=0.1.0
+GITHUB_REPO=<your-account>/<your-repo>
+```
+
+The assets then become `librarytracker-0.1.0-windows-x64-app.zip` and so on (see [Naming standard](standard-en.md)).
+
+Then `calculator-app/pom.xml`:
 
 In `calculator-app/pom.xml`:
 
@@ -34,8 +47,11 @@ The shade plugin's `mainClass` must point at your new entry-point class (step 3)
 <mainClass>com.ucoruh.librarytracker.LibraryTrackerApp</mainClass>
 ```
 
-If you rename the `artifactId`, also update every script that hard-codes `calculator-app-1.0-SNAPSHOT.jar`
-(`8-run-app.bat`/`.sh`, `9-run-webpage.bat`/`.sh`, `7-build-app.bat`/`.sh`'s jar-check) and the `<mainClass>` above.
+**Simplest and safest: keep the module folder and `artifactId` as `calculator-app`** - the scripts, `Doxyfile`,
+`mkdocs.yml` and CI refer to that folder, and the *names your users see* (assets, site, jar inside the app archive) come
+from `PROJECT_NAME`, not from the `artifactId`. Change only `groupId`, `<name>`, `<description>` and the `<mainClass>`
+above. (If you insist on renaming the folder too, search the repository for `calculator-app` and replace every hit in
+the scripts, `Doxyfile`, `mkdocs.yml`, `.github/workflows/ci.yml` and `.gitignore`.)
 
 ## 2. Rename the package and folders
 
@@ -79,24 +95,24 @@ boundary tables) - copy the pattern, not the content.
 
 ## 5. Update Doxygen and the site
 
-`Doxyfile`:
+`Doxyfile` (the output folder and `PROJECT_NUMBER` come from the scripts - do not change those two lines):
 ```
 PROJECT_NAME    = "Library Book Tracker"
 PROJECT_BRIEF   = "A small library catalog and loan tracker"
 INPUT           = calculator-app/src/main/java
 ```
-(`INPUT` can stay as-is if you keep the `calculator-app` folder name; rename it too - `git mv calculator-app
-library-tracker-app` - if you want the folder to match, and then update every script/`pom.xml`/`Doxyfile`
-reference to `calculator-app/`.)
+The site: `mkdocs.yml` (`site_name`, `site_description`, `repo_url`) and the landing page `docs/index.md`; the Maven
+site banner in `calculator-app/src/site/site.xml` is generic and can stay.
 
 ## 6. Rebuild and check
 
 ```batch
-7-build-app.bat
-9-run-webpage.bat
+7-build-all-windows.bat
+9-open-site-windows.bat
 ```
+(`./7-build-all-linux.sh` and `./9-open-site-linux.sh` on Linux/WSL.)
 Open the site, check the **Which report is which?** page, and confirm:
-- Surefire report shows all your new tests, all green
+- the unit-test report shows all your new tests, all green
 - JaCoCo and ReportGenerator both show real coverage numbers for your new classes (not 0%, and not the old
   `Calculator` class - it should be gone)
 - Javadoc and Doxygen both show your new classes with your new Javadoc comments

@@ -1,24 +1,24 @@
 # Reports across the three course templates
 
-The full "which report is which" breakdown for **this** template lives on the generated site itself, next to the
-tools it describes: `calculator-app/target/site/tool-catalog.html` (source:
-`calculator-app/src/site/markdown/tool-catalog.md`), linked as **"Which report is which?"** in the site's left
-menu. Build the site first (`7-build-app.bat`/`.sh`) if that file does not exist yet.
+The "which report is which" breakdown for **this** template is the page [Which report is which?](which-report.md);
+build the site first (`7-build-all-windows.bat` / `./7-build-all-linux.sh`) to see the report pages themselves.
 
 ## The same idea, three ecosystems
 
-All three course template repositories follow the same "every report twice: native tool + ReportGenerator" idea,
-so what you learn to read here transfers directly:
+All three course templates follow the same standard ([Naming standard](standard-en.md)): every report **twice**
+(native tool + a cross-ecosystem tool), on **Windows and Linux**, shown in a **MkDocs Material** main site, with the
+ecosystem's own site tool published next to it (`native/`).
 
 | Concern | Java (this repo) | C/C++ (`cpp-cmake-ctest-template`) | C# (`vs-net-core-template`) |
 |---|---|---|---|
-| Unit-test results | Maven Surefire Report | CTest JUnit XML -> `junit2html` | .NET TRX -> HTML |
-| Code coverage, native | JaCoCo HTML | OpenCppCoverage HTML (Windows) / `gcovr` (Linux) | `dotnet-coverage` |
+| Unit-test results | JUnit XML -> `junit2html` (Surefire page in the Maven site) | CTest JUnit XML -> `junit2html` | .NET TRX -> HTML |
+| Code coverage, native | JaCoCo HTML | OpenCppCoverage HTML (Windows) / lcov, gcovr (Linux) | coverlet lcov -> `genhtml` |
 | Code coverage, other family | ReportGenerator (from the JaCoCo XML) | ReportGenerator (from the coverage XML) | ReportGenerator (from coverlet's cobertura XML) |
-| Documentation coverage | coverxygen -> `genhtml` **and** coverxygen -> ReportGenerator | coverxygen -> `genhtml` **and** coverxygen -> ReportGenerator | coverxygen -> `genhtml` **and** coverxygen -> ReportGenerator |
-| API docs, ecosystem-native | Javadoc | Doxygen (there is no separate "native" C++ doc tool - Doxygen is both) | DocFX |
+| Documentation coverage | coverxygen -> `genhtml` **and** coverxygen -> ReportGenerator | the same | the same |
+| API docs, ecosystem-native | Javadoc | Doxygen (there is no separate "native" C++ doc tool) | DocFX |
 | API docs, cross-language | Doxygen | Doxygen | Doxygen |
-| Site | `mvn site` (Fluido skin) | Doxygen HTML as the site | DocFX site |
+| Ecosystem's own site (published under `native/`, never framed) | `mvn site` (Fluido skin) | - | DocFX site |
+| Main site | MkDocs Material | MkDocs Material | MkDocs Material |
 
-Everything else (badges, `-historydir` coverage trend, `site.zip` in the release) works the same way across all
-three - see [releases-en.md](releases-en.md).
+Everything else (badges, the `-historydir` coverage trend, `...-site.zip` in the release) works the same way in all
+three - see [Releases and private repositories](releases-en.md).

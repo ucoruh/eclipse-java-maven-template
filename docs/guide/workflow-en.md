@@ -1,4 +1,4 @@
-# Daily workflow
+# Daily workflow and reports
 
 ## Branch, commit, push
 
@@ -10,7 +10,7 @@ git commit -m "Add LibraryCatalog.checkOut with overdue tracking"
 git push -u origin feature/checkout-book
 ```
 
-The `pre-commit` hook (installed by `1-configure-git-hooks`) runs Astyle on every staged `.java`/`.c`/`.cpp`/`.h`
+The `pre-commit` hook (installed by `1-configure-git-hooks-*`) runs Astyle on every staged `.java`/`.c`/`.cpp`/`.h`
 file and refuses the commit if it cannot format cleanly, or if `.gitignore`/`README.md`/`Doxyfile` are missing.
 Open a pull request into `main` when the branch is ready; merge it once CI is green.
 
@@ -19,112 +19,88 @@ Open a pull request into `main` when the branch is ready; merge it once CI is gr
 | When | What runs | Where the output lands |
 |---|---|---|
 | every `git commit` | Astyle formatting check (`pre-commit` hook) | in place, on your files |
-| every push / PR | `.github/workflows/ci.yml` job `build`: `mvn clean test package` | GitHub Actions "Checks" tab; Surefire reports uploaded as an artifact only if it fails |
-| every push / PR | `.github/workflows/ci.yml` job `site`: the full report/site pipeline (see below) | a downloadable `maven-site-preview` artifact on the run, so a reviewer can preview the site from a PR |
-| `7-build-app.bat` / `.sh` (run by you, whenever) | full build: tests, JaCoCo, ReportGenerator (coverage + badge), Doxygen, coverxygen, `genhtml`, ReportGenerator (doc-coverage + badge), `mvn site`, per-report `downloads/*.zip`, `release/*.tar.gz` | `calculator-app/target/site/`, `release/` (both are gitignored - not committed) |
-| every push to `main`, or a manual dispatch, of `.github/workflows/pages.yml` | the same full pipeline, published to the `gh-pages` branch (skipped with an explanation on a private repo unless the `PAGES_ON_PRIVATE` repository variable is `true`) | `https://<owner>.github.io/<repo>/` |
-| a `vX.Y.Z` tag push, or a manual dispatch (with a `version` input), of `.github/workflows/release.yml` | the same full pipeline, then a GitHub Release with every report attached as its own named asset | the repo's **Releases** page |
-| `10-release.bat` / `.sh` (run by you) | the same full pipeline, zipped as `release/site.zip`, published with `gh release create` | the repo's **Releases** page, without spending any Actions minutes |
-
-CI's `build` job is deliberately lean: it only compiles and runs tests on every push, so it stays fast and does not
-burn your (limited, on a private repo) Actions minutes. CI's `site` job, `pages.yml` and `release.yml` all run the
-same heavier pipeline (Doxygen, ReportGenerator, coverxygen/`genhtml`, `mvn site`) - `site` uploads it as a
-preview artifact, `pages.yml` publishes it live, `release.yml` attaches it to a release. See
-[releases-en.md](releases-en.md) for the private-repo/GitHub Free implications of each.
+| you, many times a day | `6-build-and-test-windows.bat` / `./6-build-and-test-linux.sh` (about a minute): build + JUnit tests + jar + test report | `build/<platform>-release/`, `reports/<platform>/tests-junit2html/`, `publish/<platform>-<arch>/` |
+| you, before a push or a demo | `7-build-all-windows.bat` / `./7-build-all-linux.sh`: everything - coverage (JaCoCo + ReportGenerator), Doxygen, Javadoc, documentation coverage (genhtml + ReportGenerator), Maven site, MkDocs site, `release/` | `reports/<platform>/`, `site/`, `site-native/`, `release/` (all gitignored) |
+| every push / PR | `.github/workflows/ci.yml`: `windows`, `linux`, `macos` jobs, then `site` (merge + link check) | GitHub Actions run; the merged site is an artifact |
+| push to `main` | the same, and the `site` job deploys GitHub Pages | `https://<owner>.github.io/<repo>/` (skipped on a private repo, see [Releases](releases-en.md)) |
+| a `vX.Y.Z` tag | the same, and the `site` job publishes the GitHub Release with every asset | the repo's **Releases** page |
+| `10-release-*` (you) | build everything locally and `gh release create` | the repo's **Releases** page, no Actions minutes |
 
 ## Reading the reports
 
-Run `9-run-webpage.bat`/`.sh` (it serves the site over a local HTTP server and opens it - see below for why) and
-start from **Which report is which?** in the left menu - it explains every report on the site and which
-folder/file backs it. Short version:
-- **Unit Tests -> Surefire Report**: did the tests pass, and what did each one assert.
-- **Code Coverage -> JaCoCo / ReportGenerator**: same underlying data, two renderings; ReportGenerator additionally
-  gives you badges and a history trend.
-- **Documentation Coverage -> Coverxygen (genhtml / ReportGenerator)**: how much of your public API has a Javadoc
-  comment - again the same data, two renderings.
-- **API Docs -> Javadoc / Doxygen**: the actual API reference, in the Java-native format and in the
-  cross-language-consistent format the other two course templates also use.
-- **Code Quality -> Checkstyle / PMD / CPD / SpotBugs**: style, design smells, copy-paste, bug patterns -
-  informational, they do not fail the build.
+Run `9-open-site-windows.bat` / `./9-open-site-linux.sh` (it serves the site on http://localhost:8000/) and start
+from **Which report is which?** under **Reports**. Short version:
 
-Every one of these also has its own page **inside the site**, under the **Reports** menu, showing the report in a
-framed, scrollable viewer with "Open in a new tab" and "Download (zip)" buttons - see the next section for how
-that is built, in case you want to add a report of your own.
+- **Unit tests** (`tests-junit2html`): did the tests pass, what did each assert.
+- **Coverage**: JaCoCo and ReportGenerator show the same data two ways; ReportGenerator adds badges and a history.
+- **Documentation coverage**: how much of your public API has a doc comment - genhtml and ReportGenerator, same data.
+- **API docs**: Javadoc (Java-native) and Doxygen (the same tool the C/C++ and C# templates use).
+- **Maven site** (opens in its own tab): Checkstyle, PMD, CPD, SpotBugs, JXR, Surefire - informational, they never
+  fail the build.
+
+Reports exist twice - **Windows** and **Linux** - because the results can differ. Read both when they disagree.
 
 ## Showing an HTML report inside your site
 
-Every report page under the **Reports** menu (`calculator-app/src/site/markdown/reports/*.html` once built) is a
-small hand-written page, not something Maven generates automatically. This is how one is built, using the
-JaCoCo report page as a worked example, and how to add a new one.
+The site is MkDocs Material. The report pages under **Reports -> Windows / Linux** are **generated** by
+`scripts/assemble.py site` (called by `7-build-all-*`); this section shows what such a page is, how to add your own
+report, and how to test it.
 
-**When to use an iframe, and when not to.** Put a report in an iframe only if it is a *standalone* HTML report
-made by a tool outside the site generator: JaCoCo, ReportGenerator, genhtml (coverxygen), Javadoc, Doxygen. Reports
-that Maven site generates itself - Surefire report, Checkstyle, PMD, CPD, SpotBugs, JXR, the project-info pages - are
-already pages of this same site, with the same menu. Wrapping them in an iframe shows the site inside the site (two
-menus, two headers). Link those directly from `site.xml` instead, e.g.
-`<item name="Code Quality: Checkstyle" href="checkstyle.html" />`.
+**When to use an iframe, and when not.** Put a report in an `<iframe>` only if it is **standalone HTML made outside
+the site generator**: JaCoCo, ReportGenerator, genhtml, junit2html, Javadoc, Doxygen, OpenCppCoverage. A page that
+carries its own site navigation - every Maven-site page (Surefire, Checkstyle, PMD, CPD, SpotBugs, JXR, project
+info) - is **never framed**: it would show a site inside the site (two menus, two banners). Link it instead so it
+opens in a new tab (see the "right / wrong" example in [Naming standard](standard-en.md#6-site-rules-what-is-framed-and-what-is-not)).
 
-**1. The markdown source** - `calculator-app/src/site/markdown/reports/jacoco.md`:
+**1. The page.** Each report page is a small Markdown file with raw HTML, e.g.
+`docs/reports/linux/coverage-jacoco/index.md` (generated - do not edit it, edit the template in
+`scripts/assemble.py`, function `report_page`):
 
-```markdown
-# Code Coverage: JaCoCo (native)
+```html
+# Code coverage - JaCoCo - Linux
 
 <div class="report-toolbar">
-<a class="btn" href="../jacoco/index.html" target="_blank" rel="noopener">Open in a new tab</a>
-<a class="btn" href="../downloads/jacoco.zip">Download (zip)</a>
+<a class="md-button md-button--primary" href="html/index.html" target="_blank" rel="noopener">Open in a new tab</a>
+<a class="md-button" href="https://github.com/<owner>/<repo>/releases/download/v1.1.0/calculator-1.1.0-linux-report-coverage-jacoco.zip">Download (zip)</a>
 </div>
 
-<p class="report-explainer">One sentence: what this report shows and why it matters.</p>
+<p class="report-explainer">One sentence: what the report shows.</p>
 
 <div class="report-frame-wrap">
-<iframe class="report-frame" src="../jacoco/index.html" title="JaCoCo coverage report" loading="lazy"></iframe>
+<iframe class="report-frame" src="html/index.html" title="JaCoCo coverage (linux)" loading="lazy"></iframe>
 </div>
 
-<p class="report-fallback">If the report above does not load (some browsers block framed pages), <a
-href="../jacoco/index.html">open it directly</a>.</p>
+<p class="report-fallback">If the frame stays empty, <a href="html/index.html">open the report directly</a>.</p>
 ```
 
-Doxia's Markdown parser passes standalone, blank-line-separated HTML blocks straight through, which is how the
-`<div>`/`<iframe>` markup survives into the generated page unchanged. The paths are **relative to
-`reports/<name>.html`**, i.e. one level below the site root, so a report that lives at
-`calculator-app/target/site/jacoco/index.html` is `../jacoco/index.html` from here - the same relative path works
-unchanged locally and on GitHub Pages (`/<repo>/reports/jacoco.html` and `/<repo>/jacoco/index.html` are still one
-level apart). The `.report-toolbar`, `.report-frame-wrap`, `.report-frame` etc. classes are styled once, for every
-report page, in `calculator-app/src/site/resources/css/site.css`.
+The raw report is copied next to the page as `html/`, so the frame's path `html/index.html` is **relative** and
+works both on GitHub Pages (`/<repo>/reports/linux/coverage-jacoco/`) and on `http://localhost:8000/`.
 
-**2. The menu entry** - add a line to the `Reports` `<menu>` in `calculator-app/src/site/site.xml`:
+**2. Add a new report.**
 
-```xml
-<item name="Coverage: JaCoCo (native)" href="reports/jacoco.html" />
-```
+1. Make your tool write standalone HTML into `reports/<platform>/<kind>-<tool>/` (e.g. `reports/linux/mutation-pitest/`)
+   in both `7-build-all-windows.bat` and `7-build-all-linux.sh`.
+2. Add one entry to the `REPORTS` list at the top of `scripts/assemble.py` (folder key, title, one-line explanation,
+   entry file, asset name). That gets you the frame page, the zip in `release/`, the row in `ASSETS.md` and the
+   downloads table.
+3. Add the page to the `nav:` of `mkdocs.yml` under Reports -> Windows and Linux.
 
-**3. The download button's target** - `../downloads/jacoco.zip` is produced by `7-build-app.bat`/`.sh` (the step
-titled "Bundle each report into ... downloads/*.zip"): a directory-shaped report (JaCoCo, ReportGenerator,
-coverxygen, Javadoc, Doxygen) is zipped as-is; a single-file report generated straight at the site root
-(Surefire, Checkstyle, PMD, CPD, SpotBugs) is bundled together with the site's shared `css/`/`images/` folders
-first, so it still renders correctly when unzipped and opened on its own. If you add a genuinely new report, add
-one more `tar -a -cf` (Windows) / `zip -rq` (Linux, via the `zip_dir` helper) line next to the existing ones.
+**3. Test it locally.** `7-build-all-*` then `9-open-site-*`: the site is served over http on port 8000. Browsers
+refuse to load an `<iframe>` from a `file://` page, so double-clicking `site/index.html` shows empty frames - always
+go through `http://localhost:8000/`.
 
-**4. Testing it locally** - `9-run-webpage.bat`/`.sh` (no arguments) serves `calculator-app/target/site/` with
-`python -m http.server` and prints the URL to open. This step is not optional: browsers block an `<iframe>` from
-loading a `file://` page for security reasons, so double-clicking `index.html` will show a blank frame on every
-report page - you must go through `http://localhost:8000/` (or whatever port you passed) for the frames to load.
+**Common problems.**
 
-**Common problems**:
-- **Blank iframe, "Open in a new tab" works fine** - you opened the site via `file://` instead of
-  `9-run-webpage`. Use the local HTTP server.
-- **Blank iframe even over `http://`** - the report folder was not actually generated/copied. Check that
-  `calculator-app/target/site/<folder>/index.html` exists; if not, re-run `7-build-app` and read its console
-  output for the step that failed.
-- **404 for the report** - a stale absolute or `/repo`-prefixed path. Keep paths relative (`../folder/...`), not
-  absolute (`/folder/...`) - GitHub Pages serves the site from a `/<repo>/` sub-path, so an absolute path breaks
-  there even though it works locally.
-- **"Download (zip)" 404s** - the zip is produced by `7-build-app`'s bundling step, not by `mvn site` alone;
-  re-run `7-build-app` (running `mvn site` on its own will not create `target/site/downloads/`).
+| Symptom | Cause / fix |
+|---|---|
+| Empty frame, "Open in a new tab" works | the site was opened via `file://`; use `9-open-site-*` |
+| Empty frame over http | the report folder was not generated or copied: check `reports/<platform>/<kind>-<tool>/index.html` exists and re-run `7-build-all-*` |
+| 404 for the report | an absolute path (`/html/...`); keep frame paths relative - GitHub Pages serves under `/<repo>/` |
+| Blank frame with a "refused to connect" message | the report tool sends `X-Frame-Options`; standalone file reports do not, so this means you framed a **server** page - open it in a new tab instead |
+| `mkdocs build --strict` warns about a missing file | a page listed in `nav:` was not generated; add the report to `REPORTS` in `assemble.py` |
 
 ## Keeping coverage up
 
-Run `7-build-app` after every meaningful change and glance at the coverage badges
-(`assets/badge_linecoverage.svg` etc., also shown at the top of `README.md`) or the JaCoCo report. If a new method
-has 0% coverage, it has no test yet - write one before moving on (see
-[from-topic-en.md](from-topic-en.md#4-write-tests-first)).
+Run `6-build-and-test-*` after every meaningful change and `7-build-all-*` before you push; glance at the coverage
+badges (`assets/badge_linecoverage.svg` etc., also at the top of `README.md`) or the JaCoCo page. A new method with 0%
+coverage has no test yet - write one before moving on (see [from-topic-en.md](from-topic-en.md#4-write-tests-first)).

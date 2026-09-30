@@ -11,19 +11,19 @@ ne zaman duracağınızı bilirsiniz.
 | JDK 17 (veya 21) | Java'yı derlemek/çalıştırmak için; JUnit 5, 17+ ister | her şey |
 | Maven 3.8+ | build, test, package, site | her şey |
 | Git | clone, hook'lar, release'ler | her şey |
-| Doxygen | API dokümantasyonu (2. aile) + dokümantasyon kapsamasının girdisi | `7-build-app` |
-| lcov (`genhtml`) | dokümantasyon kapsama raporunu (native aile) render eder | `7-build-app` |
-| Python 3.12 + `coverxygen` | Doxygen'in XML'ini dokümantasyon-kapsama kaynağı olan lcov.info'ya çevirir | `7-build-app` |
-| .NET SDK + ReportGenerator global tool | kapsama/dokümantasyon-kapsama HTML'i, rozetler, geçmiş (2. aile) | `7-build-app` |
+| Doxygen | API dokümantasyonu (2. aile) + dokümantasyon kapsamasının girdisi | `7-build-all-*` |
+| lcov (`genhtml`) + Windows'a özgü bir Perl | dokümantasyon kapsama raporunu (native aile) render eder | `7-build-all-*` |
+| Python 3.12 + `requirements.txt` paketleri (`coverxygen`, `junit2html`, `mkdocs-material`) | dokümantasyon-kapsama kaynağı, birim test HTML raporu, ana site | `6-build-and-test-*`, `7-build-all-*` |
+| .NET SDK + ReportGenerator global tool | kapsama/dokümantasyon-kapsama HTML'i, rozetler, geçmiş (2. aile) | `7-build-all-*` |
 | Astyle | kod biçimlendirme | `5-format-code`, pre-commit kancası |
-| GitHub CLI (`gh`) | makinenizden bir release yayımlamak | `10-release` |
+| GitHub CLI (`gh`) | makinenizden bir release yayımlamak | `10-release-*` |
 
 ## Windows
 
 ### 1. Paket yöneticileri
 
 ```batch
-3-install-package-manager.bat
+3-install-package-manager-windows.bat
 ```
 
 [Chocolatey](https://chocolatey.org/) ve [Scoop](https://scoop.sh/)'u, zaten yoksa kurar.
@@ -31,8 +31,11 @@ ne zaman duracağınızı bilirsiniz.
 ### 2. Geri kalan her şey
 
 ```batch
-4-install-required-apps.bat
+4-install-tools-windows.bat
 ```
+
+(**Yönetici** terminalinde çalıştırın; JDK 17, Maven, Astyle, Doxygen, Graphviz, lcov, Strawberry Perl, ReportGenerator
+aracı, Python paketleri ve GitHub CLI'ı - her biri yalnızca eksikse - kurar.)
 
 Bu betik her aracı önce kontrol eder ve yalnızca eksik olanı kurar, bu yüzden tekrar tekrar çalıştırmak güvenlidir.
 Ardından her aracı doğrulayın:
@@ -60,7 +63,7 @@ Beklenen: bir sürüm numarası, örn. `1.9.7`.
 where genhtml
 ```
 Beklenen: `C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml` gibi bir yol. Bu dosyanın **`.exe` uzantısı yoktur** -
-bir Perl betiğidir, bu yüzden `7-build-app.bat` onu her zaman `genhtml` olarak değil, `perl "<yol>\genhtml" ...`
+bir Perl betiğidir, bu yüzden `7-build-all-windows.bat` onu her zaman `genhtml` olarak değil, `perl "<yol>\genhtml" ...`
 olarak çalıştırır. `perl`'in kendisi eksikse: `choco install strawberryperl -y`.
 
 ```batch
@@ -78,7 +81,7 @@ Beklenen: bir .NET SDK sürümü (8.x veya üzeri) ve ReportGenerator'ın yardı
 ```batch
 gh --version
 ```
-Beklenen: `gh version X.Y.Z (...)`. Yalnızca `10-release.bat` için gerekli - bakınız
+Beklenen: `gh version X.Y.Z (...)`. Yalnızca `10-release-windows.bat` için gerekli - bakınız
 [releases-tr.md](releases-tr.md).
 
 ## Linux / WSL (Ubuntu)
@@ -87,20 +90,15 @@ WSL kullanıyorsanız aşağıdaki tüm komutlar için bir **Ubuntu terminali** 
 Drive'ınızdaki `G:` yolunu göremez - bunu nasıl aşacağınız için bakınız
 [troubleshooting-tr.md](troubleshooting-tr.md#wsl-g-yi-goremiyor).
 
-### 1. Paket yöneticisi
+### 1. Her şey (tek betik)
 
 ```bash
-./3-install-package-manager.sh
+./4-install-tools-linux.sh
 ```
 
-`apt`'ı günceller ve eksikse .NET SDK'yı kullanıcı bazında kurar (`$HOME/.dotnet` içine, bu kısım için `sudo`
-gerekmez).
-
-### 2. Geri kalan her şey
-
-```bash
-./4-install-required-apps.sh
-```
+Linux'ta ayrı bir paket yöneticisi betiği yoktur (`apt` zaten vardır). Betik `apt`'ı günceller, yerel araçları kurar ve -
+yalnızca `apt` sürümü çok eskiyse - kullanıcı bazında JDK 17, Maven 3.9 ve .NET SDK'yı (`$HOME/tools` ve `$HOME/.dotnet`
+içine, bu kısım için `sudo` gerekmez), ardından ReportGenerator'ı ve `requirements.txt` Python paketlerini kurar.
 
 Doğrulayın:
 
@@ -129,7 +127,7 @@ export PATH="$HOME/.dotnet:$HOME/.dotnet/tools:$PATH"
 ### 3. Betikleri çalıştırılabilir yapın
 
 `.sh` betikleri çalıştırılabilir bit'i işaretli olarak commit edilir (`git update-index --chmod=+x`), bu yüzden
-taze bir `git clone` `./7-build-app.sh`'i doğrudan çalıştırmanıza izin vermelidir. "Permission denied" alırsanız:
+taze bir `git clone` `./7-build-all-linux.sh`'i doğrudan çalıştırmanıza izin vermelidir. "Permission denied" alırsanız:
 
 ```bash
 chmod +x *.sh
