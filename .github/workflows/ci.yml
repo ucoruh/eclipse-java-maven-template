@@ -1,91 +1,240 @@
-name: Build and Test
+name: CI
 
-# Two jobs on every push/PR:
-#  - build: compile + run the JUnit5 test suite (fast, seconds).
-#  - site: the full report/site pipeline (Doxygen, ReportGenerator,
-#    coverxygen/genhtml, mvn site), uploaded as a downloadable artifact so a
-#    PR reviewer can preview the site without waiting for a release. This is
-#    the same pipeline release.yml and pages.yml run, just without publishing
-#    anything - a few minutes of Actions time per push (see release.yml's
-#    header comment for the breakdown).
+# One workflow, four jobs (see docs/guide/standard-en.md, "CI in one picture"):
+#   windows  - 7-build-all-windows.bat --no-site : build, tests, coverage (2 families), doc coverage (2), API docs
+#   linux    - 7-build-all-linux.sh   --no-site : the same on Linux (+ the Maven site as site-native/)
+#   macos    - builds and packs the application only
+#   site     - merges every artifact, builds the MkDocs site (both platforms) + link check,
+#              deploys GitHub Pages on a push to main, publishes the GitHub Release on a v* tag.
+#
+# Cost (private repo on GitHub Free: 2,000 min/month; Windows minutes count x2, macOS x10): a full run is
+# roughly 12-20 billed minutes. Push freely to feature branches, tag only when you release. Artifacts live 7 days.
+# Private repository: Pages is skipped unless the repository variable PAGES_ON_PRIVATE is "true"
+# (GitHub Pro / Student Developer Pack) - see docs/guide/showcase-en.md and docs/guide/releases-en.md.
 on:
   push:
+    branches: ["**"]
+    tags: ["v*"]
   pull_request:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      release:
+        description: "Also publish the GitHub Release v<VERSION from project.env>"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  NO_MKDOCS_2_WARNING: "true"
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
 
 jobs:
-  build:
-    name: mvn clean test package
-    runs-on: ubuntu-latest
+  windows:
+    name: Windows - build, test, reports
+    runs-on: windows-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7
+      - uses: actions/checkout@v7
 
-      - name: Set up JDK 17 (Temurin)
-        uses: actions/setup-java@v6
+      - uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: "17"
           cache: maven
 
-      - name: Build and test
-        run: mvn -B -f calculator-app/pom.xml clean test package
-
-      - name: Upload Surefire report on failure
-        if: failure()
-        uses: actions/upload-artifact@v7
-        with:
-          name: surefire-reports
-          path: calculator-app/target/surefire-reports
-          retention-days: 7
-
-  site:
-    name: Build full site + every report (artifact preview)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Set up JDK 17 (Temurin)
-        uses: actions/setup-java@v6
-        with:
-          distribution: temurin
-          java-version: "17"
-          cache: maven
-
-      - name: Set up .NET (for the ReportGenerator global tool)
-        uses: actions/setup-dotnet@v6
+      - uses: actions/setup-dotnet@v6
         with:
           dotnet-version: "8.0.x"
 
-      - name: Set up Python (for coverxygen)
-        uses: actions/setup-python@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
+          cache: pip
 
-      - name: Install native tools (doxygen, lcov/genhtml, zip)
-        run: sudo apt-get update && sudo apt-get install -y doxygen lcov zip
+      - name: Install Doxygen, lcov (genhtml) and Graphviz
+        shell: pwsh
+        run: choco install doxygen.install lcov graphviz -y --no-progress
 
-      - name: Install coverxygen
-        run: python3 -m pip install --user coverxygen
-
-      - name: Install the ReportGenerator global tool
-        run: dotnet tool install --global dotnet-reportgenerator-globaltool
-
-      - name: Put dotnet tools and the pip user base on PATH
+      - name: Install the Python packages and the ReportGenerator tool
+        shell: pwsh
         run: |
-          echo "$HOME/.dotnet/tools" >> "$GITHUB_PATH"
-          echo "$(python3 -m site --user-base)/bin" >> "$GITHUB_PATH"
+          py -3.12 -m pip install -r requirements.txt
+          dotnet tool install --global dotnet-reportgenerator-globaltool
+          "$env:USERPROFILE\.dotnet\tools" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+          "C:\Program Files\doxygen\bin" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
 
-      - name: Build, test, generate every report and the site
+      - name: Build everything for Windows (no site - the site job builds it once)
+        shell: cmd
+        run: .\7-build-all-windows.bat --no-site < nul
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: platform-windows
+          path: |
+            reports/windows
+            !reports/windows/_history
+            release
+          retention-days: 7
+          if-no-files-found: error
+
+  linux:
+    name: Linux - build, test, reports
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "8.0.x"
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Doxygen, lcov (genhtml), Graphviz and zip
+        run: sudo apt-get update && sudo apt-get install -y doxygen lcov graphviz zip
+
+      - name: Install the Python packages and the ReportGenerator tool
         run: |
-          chmod +x 7-build-app.sh
-          ./7-build-app.sh
+          python3 -m pip install -r requirements.txt
+          dotnet tool install --global dotnet-reportgenerator-globaltool
 
-      - name: Upload the site as an artifact
+      - name: Build everything for Linux (no site - the site job builds it once)
+        run: |
+          chmod +x *.sh scripts/*.sh
+          ./7-build-all-linux.sh --no-site
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: platform-linux
+          path: |
+            reports/linux
+            !reports/linux/_history
+            release
+            site-native
+          retention-days: 7
+          if-no-files-found: error
+
+  macos:
+    name: macOS - application only
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Build, test and pack the macOS application
+        run: |
+          . scripts/load-env-linux.sh
+          mvn -B -f calculator-app/pom.xml -Drevision="$VERSION" clean verify
+          python3 scripts/assemble.py app --platform macos --arch arm64
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: platform-macos
+          path: release
+          retention-days: 7
+          if-no-files-found: error
+
+  site:
+    name: Site - merge, link check, Pages, Release
+    needs: [windows, linux, macos]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Read project.env (PROJECT_NAME, VERSION, GITHUB_REPO)
+        run: grep -E '^[A-Z_]+=' project.env | tr -d '\r' >> "$GITHUB_ENV"
+
+      - name: Refuse a tag that does not match project.env
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          if [ "${GITHUB_REF_NAME#v}" != "$VERSION" ]; then
+            echo "::error::tag ${GITHUB_REF_NAME} does not match VERSION=$VERSION in project.env - edit project.env (or tag v$VERSION)."
+            exit 1
+          fi
+
+      - run: python3 -m pip install -r requirements.txt
+
+      - name: Collect the per-platform artifacts
+        uses: actions/download-artifact@v8
+        with:
+          pattern: platform-*
+          merge-multiple: true
+          path: .
+
+      - name: Build the MkDocs site (both platforms), check links, pack the neutral assets
+        run: |
+          python3 scripts/assemble.py site
+          python3 -m mkdocs build --strict -q -d site
+          python3 scripts/assemble.py finalize
+          python3 scripts/assemble.py notes
+          ls -1 release
+
+      - name: Upload the merged site (preview artifact)
         uses: actions/upload-artifact@v7
         with:
-          name: maven-site-preview
-          path: calculator-app/target/site
+          name: site
+          path: site
           retention-days: 7
+
+      - name: Is GitHub Pages allowed on this repository?
+        id: gate
+        env:
+          IS_PRIVATE: ${{ github.event.repository.private }}
+          PAGES_ON_PRIVATE: ${{ vars.PAGES_ON_PRIVATE }}
+          IS_MAIN: ${{ github.ref == 'refs/heads/main' }}
+        run: |
+          GUIDE="https://github.com/${GITHUB_REPOSITORY}/blob/main/docs/guide/showcase-en.md"
+          if [ "$IS_MAIN" != "true" ]; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "Pages deploy runs only for main (this ref: ${GITHUB_REF})." >> "$GITHUB_STEP_SUMMARY"
+          elif [ "$IS_PRIVATE" = "true" ] && [ "$PAGES_ON_PRIVATE" != "true" ]; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            MSG="This repository is private and the repository variable PAGES_ON_PRIVATE is not 'true', so the GitHub Pages deploy was skipped (Pages on a private repo needs GitHub Pro/Team or the free Student Developer Pack). Nothing is lost: show the full site locally with 7-build-all-<platform> + 9-open-site-<platform>, and every report and the whole site (site.zip) are attached to the GitHub Release. Step-by-step guide: ${GUIDE} . To enable Pages after getting Pro: Settings -> Secrets and variables -> Actions -> Variables -> PAGES_ON_PRIVATE = true, then Settings -> Pages -> gh-pages."
+            echo "::notice title=GitHub Pages skipped (private repository)::${MSG}"
+            { echo "## GitHub Pages skipped"; echo; echo "${MSG}"; } >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            { echo "## GitHub Pages deploy"; echo; echo "Publishing site/ to the gh-pages branch."; } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Deploy to GitHub Pages (gh-pages branch)
+        if: steps.gate.outputs.run == 'true'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+
+      - name: Publish the GitHub Release (every file of release/)
+        if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.release)
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: ${{ env.PROJECT_NAME }} ${{ env.VERSION }}
+          body_path: build/release-notes.md
+          files: release/*
+          fail_on_unmatched_files: true
