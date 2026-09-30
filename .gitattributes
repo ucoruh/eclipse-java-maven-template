@@ -12,3 +12,7 @@
 # Windows' own bash), and keep the shebang scripts free of \r too.
 pre-commit text eol=lf
 pre-push text eol=lf
+
+# Read by both cmd.exe and bash scripts; python helpers run under both.
+project.env text eol=lf
+*.py text eol=lf

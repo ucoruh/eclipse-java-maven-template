@@ -1,0 +1,8 @@
+# Python tools used by the build scripts and the CI workflow. Install once:
+#   py -3.12 -m pip install --user -r requirements.txt      (Windows)
+#   python3 -m pip install --user -r requirements.txt       (Linux / WSL)
+# (4-install-tools-windows.bat and 4-install-tools-linux.sh do this for you.)
+mkdocs==1.6.1
+mkdocs-material==9.7.7
+junit2html==31.1.4
+coverxygen==1.8.2

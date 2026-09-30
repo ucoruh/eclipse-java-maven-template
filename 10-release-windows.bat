@@ -1,51 +1,28 @@
 @echo off
-
-:: Enable necessary extensions
+rem 10 - LOCAL release: build everything (script 7), then publish release\ with the GitHub CLI.
+rem Works on a private repository on GitHub Free and uses no Actions minutes.
+rem   10-release-windows.bat --dry-run   build + show the exact gh command and the asset list; publish nothing
+rem   10-release-windows.bat             really publish tag v<VERSION from project.env> with every file in release\
+rem The version comes from project.env (VERSION=1.1.0 -> tag v1.1.0); edit it there, commit, then release.
+rem NOTE: a local build only holds THIS platform's assets. CI (the "v*" tag workflow) builds Windows +
+rem Linux + macOS; use this script when you want to release without CI (see docs\guide\releases-en.md).
 @setlocal enableextensions enabledelayedexpansion
 @cd /d "%~dp0"
 
-echo ============================================================
-echo  Local release: build everything, package release\, publish
-echo  with the GitHub CLI (works on a private repo + GitHub Free -
-echo  see docs\guide\releases-en.md)
-echo ============================================================
-
 set "DRYRUN=0"
-set "VERSION="
+for %%A in (%*) do if /I "%%~A"=="--dry-run" set "DRYRUN=1"
 
-:parse_args
-if "%~1"=="" goto args_done
-if /I "%~1"=="--dry-run" (
-    set "DRYRUN=1"
-    shift
-    goto parse_args
-)
-if not defined VERSION (
-    set "VERSION=%~1"
-    shift
-    goto parse_args
-)
-shift
-goto parse_args
-:args_done
+call scripts\load-env-windows.bat
+if errorlevel 1 exit /b 1
+call scripts\detect-python-windows.bat
+if errorlevel 1 exit /b 1
+set "TAG=v%VERSION%"
 
-if not defined VERSION (
-    if exist "VERSION" (
-        set /p VERSION=<VERSION
-    )
-)
-if not defined VERSION (
-    echo [ERROR] No version given and no VERSION file found.
-    echo Usage: 10-release.bat vX.Y.Z [--dry-run]
-    echo    or: put "vX.Y.Z" in a VERSION file and run: 10-release.bat [--dry-run]
-    exit /b 1
-)
-echo Release version: %VERSION%
+echo ============================================================
+echo  Local release %TAG% of %PROJECT_NAME%  (platform %PLATFORM%-%ARCH%)
+echo ============================================================
 
-echo -----------------------------------------------------------
-echo 1. Refuse a dirty working tree (release must come from a
-echo    committed, reviewable state)
-echo -----------------------------------------------------------
+echo [1/5] Refuse a dirty working tree (a release must come from a committed state)
 where git >nul 2>&1
 if errorlevel 1 (
     echo [ERROR] git not found on PATH.
@@ -54,101 +31,57 @@ if errorlevel 1 (
 set "DIRTY="
 for /f "delims=" %%S in ('git status --porcelain 2^>nul') do set "DIRTY=1"
 if defined DIRTY (
-    echo [ERROR] Working tree is not clean. Commit or stash your changes first:
+    echo [ERROR] The working tree is not clean. Commit or stash your changes first:
     git status --short
     exit /b 1
 )
 
-echo -----------------------------------------------------------
-echo 2. Check the GitHub CLI is installed and logged in
-echo -----------------------------------------------------------
+echo [2/5] Check the GitHub CLI is installed and logged in
 where gh >nul 2>&1
 if errorlevel 1 (
-    echo [ERROR] GitHub CLI "gh" not found. Fix: choco install gh -y
-    if "%DRYRUN%"=="1" echo [DRY RUN] Continuing without gh - a real release needs it.
+    echo [WARN] GitHub CLI "gh" not found. Fix: choco install gh -y
     if "%DRYRUN%"=="0" exit /b 1
-)
-gh auth status >nul 2>&1
-if errorlevel 1 (
-    echo [ERROR] gh is not logged in to GitHub.
-    echo Fix: gh auth login
-    echo ^(see docs\guide\releases-en.md for a step-by-step walkthrough,
-    echo including the GitHub Student Developer Pack^)
-    if "%DRYRUN%"=="1" echo [DRY RUN] Continuing without gh - a real release needs it.
-    if "%DRYRUN%"=="0" exit /b 1
+    echo [DRY RUN] Continuing without gh - a real release needs it.
+) else (
+    gh auth status >nul 2>&1
+    if errorlevel 1 (
+        echo [WARN] gh is not logged in. Fix: gh auth login   ^(see docs\guide\releases-en.md^)
+        if "%DRYRUN%"=="0" exit /b 1
+        echo [DRY RUN] Continuing without a login - a real release needs it.
+    )
 )
 
-echo -----------------------------------------------------------
-echo 3. Build everything locally: jar, both coverage-report
-echo    families, both doc-coverage families, API docs, site
-echo -----------------------------------------------------------
-call "%~dp07-build-app.bat"
+echo [3/5] Build everything (7-build-all-windows.bat: reports, API docs, both sites, release\)
+set "NO_PAUSE=1"
+call .\7-build-all-windows.bat
 if errorlevel 1 (
-    echo [ERROR] Build failed - fix it before releasing.
+    echo [ERROR] The build failed - fix it before releasing.
     exit /b 1
 )
 
-echo -----------------------------------------------------------
-echo 4. Zip the whole site as release\site.zip (download -^> unzip
-echo    -^> open index.html; this is how graders see the site on a
-echo    private repo without GitHub Pages - see docs\guide\releases-en.md)
-echo -----------------------------------------------------------
-if exist "release\site.zip" del /q "release\site.zip"
-powershell -NoProfile -ExecutionPolicy Bypass -Command "Compress-Archive -Path 'calculator-app\target\site\*' -DestinationPath 'release\site.zip' -Force"
-if errorlevel 1 (
-    echo [ERROR] Could not create release\site.zip.
-    exit /b 1
-)
-if not exist "release\site.zip" (
-    echo [ERROR] release\site.zip was not created.
-    exit /b 1
-)
->> "release\README.md" echo ^| `site.zip` ^| The full Maven site, zipped - unzip and open `index.html` (this is how a private-repo release ships the site without GitHub Pages; see `docs/guide/releases-en.md`) ^|
-
-echo -----------------------------------------------------------
-echo Release assets in release\:
-echo -----------------------------------------------------------
+echo [4/5] Release notes
+%PY% scripts\assemble.py notes
+if errorlevel 1 exit /b 1
+echo Files in release\ ^(these become the release assets^):
 dir /b "release"
 
-set "NOTES_FILE=%TEMP%\release-notes-%VERSION%.md"
-> "%NOTES_FILE%" echo # %VERSION%
->> "%NOTES_FILE%" echo.
->> "%NOTES_FILE%" echo Built locally with 7-build-app.bat / 7-build-app.sh. This Java template's runnable jar is
->> "%NOTES_FILE%" echo portable bytecode - application-binary.tar.gz runs unmodified on Windows, Linux and macOS
->> "%NOTES_FILE%" echo with any JDK 17+.
->> "%NOTES_FILE%" echo.
->> "%NOTES_FILE%" echo - application-binary.tar.gz - the runnable jar ^(cross-platform^)
->> "%NOTES_FILE%" echo - source-code.tar.gz - the source tree at this commit ^(git archive^)
->> "%NOTES_FILE%" echo - test-results-surefire.tar.gz - raw JUnit XML plus the rendered Surefire report
->> "%NOTES_FILE%" echo - test-jacoco-report.tar.gz / test-coverage-report.tar.gz - unit-test coverage, native ^(JaCoCo^) and ReportGenerator families
->> "%NOTES_FILE%" echo - doc-coverage-report.tar.gz / doc-coverage-reportgenerator-report.tar.gz - documentation coverage, native ^(genhtml^) and ReportGenerator families
->> "%NOTES_FILE%" echo - application-documentation.tar.gz - Doxygen API docs
->> "%NOTES_FILE%" echo - api-docs-javadoc.tar.gz - Javadoc API docs
->> "%NOTES_FILE%" echo - application-site.tar.gz / site.zip - the full Maven site ^(unzip site.zip and open index.html^)
->> "%NOTES_FILE%" echo - README.md - what every archive above is ^(same table, generated by 7-build-app^)
->> "%NOTES_FILE%" echo.
->> "%NOTES_FILE%" echo See release/README.md for the full asset table.
-
 if "%DRYRUN%"=="1" (
-    echo -----------------------------------------------------------
     echo [DRY RUN] Would run:
-    echo   gh release create %VERSION% release\* --title "%VERSION%" --notes-file "%NOTES_FILE%"
+    echo   gh release create %TAG% release\* --title "%PROJECT_NAME% %VERSION%" --notes-file build\release-notes.md
     echo [DRY RUN] No release was created and nothing was published.
     exit /b 0
 )
 
-echo -----------------------------------------------------------
-echo 5. Publish with the GitHub CLI (no Actions minutes used)
-echo -----------------------------------------------------------
-gh release create "%VERSION%" release\* --title "%VERSION%" --notes-file "%NOTES_FILE%"
+echo [5/5] Publish with the GitHub CLI
+gh release create "%TAG%" release\* --title "%PROJECT_NAME% %VERSION%" --notes-file "build\release-notes.md"
 if errorlevel 1 (
     echo [ERROR] "gh release create" failed - see the output above.
-    echo Common causes: the tag %VERSION% already exists, you lack push access,
-    echo or an asset exceeds GitHub's 2 GiB-per-file limit.
+    echo Common causes: the tag %TAG% already exists ^(raise VERSION in project.env^), you have no write
+    echo access to the repository, or an asset is larger than 2 GiB.
     exit /b 1
 )
-
 echo ....................
-echo Release %VERSION% published.
+echo Release %TAG% published.
 echo ....................
 if not defined CI pause
+exit /b 0

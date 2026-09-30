@@ -8,7 +8,7 @@ currentDir=$(pwd)
 echo "Get the current directory: $currentDir"
 
 echo "Change the current working directory to the script directory"
-cd "$(dirname "$0")"
+cd "$(dirname "$0")/.."
 
 # Find and delete desktop.ini files, and remove them from Git index
 find . -name 'desktop.ini' -print0 | while IFS= read -r -d '' file; do

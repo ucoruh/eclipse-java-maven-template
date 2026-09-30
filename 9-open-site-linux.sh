@@ -1,50 +1,48 @@
 #!/bin/bash
+# 9 - open the built site in your browser, served over http://localhost (the report pages use
+# <iframe>, and most browsers block iframes on a file:// page).
+#   ./9-open-site-linux.sh              serve site/            (the MkDocs site, all reports)
+#   ./9-open-site-linux.sh 9000         same, on port 9000
+#   ./9-open-site-linux.sh --maven      serve site-native/     (the Maven site on its own)
+#   ./9-open-site-linux.sh --edit       live-reloading MkDocs dev server (while writing docs)
+# In WSL the URL also opens in your Windows browser (localhost is forwarded).
 set -e
-
 cd "$(dirname "$0")"
+. scripts/load-env-linux.sh
+. scripts/detect-python-linux.sh
+
+export NO_MKDOCS_2_WARNING=true
+DIR=site; PORT=8000; MODE=serve
+for a in "$@"; do
+    case "$a" in
+        --maven) DIR=site-native ;;
+        --edit) MODE=edit ;;
+        ''|*[!0-9]*) ;;
+        *) PORT="$a" ;;
+    esac
+done
 
 open_url() {
-    local url="$1"
-    if command -v xdg-open >/dev/null 2>&1; then
-        xdg-open "$url" >/dev/null 2>&1 &
-    elif command -v wslview >/dev/null 2>&1; then
-        wslview "$url" >/dev/null 2>&1 &
-    else
-        echo "Open this in your browser: $url"
-    fi
+    if [ -n "$CI" ]; then return 0; fi
+    if command -v wslview >/dev/null 2>&1; then wslview "$1" >/dev/null 2>&1 &
+    elif command -v xdg-open >/dev/null 2>&1; then xdg-open "$1" >/dev/null 2>&1 &
+    elif command -v explorer.exe >/dev/null 2>&1; then explorer.exe "$1" >/dev/null 2>&1 &
+    else echo "Open this in your browser: $1"; fi
 }
 
-if [ "$1" = "--serve" ]; then
-    echo "Running a live Maven site dev server (rebuilds pages from src/site on"
-    echo "demand). Only useful while editing site.xml/markdown - the report"
-    echo "pages need a full '7-build-app.sh' run first so their iframes have"
-    echo "something to point at."
-    echo "Open http://localhost:9000/ - Use CTRL+C to stop."
-    open_url "http://localhost:9000/"
-    mvn -f calculator-app/pom.xml site:run
-else
-    INDEX="calculator-app/target/site/index.html"
-    if [ ! -f "$INDEX" ]; then
-        echo "[ERROR] $INDEX not found. Build it first: ./7-build-app.sh" >&2
-        exit 1
-    fi
-    PORT="${2:-8000}"
-    PYTHON=""
-    if command -v python3 >/dev/null 2>&1; then
-        PYTHON=python3
-    elif command -v python >/dev/null 2>&1; then
-        PYTHON=python
-    else
-        echo "[ERROR] Neither python3 nor python was found on PATH." >&2
-        echo "        Install Python 3, or use './9-run-webpage.sh --serve' instead." >&2
-        exit 1
-    fi
-    echo "Serving the already-built static site with a local HTTP server."
-    echo "(Report pages use an <iframe> - most browsers block iframes on a"
-    echo "file:// page, so this must be served over http://, not opened directly.)"
-    echo "Open http://localhost:$PORT/ - Use CTRL+C to stop."
+if [ "$MODE" = "edit" ]; then
+    echo "Live MkDocs server - the report pages need a full ./7-build-all-linux.sh run first."
+    "$PY" scripts/assemble.py site
+    echo "Open http://localhost:$PORT/ - CTRL+C stops it."
     open_url "http://localhost:$PORT/"
-    "$PYTHON" -m http.server "$PORT" --directory "calculator-app/target/site"
+    "$PY" -m mkdocs serve -a "localhost:$PORT"
+    exit 0
 fi
 
-echo "Operation Completed!"
+if [ ! -f "$DIR/index.html" ]; then
+    echo "[ERROR] $DIR/index.html not found. Build it first: ./7-build-all-linux.sh" >&2
+    exit 1
+fi
+echo "Serving $DIR/ at http://localhost:$PORT/   (CTRL+C stops the server)"
+open_url "http://localhost:$PORT/"
+"$PY" -m http.server "$PORT" --directory "$DIR"

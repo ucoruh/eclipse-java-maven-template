@@ -9,7 +9,7 @@ echo Get the current directory
 set "currentDir=%CD%"
 
 echo Change the current working directory to the script directory
-@cd /d "%~dp0"
+@cd /d "%~dp0.."
 
 del desktop.ini /A:H /S
 

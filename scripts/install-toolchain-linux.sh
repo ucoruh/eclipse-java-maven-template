@@ -85,4 +85,4 @@ if [ "$DOTNET_OK" -eq 0 ]; then
     dotnet --version
 fi
 
-echo "Done. Run 4-install-required-apps.sh next."
+echo "Done. Toolchain ready (called by 4-install-tools-linux.sh)."
