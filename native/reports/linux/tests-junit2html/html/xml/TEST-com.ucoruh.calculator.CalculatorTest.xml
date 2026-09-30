@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.ucoruh.calculator.CalculatorTest" time="0.268" tests="15" errors="0" skipped="0" failures="0" flakes="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.ucoruh.calculator.CalculatorTest" time="0.215" tests="15" errors="0" skipped="0" failures="0" flakes="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -12,7 +12,7 @@
     <property name="java.vm.specification.version" value="17"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/temurin-17-jdk-amd64/lib"/>
-    <property name="sun.java.command" value="/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/surefire/surefirebooter-20260930014934517_3.jar /home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/surefire 2026-09-30T01-49-34_373-jvmRun1 surefire-20260930014934517_1tmp surefire_0-20260930014934517_2tmp"/>
+    <property name="sun.java.command" value="/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/surefire/surefirebooter-20260930021017229_3.jar /home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/surefire 2026-09-30T02-10-17_135-jvmRun1 surefire-20260930021017229_1tmp surefire_0-20260930021017229_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/test-classes:/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/classes:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter/6.1.3/junit-jupiter-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-api/6.1.3/junit-jupiter-api-6.1.3.jar:/home/runner/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-commons/6.1.3/junit-platform-commons-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-params/6.1.3/junit-jupiter-params-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-engine/6.1.3/junit-jupiter-engine-6.1.3.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-launcher/6.1.3/junit-platform-launcher-6.1.3.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-engine/6.1.3/junit-platform-engine-6.1.3.jar:/home/runner/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/runner/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/home/runner/.m2/repository/org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20.jar:/home/runner/.m2/repository/ch/qos/logback/logback-classic/1.6.4/logback-classic-1.6.4.jar:/home/runner/.m2/repository/ch/qos/logback/logback-core/1.6.4/logback-core-1.6.4.jar"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -21,14 +21,14 @@
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.version.date" value="2026-08-18"/>
     <property name="java.home" value="/usr/lib/jvm/temurin-17-jdk-amd64"/>
-    <property name="revision" value="1.1.1"/>
+    <property name="revision" value="1.1.2"/>
     <property name="file.separator" value="/"/>
     <property name="basedir" value="/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
-    <property name="surefire.real.class.path" value="/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/surefire/surefirebooter-20260930014934517_3.jar"/>
+    <property name="surefire.real.class.path" value="/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/surefire/surefirebooter-20260930021017229_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.20.1+1"/>
     <property name="user.name" value="runner"/>
@@ -54,65 +54,65 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="boundaryValues(int, String, int, int)[1]" classname="com.ucoruh.calculator.CalculatorTest" time="0.042">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - add(2147483647, 0)
+  <testcase name="boundaryValues(int, String, int, int)[1]" classname="com.ucoruh.calculator.CalculatorTest" time="0.023">
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - add(2147483647, 0)
 ]]></system-err>
   </testcase>
   <testcase name="boundaryValues(int, String, int, int)[2]" classname="com.ucoruh.calculator.CalculatorTest" time="0.003">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - add(-2147483648, 0)
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - add(-2147483648, 0)
 ]]></system-err>
   </testcase>
   <testcase name="boundaryValues(int, String, int, int)[3]" classname="com.ucoruh.calculator.CalculatorTest" time="0.003">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - subtract(0, 2147483647)
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - subtract(0, 2147483647)
 ]]></system-err>
   </testcase>
   <testcase name="multiplyTwoNegatives" classname="com.ucoruh.calculator.CalculatorTest$Multiply" time="0.002">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - multiply(-2, -3)
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - multiply(-2, -3)
 ]]></system-err>
   </testcase>
   <testcase name="multipliesPositiveNumbers" classname="com.ucoruh.calculator.CalculatorTest$Multiply" time="0.002">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - multiply(3, 4)
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - multiply(3, 4)
 ]]></system-err>
   </testcase>
   <testcase name="multiplyByZero" classname="com.ucoruh.calculator.CalculatorTest$Multiply" time="0.003">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - multiply(123, 0)
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - multiply(123, 0)
 ]]></system-err>
   </testcase>
-  <testcase name="divideByZeroThrows" classname="com.ucoruh.calculator.CalculatorTest$Divide" time="0.008">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - divide(10, 0)
-2026-09-30 01:49:37 [main] ERROR com.ucoruh.calculator.Calculator - divide by zero requested for dividend 10
+  <testcase name="divideByZeroThrows" classname="com.ucoruh.calculator.CalculatorTest$Divide" time="0.006">
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - divide(10, 0)
+2026-09-30 02:10:19 [main] ERROR com.ucoruh.calculator.Calculator - divide by zero requested for dividend 10
 ]]></system-err>
   </testcase>
   <testcase name="zeroDividend" classname="com.ucoruh.calculator.CalculatorTest$Divide" time="0.002">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - divide(0, 42)
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - divide(0, 42)
 ]]></system-err>
   </testcase>
-  <testcase name="dividesWithRemainder" classname="com.ucoruh.calculator.CalculatorTest$Divide" time="0.002">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - divide(1, 3)
+  <testcase name="dividesWithRemainder" classname="com.ucoruh.calculator.CalculatorTest$Divide" time="0.001">
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - divide(1, 3)
 ]]></system-err>
   </testcase>
-  <testcase name="dividesEvenly" classname="com.ucoruh.calculator.CalculatorTest$Divide" time="0.002">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - divide(6, 3)
+  <testcase name="dividesEvenly" classname="com.ucoruh.calculator.CalculatorTest$Divide" time="0.001">
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - divide(6, 3)
 ]]></system-err>
   </testcase>
-  <testcase name="subtractsPositiveNumbers" classname="com.ucoruh.calculator.CalculatorTest$Subtract" time="0.002">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - subtract(4, 3)
+  <testcase name="subtractsPositiveNumbers" classname="com.ucoruh.calculator.CalculatorTest$Subtract" time="0.004">
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - subtract(4, 3)
 ]]></system-err>
   </testcase>
   <testcase name="subtractResultingInNegative" classname="com.ucoruh.calculator.CalculatorTest$Subtract" time="0.003">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - subtract(0, 5)
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - subtract(0, 5)
 ]]></system-err>
   </testcase>
-  <testcase name="addZero" classname="com.ucoruh.calculator.CalculatorTest$Add" time="0.008">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - add(7, 0)
+  <testcase name="addZero" classname="com.ucoruh.calculator.CalculatorTest$Add" time="0.001">
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - add(7, 0)
 ]]></system-err>
   </testcase>
-  <testcase name="addsPositiveNumbers" classname="com.ucoruh.calculator.CalculatorTest$Add" time="0.002">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - add(2, 3)
+  <testcase name="addsPositiveNumbers" classname="com.ucoruh.calculator.CalculatorTest$Add" time="0.001">
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - add(2, 3)
 ]]></system-err>
   </testcase>
-  <testcase name="addsNegativeAndPositive" classname="com.ucoruh.calculator.CalculatorTest$Add" time="0.001">
-    <system-err><![CDATA[2026-09-30 01:49:37 [main] INFO  com.ucoruh.calculator.Calculator - add(-4, 3)
+  <testcase name="addsNegativeAndPositive" classname="com.ucoruh.calculator.CalculatorTest$Add" time="0.002">
+    <system-err><![CDATA[2026-09-30 02:10:19 [main] INFO  com.ucoruh.calculator.Calculator - add(-4, 3)
 ]]></system-err>
   </testcase>
 </testsuite>
