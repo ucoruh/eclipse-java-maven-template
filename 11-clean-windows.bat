@@ -14,7 +14,7 @@ for %%D in (build publish release site site-native calculator-app\target docs\re
         rd /S /Q "%%D"
     )
 )
-for %%F in (docs\downloads.md docs\maven-site.md build\release-notes.md) do if exist "%%F" del /Q "%%F"
+del /Q docs\downloads.*.md docs\maven-site.*.md >nul 2>nul
 if exist "reports" (
     for /d %%P in (reports\*) do (
         for /d %%K in ("%%P\*") do (

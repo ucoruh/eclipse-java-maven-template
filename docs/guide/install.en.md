@@ -69,7 +69,7 @@ extension** - it is a Perl script, so `7-build-all-windows.bat` always runs it a
 py -3.12 -c "import coverxygen; print('coverxygen OK')"
 ```
 Expected: `coverxygen OK`. **Do not use plain `python`** for this - see
-[troubleshooting-en.md](troubleshooting-en.md#a-different-python-runs-first) for why.
+[troubleshooting.md](troubleshooting.md#a-different-python-runs-first) for why.
 
 ```batch
 dotnet --version
@@ -81,12 +81,12 @@ Expected: a .NET SDK version (8.x or newer) and ReportGenerator's help text.
 gh --version
 ```
 Expected: `gh version X.Y.Z (...)`. Needed only for `10-release-windows.bat` - see
-[releases-en.md](releases-en.md).
+[releases.md](releases.md).
 
 ## Linux / WSL (Ubuntu)
 
 If you use WSL, open an **Ubuntu terminal** (not PowerShell) for all of the commands below. WSL cannot see your
-Google Drive `G:` path - see [troubleshooting-en.md](troubleshooting-en.md#wsl-cannot-see-g) for how to work
+Google Drive `G:` path - see [troubleshooting.md](troubleshooting.md#wsl-cannot-see-g) for how to work
 around that.
 
 ### 1. Everything (one script)
@@ -115,7 +115,7 @@ gh --version
 If `reportgenerator` is "not found" right after installing it, your shell does not have `$HOME/.dotnet/tools` on
 `PATH` yet. If it *is* found but fails with a "You must install .NET to run this application" / missing-framework
 error, `DOTNET_ROOT` is not set (see
-[troubleshooting-en.md](troubleshooting-en.md#dotnet-root)). Add both to `~/.bashrc` and open a new terminal:
+[troubleshooting.md](troubleshooting.md#dotnet-root)). Add both to `~/.bashrc` and open a new terminal:
 
 ```bash
 export DOTNET_ROOT="$HOME/.dotnet"
@@ -134,4 +134,4 @@ chmod +x *.sh
 ## Next
 
 Once every command above prints what this page says it should, continue with
-[use-template-en.md](use-template-en.md).
+[use-template.md](use-template.md).

@@ -16,7 +16,7 @@ konuyu buraya koyun, adımlar aynı).
 - [ ] Her yeni modül için **önce** test yazın (normal, sınır, geçersiz girdi - aşağıya bakın)
 - [ ] Her değişiklikten sonra `6-build-and-test-*` (ve push'tan önce `7-build-all-*`) çalıştırın, kapsama rozetlerini/raporlarını kontrol edin
 - [ ] `README.md`'nin başlığını ve açıklamasını güncelleyin
-- [ ] Erken ve sık commit edin (bakınız [workflow-tr.md](workflow-tr.md))
+- [ ] Erken ve sık commit edin (bakınız [workflow.md](workflow.md))
 
 ## 1. Projeyi ve Maven koordinatlarını adlandırın
 
@@ -28,7 +28,7 @@ VERSION=0.1.0
 GITHUB_REPO=<hesabiniz>/<depo-adiniz>
 ```
 
-Dosyalar böylece `librarytracker-0.1.0-windows-x64-app.zip` vb. olur ([Adlandırma standardı](standard-tr.md)).
+Dosyalar böylece `librarytracker-0.1.0-windows-x64-app.zip` vb. olur ([Adlandırma standardı](standard.md)).
 
 Sonra `calculator-app/pom.xml`:
 
@@ -102,7 +102,7 @@ PROJECT_NAME    = "Kütüphane Kitap Takip Sistemi"
 PROJECT_BRIEF   = "Küçük bir kütüphane kataloğu ve ödünç takip sistemi"
 INPUT           = calculator-app/src/main/java
 ```
-Site: `mkdocs.yml` (`site_name`, `site_description`, `repo_url`) ve açılış sayfası `docs/index.md`; Maven sitesi
+Site: `mkdocs.yml` (`site_name`, `site_description`, `repo_url`) ve açılış sayfası `docs/index.en.md` / `docs/index.tr.md`; Maven sitesi
 banner'ı (`calculator-app/src/site/site.xml`) geneldir, olduğu gibi kalabilir.
 
 ## 6. Yeniden derleyin ve kontrol edin
@@ -120,7 +120,7 @@ Siteyi açın, **Which report is which?** sayfasını kontrol edin ve şunları 
 
 ## 7. Devam edin
 
-- [workflow-tr.md](workflow-tr.md) - günlük branch/commit/push döngüsü ve CI'nin ne yaptığı
-- [releases-tr.md](releases-tr.md) - notlandırılacak bir anlık görüntüyü (snapshot) nasıl yayımlarsınız
-- [troubleshooting-tr.md](troubleshooting-tr.md) - yukarıdakileri yaparken karşılaşmanız en olası hataların
+- [workflow.md](workflow.md) - günlük branch/commit/push döngüsü ve CI'nin ne yaptığı
+- [releases.md](releases.md) - notlandırılacak bir anlık görüntüyü (snapshot) nasıl yayımlarsınız
+- [troubleshooting.md](troubleshooting.md) - yukarıdakileri yaparken karşılaşmanız en olası hataların
   düzeltmeleri

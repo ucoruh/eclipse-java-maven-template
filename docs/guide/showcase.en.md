@@ -16,7 +16,7 @@ private, while a repository created from a template can.
    repository**.
 4. In your new repository: **Settings -> Collaborators -> Add people**, add the instructor `ucoruh` (and your team
    mates). They must accept the invitation before they can see the repository.
-5. Clone it and do the first build (see [Use the template](use-template-en.md)).
+5. Clone it and do the first build (see [Use the template](use-template.md)).
 
 ## Build and open the full site locally
 
@@ -83,11 +83,11 @@ collaborators (the instructor).
 (`./10-release-linux.sh` on Linux/WSL.) `--dry-run` builds everything and prints the exact `gh release create`
 command and the file list without publishing. The real run publishes `v<VERSION from project.env>` with **every file
 of `release/`**. You need the GitHub CLI logged in once: `gh auth login` - see [Releases and private
-repositories](releases-en.md).
+repositories](releases.md).
 
 ## If you have GitHub Pro (Student Developer Pack)
 
-Then the live site is possible too: see [Releases and private repositories](releases-en.md), section *Getting
+Then the live site is possible too: see [Releases and private repositories](releases.md), section *Getting
 GitHub Pages anyway*. Until then, this local showcase is fully sufficient.
 
 ## Problems

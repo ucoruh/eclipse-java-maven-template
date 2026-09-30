@@ -13,7 +13,7 @@ GITHUB_REPO=ucoruh/eclipse-java-maven-template
 
 Her betik (`scripts/load-env-windows.bat`, `scripts/load-env-linux.sh`, `scripts/assemble.py`) ve CI iş akışı bu
 dosyayı okur. Projeyi yeniden adlandırmak için **yalnızca bu dosyayı** düzenlersiniz (artı Java paketini - bkz.
-[Proje konusundan projenize](from-topic-tr.md)). `VERSION` başında `v` olmadan yazılır; Git etiketi `v` + `VERSION`
+[Proje konusundan projenize](from-topic.md)). `VERSION` başında `v` olmadan yazılır; Git etiketi `v` + `VERSION`
 olur. Maven `pom.xml` sürümünü betiklerden alır (`-Drevision=<VERSION>`), yani jar `calculator-app-1.1.0.jar` olur.
 
 ## 2. Platform simgeleri
@@ -107,16 +107,24 @@ bağımsız olanları içerir; `ASSETS.md` hangi platformun dosyalarının eksik
 
 ## 6. Site kuralları: neyin çerçevesi olur, neyin olmaz
 
-Ana site **MkDocs Material**'dır: Ana sayfa, Guide (EN), Kılavuz (TR), Reports (Windows / Linux), API docs,
+Ana site **MkDocs Material**'dır: Ana sayfa, Kılavuz, Raporlar (Windows / Linux), API belgeleri,
 Downloads, Maven sitesi. Java ekosisteminin kendi sitesi (Maven + Fluido) de üretilir ve Pages'te `native/`
 altında yayınlanır (yerelde `site-native/`).
 
-**Kural:** yalnızca **site üretecinin dışında üretilmiş bağımsız HTML** `<iframe>` içine konur (ReportGenerator,
-genhtml, junit2html, JaCoCo, Javadoc, Doxygen). **Kendi site gezinmesini taşıyan sayfa** - Maven sitesinin her
-sayfası (proje bilgisi, Surefire, Checkstyle, PMD, CPD, SpotBugs, JXR) - **asla çerçevelenmez**; yeni sekmede kendi
-sitesi olarak açılan bir bağlantıyla verilir.
+**Kural:** **Maven sitesi sayfası olmayan her rapor, İKİ sitede de bir `<iframe>` içinde gösterilir** - MkDocs ana sitesi
+ve Maven native sitesi. Buna JaCoCo, ReportGenerator (kod ve dokümantasyon kapsaması), genhtml/coverxygen, Doxygen,
+Javadoc, **Test Javadoc**, JXR **Source Xref** ve **Test Source Xref** ile junit2html test sonuçları girer (diğer
+şablonlarda OpenCppCoverage/lcov/gcovr HTML'i): hepsi site menüsü olmayan bağımsız HTML'dir. Yalnızca **Maven'in kendi
+menüsüyle kendisinin ürettiği sayfalar** - Surefire raporu, Checkstyle, PMD, CPD, SpotBugs, proje bilgisi, bağımlılıklar,
+eklentiler, SCM - yeni sekmede açılan düz bağlantı olarak kalır; onları çerçevelemek site içinde site gösterir.
 
-Doğru - bağımsız rapor çerçevede (`docs/reports/linux/coverage-jacoco/index.md`):
+* **MkDocs sitesinde** her çerçeveli raporun **Reports -> Windows / Linux** veya **API docs** altında kendi sayfası vardır.
+* **Maven native sitesinde** hiçbir menü öğesi ham rapor klasörünü göstermez: her bağımsız raporun `frames/` içinde küçük
+  bir sarmalayıcı sayfası vardır (`scripts/assemble.py prep` üretir; `Source Xref`, `Test Source Xref`, `Javadoc`,
+  `Test Javadoc`, `Coverage: JaCoCo` ve platform başına *Reports - Linux / Windows* menülerindeki raporlar).
+  `Source Code`, Maven'in `scm.html` sayfasıdır; bu yüzden düz bağlantıdır.
+
+Doğru - bağımsız rapor çerçevede (`docs/reports/linux/coverage-jacoco/index.tr.md`):
 
 ```html
 <iframe class="report-frame" src="html/index.html" title="JaCoCo coverage (linux)" loading="lazy"></iframe>
@@ -135,6 +143,19 @@ Doğru - Maven sitesi sayfası, yeni sekmede açılan bağlantı olarak:
 <a href="../native/checkstyle.html" target="_blank" rel="noopener">Checkstyle (Maven sitesi)</a>
 ```
 
+### Site iki dillidir (mkdocs-static-i18n, suffix kipi)
+
+Tek menü, iki dil: İngilizce site kökünde varsayılandır, Türkçe `/tr/` altındadır ve başlıktaki dil seçici aynı
+sayfanın iki sürümü arasında geçiş yapar. Her sayfa bir çifttir: `ad.en.md` + `ad.tr.md` (kılavuzlar, açılış sayfası,
+indirmeler, "Hangi rapor hangisi?"); üretilen rapor sayfalarını `scripts/assemble.py` iki dilde yazar. Menü
+`mkdocs.yml` içinde bir kez, İngilizce yazılır; Türkçe etiketler `nav_translations` içindedir. Sayfalar arası bağlantılar
+`baska-sayfa.md` biçiminde yazılır (eklenti aynı dili seçer).
+
+**Her iki dilde çerçeve yolları.** Ham rapor dosyaları bir kez, İngilizce sayfanın yanına kopyalanır
+(`reports/linux/coverage-jacoco/html/`). Bu yüzden İngilizce sayfa `html/index.html`'i çerçeveler; Türkçe sayfa bir klasör
+daha derindedir ve `../../../../reports/linux/coverage-jacoco/html/index.html`'i çerçeveler - aynı dosyalar, `/tr/...`
+altından erişilir. Bağlantı denetleyicisi ikisini de doğrular.
+
 ## 7. CI tek bakışta
 
 | İş | Çalıştığı yer | Yaptığı |
@@ -142,4 +163,4 @@ Doğru - Maven sitesi sayfası, yeni sekmede açılan bağlantı olarak:
 | `windows` | `windows-latest` | `7-build-all-windows.bat --no-site`, `reports/windows` + kendi `release/` dosyalarını yükler |
 | `linux` | `ubuntu-latest` | `7-build-all-linux.sh --no-site`, `reports/linux`, `site-native` + kendi `release/` dosyalarını yükler |
 | `macos` | `macos-latest` | yalnız uygulamayı derler ve paketler (`...-macos-arm64-app.tar.gz`) |
-| `site` | `ubuntu-latest` | tüm çıktıları birleştirir, MkDocs sitesini (iki platform) kurar + Maven sitesini `native/` altına koyar, bağlantıları denetler (yalnız **kendi** sayfalarımızdaki kırık bağlantılarda hata verir), `main`'e push'ta Pages'e yayınlar (özel depo kuralı: [sürümler](releases-tr.md)), `v*` etiketinde `ASSETS.md`, `SHA256SUMS.txt` ve siteye bağlantı veren notlarla her dosyayı yayınlar |
+| `site` | `ubuntu-latest` | tüm çıktıları birleştirir, MkDocs sitesini (iki platform) kurar + Maven sitesini `native/` altına koyar, bağlantıları denetler (yalnız **kendi** sayfalarımızdaki kırık bağlantılarda hata verir), `main`'e push'ta Pages'e yayınlar (özel depo kuralı: [sürümler](releases.md)), `v*` etiketinde `ASSETS.md`, `SHA256SUMS.txt` ve siteye bağlantı veren notlarla her dosyayı yayınlar |

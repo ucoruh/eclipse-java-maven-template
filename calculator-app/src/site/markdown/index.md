@@ -26,19 +26,19 @@ ReportGenerator, Doxygen, Javadoc, junit2html, documentation coverage) for Windo
 
 <div class="report-card">
 <span class="card-eyebrow">Code coverage</span>
-<h3><a href="jacoco/index.html">JaCoCo</a></h3>
+<h3><a href="frames/jacoco.html">JaCoCo</a></h3>
 <p>Line, branch and method coverage on the source.</p>
 </div>
 
 <div class="report-card">
 <span class="card-eyebrow">API docs</span>
-<h3><a href="apidocs/index.html">Javadoc</a></h3>
+<h3><a href="frames/javadoc.html">Javadoc</a></h3>
 <p>The Java API reference.</p>
 </div>
 
 <div class="report-card">
 <span class="card-eyebrow">Source</span>
-<h3><a href="xref/index.html">Source cross-reference (JXR)</a></h3>
+<h3><a href="frames/xref.html">Source cross-reference (JXR)</a></h3>
 <p>Browsable source with links from every symbol.</p>
 </div>
 

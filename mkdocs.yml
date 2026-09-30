@@ -75,28 +75,64 @@ exclude_docs: |
   desktop.ini
   **/desktop.ini
 
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      reconfigure_material: true
+      reconfigure_search: true
+      fallback_to_default: true
+      languages:
+        - locale: en
+          name: English
+          build: true
+          default: true
+          site_name: Calculator - Java + Maven course template
+        - locale: tr
+          name: Türkçe
+          build: true
+          site_name: Calculator - Java + Maven ders şablonu
+          nav_translations:
+            Home: Ana sayfa
+            Guide: Kılavuz
+            Install the tools: Araçları kurun
+            Use the template: Şablonu kullanın
+            From a project topic to your project: Proje konusundan kendi projenize
+            Daily workflow and reports: Günlük çalışma ve raporlar
+            Showing your project without GitHub Pages: GitHub Pages olmadan projenizi gösterin
+            Releases and private repositories: Sürümler ve özel depolar
+            Naming standard and site rules: Adlandırma standardı ve site kuralları
+            Toolchain comparison: Araç zinciri karşılaştırması
+            Troubleshooting: Sorun giderme
+            Reports: Raporlar
+            Overview: Genel bakış
+            Which report is which?: Hangi rapor hangisi?
+            Unit tests (junit2html): Birim testleri (junit2html)
+            Coverage - JaCoCo: Kapsama - JaCoCo
+            Coverage - ReportGenerator: Kapsama - ReportGenerator
+            Doc coverage - genhtml: Dokümantasyon kapsaması - genhtml
+            Doc coverage - ReportGenerator: Dokümantasyon kapsaması - ReportGenerator
+            API docs: API belgeleri
+            Doxygen: Doxygen
+            Javadoc: Javadoc
+            Test Javadoc: Test Javadoc
+            Source Xref (JXR): Kaynak çapraz başvurusu (JXR)
+            Test Source Xref (JXR): Test kaynağı çapraz başvurusu (JXR)
+            Downloads: İndirmeler
+            Maven site (native): Maven sitesi (native)
+
 nav:
   - Home: index.md
-  - Guide (EN):
-      - Install the tools: guide/install-en.md
-      - Use the template: guide/use-template-en.md
-      - From a project topic to your project: guide/from-topic-en.md
-      - Daily workflow and reports: guide/workflow-en.md
-      - Showing your project without GitHub Pages: guide/showcase-en.md
-      - Releases and private repositories: guide/releases-en.md
-      - Naming standard and site rules: guide/standard-en.md
-      - Toolchain comparison: guide/toolchain-comparison-en.md
-      - Troubleshooting: guide/troubleshooting-en.md
-  - Kılavuz (TR):
-      - Araçları kurun: guide/install-tr.md
-      - Şablonu kullanın: guide/use-template-tr.md
-      - Proje konusundan kendi projenize: guide/from-topic-tr.md
-      - Günlük çalışma ve raporlar: guide/workflow-tr.md
-      - GitHub Pages olmadan projenizi gösterin: guide/showcase-tr.md
-      - Sürümler ve özel depolar: guide/releases-tr.md
-      - Adlandırma standardı ve site kuralları: guide/standard-tr.md
-      - Araç zinciri karşılaştırması: guide/toolchain-comparison-tr.md
-      - Sorun giderme: guide/troubleshooting-tr.md
+  - Guide:
+      - Install the tools: guide/install.md
+      - Use the template: guide/use-template.md
+      - From a project topic to your project: guide/from-topic.md
+      - Daily workflow and reports: guide/workflow.md
+      - Showing your project without GitHub Pages: guide/showcase.md
+      - Releases and private repositories: guide/releases.md
+      - Naming standard and site rules: guide/standard.md
+      - Toolchain comparison: guide/toolchain-comparison.md
+      - Troubleshooting: guide/troubleshooting.md
   - Reports:
       - Overview: reports/index.md
       - Which report is which?: guide/which-report.md
@@ -116,9 +152,17 @@ nav:
           - Doc coverage - ReportGenerator: reports/linux/doccoverage-reportgenerator/index.md
   - API docs:
       - Overview: api.md
-      - Doxygen - Windows: reports/windows/api-doxygen/index.md
-      - Javadoc - Windows: reports/windows/api-javadoc/index.md
-      - Doxygen - Linux: reports/linux/api-doxygen/index.md
-      - Javadoc - Linux: reports/linux/api-javadoc/index.md
+      - Windows:
+          - Doxygen: reports/windows/api-doxygen/index.md
+          - Javadoc: reports/windows/api-javadoc/index.md
+          - Test Javadoc: reports/windows/api-testjavadoc/index.md
+          - Source Xref (JXR): reports/windows/api-xref-jxr/index.md
+          - Test Source Xref (JXR): reports/windows/api-xreftest-jxr/index.md
+      - Linux:
+          - Doxygen: reports/linux/api-doxygen/index.md
+          - Javadoc: reports/linux/api-javadoc/index.md
+          - Test Javadoc: reports/linux/api-testjavadoc/index.md
+          - Source Xref (JXR): reports/linux/api-xref-jxr/index.md
+          - Test Source Xref (JXR): reports/linux/api-xreftest-jxr/index.md
   - Downloads: downloads.md
   - Maven site (native): maven-site.md

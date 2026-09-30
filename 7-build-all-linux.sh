@@ -26,7 +26,7 @@ done
     || fail "coverxygen / junit2html missing for $PY. Fix: $PY -m pip install --user -r requirements.txt"
 
 echo "[1/9] Clean the generated Linux output (the reports history is kept)"
-for d in tests-junit2html coverage-jacoco coverage-reportgenerator doccoverage-lcov doccoverage-reportgenerator api-doxygen api-javadoc; do
+for d in tests-junit2html coverage-jacoco coverage-reportgenerator doccoverage-lcov doccoverage-reportgenerator api-doxygen api-javadoc api-xref-jxr api-xreftest-jxr api-testjavadoc; do
     rm -rf "reports/linux/$d"
 done
 rm -rf release site-native site
@@ -76,6 +76,12 @@ cp -r calculator-app/target/site site-native
 mkdir -p reports/linux/coverage-jacoco reports/linux/api-javadoc
 cp -r calculator-app/target/site/jacoco/. reports/linux/coverage-jacoco/
 cp -r calculator-app/target/site/apidocs/. reports/linux/api-javadoc/
+mkdir -p reports/linux/api-testjavadoc reports/linux/api-xref-jxr reports/linux/api-xreftest-jxr
+cp -r calculator-app/target/site/testapidocs/. reports/linux/api-testjavadoc/
+cp -r calculator-app/target/site/xref/. reports/linux/api-xref-jxr/
+cp -r calculator-app/target/site/xref-test/. reports/linux/api-xreftest-jxr/
+# the Maven site frames every standalone report: give it its own copy of them
+"$PY" scripts/assemble.py native
 
 echo "[8/9] Package every Linux report into release/"
 "$PY" scripts/assemble.py reports --platform linux

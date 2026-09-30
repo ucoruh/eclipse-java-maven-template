@@ -5,7 +5,7 @@ build the site first (`7-build-all-windows.bat` / `./7-build-all-linux.sh`) to s
 
 ## The same idea, three ecosystems
 
-All three course templates follow the same standard ([Naming standard](standard-en.md)): every report **twice**
+All three course templates follow the same standard ([Naming standard](standard.md)): every report **twice**
 (native tool + a cross-ecosystem tool), on **Windows and Linux**, shown in a **MkDocs Material** main site, with the
 ecosystem's own site tool published next to it (`native/`).
 
@@ -21,4 +21,4 @@ ecosystem's own site tool published next to it (`native/`).
 | Main site | MkDocs Material | MkDocs Material | MkDocs Material |
 
 Everything else (badges, the `-historydir` coverage trend, `...-site.zip` in the release) works the same way in all
-three - see [Releases and private repositories](releases-en.md).
+three - see [Releases and private repositories](releases.md).

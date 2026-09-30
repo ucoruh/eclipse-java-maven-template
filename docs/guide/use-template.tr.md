@@ -8,8 +8,8 @@ new repository**'ye tıklayın. **Owner** olarak hesabınızı, **Repository nam
 
 Fork **etmeyin**: herkese açık bir deponun fork'u **özel yapılamaz**, "Use this template" ile oluşturulan depo
 yapılabilir - ve bu derste öğrenci depoları özeldir (raporlar ve Pages için anlamı
-[Sürümler ve özel depolar](releases-tr.md), yerel gösterim için
-[GitHub Pages olmadan projenizi gösterin](showcase-tr.md) sayfasındadır).
+[Sürümler ve özel depolar](releases.md), yerel gösterim için
+[GitHub Pages olmadan projenizi gösterin](showcase.md) sayfasındadır).
 
 Sonra görmesi gerekenleri ekleyin: **Settings -> Collaborators -> Add people** -> eğitmen `ucoruh` ve takım
 arkadaşlarınız (daveti kabul etmeleri gerekir).
@@ -31,7 +31,7 @@ Bu, `pre-commit` (hazırlanan Java/C/C++/C# dosyalarını Astyle ile biçimlendi
 
 ## 4. Araç zincirini kurun
 
-Henüz yapmadıysanız [install-tr.md](install-tr.md) sayfasını izleyin (`4-install-tools-windows.bat` /
+Henüz yapmadıysanız [install.md](install.md) sayfasını izleyin (`4-install-tools-windows.bat` /
 `./4-install-tools-linux.sh`).
 
 ## 5. Projenizi `project.env` içinde adlandırın
@@ -42,7 +42,7 @@ VERSION=1.1.0
 GITHUB_REPO=<hesabiniz>/<depo-adiniz>
 ```
 Her betik ve CI iş akışı bu dosyayı okur: dosya adları (`<PROJECT_NAME>-<VERSION>-...`), sürüm etiketi (`v<VERSION>`) ve
-site bağlantıları buradan gelir. Bkz. [Adlandırma standardı](standard-tr.md).
+site bağlantıları buradan gelir. Bkz. [Adlandırma standardı](standard.md).
 
 ## 6. İlk derleme
 
@@ -64,7 +64,7 @@ Windows: `7-build-all-windows.bat`  -  Linux/WSL: `./7-build-all-linux.sh`
 
 İlk çalıştırmada birkaç dakika sürer (Maven ve rapor araçları önbelleklerini indirir). Konsol çıktısını baştan okuyun:
 her adım `[n/9]` diye numaralıdır ve bir şey ters gidince `[ERROR]` satırı ve önerilen çözümle durur
-([troubleshooting-tr.md](troubleshooting-tr.md)). `[ERROR]` olmadan biterse şunlara sahipsiniz:
+([troubleshooting.md](troubleshooting.md)). `[ERROR]` olmadan biterse şunlara sahipsiniz:
 
 - çalıştırılabilir jar: `build/<platform>-release/calculator-app-<VERSION>.jar` ve uygulama klasörü `publish/<platform>-<arch>/`
 - her rapor: `reports/<platform>/<tür>-<araç>/`
@@ -90,5 +90,5 @@ başlatır, bir sayı başka port seçer (`9-open-site-windows.bat 8080`).
 
 ## 8. Şimdi kendi projeniz yapın
 
-`Calculator` örneğini kendi proje konunuza çevirmek için [from-topic-tr.md](from-topic-tr.md) ile devam edin.
-Göstermeye hazır olunca: [GitHub Pages olmadan projenizi gösterin](showcase-tr.md).
+`Calculator` örneğini kendi proje konunuza çevirmek için [from-topic.md](from-topic.md) ile devam edin.
+Göstermeye hazır olunca: [GitHub Pages olmadan projenizi gösterin](showcase.md).

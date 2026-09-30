@@ -8,8 +8,8 @@ choose **Private**, and click **Create repository**.
 
 Do **not** fork it: a fork of a public repository **cannot be made private**, while a repository created with "Use
 this template" can - and student repositories on this course are private (see
-[Releases and private repositories](releases-en.md) for what that means for reports and Pages, and
-[Showing your project without GitHub Pages](showcase-en.md) for the local demo).
+[Releases and private repositories](releases.md) for what that means for reports and Pages, and
+[Showing your project without GitHub Pages](showcase.md) for the local demo).
 
 Then add the people who must see it: **Settings -> Collaborators -> Add people** -> the instructor `ucoruh` and your
 team mates (they must accept the invitation).
@@ -31,7 +31,7 @@ This installs `pre-commit` (auto-formats staged Java/C/C++/C# files with Astyle 
 
 ## 4. Install the toolchain
 
-Follow [install-en.md](install-en.md) if you have not already (`4-install-tools-windows.bat` /
+Follow [install.md](install.md) if you have not already (`4-install-tools-windows.bat` /
 `./4-install-tools-linux.sh`).
 
 ## 5. Name your project in `project.env`
@@ -42,7 +42,7 @@ VERSION=1.1.0
 GITHUB_REPO=<your-account>/<your-repo>
 ```
 Every script and the CI workflow read this file: the asset names (`<PROJECT_NAME>-<VERSION>-...`), the release tag
-(`v<VERSION>`) and the site links come from it. See [Naming standard](standard-en.md).
+(`v<VERSION>`) and the site links come from it. See [Naming standard](standard.md).
 
 ## 6. First build
 
@@ -65,7 +65,7 @@ Windows: `7-build-all-windows.bat`  -  Linux/WSL: `./7-build-all-linux.sh`
 
 It takes a few minutes on the first run (Maven and the report tools download their caches). Read the console output
 from the top: every step is numbered `[n/9]` and stops with an `[ERROR]` line and a suggested fix the moment something
-goes wrong (see [troubleshooting-en.md](troubleshooting-en.md)). When it ends without `[ERROR]` you have:
+goes wrong (see [troubleshooting.md](troubleshooting.md)). When it ends without `[ERROR]` you have:
 
 - a runnable jar: `build/<platform>-release/calculator-app-<VERSION>.jar` and the app folder `publish/<platform>-<arch>/`
 - every report: `reports/<platform>/<kind>-<tool>/`
@@ -91,5 +91,5 @@ number picks another port (`9-open-site-windows.bat 8080`).
 
 ## 8. Now make it your project
 
-Continue with [from-topic-en.md](from-topic-en.md) to turn the `Calculator` sample into your own project topic.
-When you are ready to show it: [Showing your project without GitHub Pages](showcase-en.md).
+Continue with [from-topic.md](from-topic.md) to turn the `Calculator` sample into your own project topic.
+When you are ready to show it: [Showing your project without GitHub Pages](showcase.md).

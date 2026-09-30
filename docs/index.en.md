@@ -21,8 +21,7 @@ and **ReportGenerator**, API docs with **Javadoc** and **Doxygen**, and this sit
 </p>
 
 [Download the latest release](https://github.com/ucoruh/eclipse-java-maven-template/releases/latest){ .md-button .md-button--primary }
-[Start here: install the tools](guide/install-en.md){ .md-button }
-[Kılavuz (TR)](guide/install-tr.md){ .md-button }
+[Start here: install the tools](guide/install.md){ .md-button }
 
 </div>
 
@@ -30,29 +29,29 @@ and **ReportGenerator**, API docs with **Javadoc** and **Doxygen**, and this sit
 
 <div class="grid cards" markdown>
 
-- :material-book-open-variant: **Guide (EN)**
+- :material-book-open-variant: **Guide**
 
     Install, use the template, turn a project topic into your own project, daily workflow, troubleshooting.
 
-    [:octicons-arrow-right-24: Open the guide](guide/install-en.md)
+    [:octicons-arrow-right-24: Open the guide](guide/install.md)
 
-- :material-translate: **Kılavuz (TR)**
+- :material-translate: **English / Türkçe**
 
-    Aynı kılavuz Türkçe: kurulum, şablon, proje konusundan projeye, sorun giderme.
+    The whole site - guides, report pages, downloads - is available in both languages. Use the language switcher in the header.
 
-    [:octicons-arrow-right-24: Kılavuzu aç](guide/install-tr.md)
+    [:octicons-arrow-right-24: Türkçe](tr/)
 
 - :material-presentation: **Show your project without GitHub Pages**
 
     Private repository on GitHub Free? Build and open the full site locally, with the demo checklist.
 
-    [:octicons-arrow-right-24: Demo checklist](guide/showcase-en.md)
+    [:octicons-arrow-right-24: Demo checklist](guide/showcase.md)
 
 - :material-tag-text: **Naming standard and site rules**
 
     Script names, folders, release assets, and when a report is framed and when it opens on its own.
 
-    [:octicons-arrow-right-24: Read the standard](guide/standard-en.md)
+    [:octicons-arrow-right-24: Read the standard](guide/standard.md)
 
 </div>
 

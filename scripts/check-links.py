@@ -45,6 +45,9 @@ def resolve(site, page, link):
     u = urlsplit(link)
     if u.scheme or link.startswith(("#", "//", "mailto:", "tel:", "data:", "javascript:")):
         return None
+    if link.startswith("/"):
+        return None  # root-relative (language switcher, canonical URLs): only valid under the hosting sub-path
+        return None
     path = unquote(u.path)
     if not path:
         return None

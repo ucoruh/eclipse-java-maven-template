@@ -22,7 +22,7 @@ Open a pull request into `main` when the branch is ready; merge it once CI is gr
 | you, many times a day | `6-build-and-test-windows.bat` / `./6-build-and-test-linux.sh` (about a minute): build + JUnit tests + jar + test report | `build/<platform>-release/`, `reports/<platform>/tests-junit2html/`, `publish/<platform>-<arch>/` |
 | you, before a push or a demo | `7-build-all-windows.bat` / `./7-build-all-linux.sh`: everything - coverage (JaCoCo + ReportGenerator), Doxygen, Javadoc, documentation coverage (genhtml + ReportGenerator), Maven site, MkDocs site, `release/` | `reports/<platform>/`, `site/`, `site-native/`, `release/` (all gitignored) |
 | every push / PR | `.github/workflows/ci.yml`: `windows`, `linux`, `macos` jobs, then `site` (merge + link check) | GitHub Actions run; the merged site is an artifact |
-| push to `main` | the same, and the `site` job deploys GitHub Pages | `https://<owner>.github.io/<repo>/` (skipped on a private repo, see [Releases](releases-en.md)) |
+| push to `main` | the same, and the `site` job deploys GitHub Pages | `https://<owner>.github.io/<repo>/` (skipped on a private repo, see [Releases](releases.md)) |
 | a `vX.Y.Z` tag | the same, and the `site` job publishes the GitHub Release with every asset | the repo's **Releases** page |
 | `10-release-*` (you) | build everything locally and `gh release create` | the repo's **Releases** page, no Actions minutes |
 
@@ -46,14 +46,17 @@ The site is MkDocs Material. The report pages under **Reports -> Windows / Linux
 `scripts/assemble.py site` (called by `7-build-all-*`); this section shows what such a page is, how to add your own
 report, and how to test it.
 
-**When to use an iframe, and when not.** Put a report in an `<iframe>` only if it is **standalone HTML made outside
-the site generator**: JaCoCo, ReportGenerator, genhtml, junit2html, Javadoc, Doxygen, OpenCppCoverage. A page that
-carries its own site navigation - every Maven-site page (Surefire, Checkstyle, PMD, CPD, SpotBugs, JXR, project
-info) - is **never framed**: it would show a site inside the site (two menus, two banners). Link it instead so it
-opens in a new tab (see the "right / wrong" example in [Naming standard](standard-en.md#6-site-rules-what-is-framed-and-what-is-not)).
+**When to use an iframe, and when not.** Every report that is **not a Maven-site page** goes into an `<iframe>`, in
+both sites: JaCoCo, ReportGenerator, genhtml, junit2html, Javadoc, Test Javadoc, Doxygen, JXR Source Xref / Test Source
+Xref (and OpenCppCoverage in the C++ template). A page the Maven site renders itself with its own menu - Surefire,
+Checkstyle, PMD, CPD, SpotBugs, project info, dependencies, plugins, SCM - is **never framed** (a site inside the site,
+two menus, two banners): link it so it opens in a new tab (see the "right / wrong" example in
+[Naming standard](standard.md#6-site-rules-what-is-framed-and-what-is-not)). In the Maven native site the frames are
+tiny wrapper pages in `frames/`, generated from the same `REPORTS` list (`scripts/assemble.py prep`), so a new report
+gets its MkDocs page **and** its Maven wrapper from one entry.
 
 **1. The page.** Each report page is a small Markdown file with raw HTML, e.g.
-`docs/reports/linux/coverage-jacoco/index.md` (generated - do not edit it, edit the template in
+`docs/reports/linux/coverage-jacoco/index.en.md` / `index.tr.md` (generated - do not edit it, edit the template in
 `scripts/assemble.py`, function `report_page`):
 
 ```html
@@ -81,7 +84,7 @@ works both on GitHub Pages (`/<repo>/reports/linux/coverage-jacoco/`) and on `ht
 1. Make your tool write standalone HTML into `reports/<platform>/<kind>-<tool>/` (e.g. `reports/linux/mutation-pitest/`)
    in both `7-build-all-windows.bat` and `7-build-all-linux.sh`.
 2. Add one entry to the `REPORTS` list at the top of `scripts/assemble.py` (folder key, title, one-line explanation,
-   entry file, asset name). That gets you the frame page, the zip in `release/`, the row in `ASSETS.md` and the
+   entry file, asset name) and its Turkish title/text in `TR_TITLE` / `TR_WHAT`. That gets you the frame page, the zip in `release/`, the row in `ASSETS.md` and the
    downloads table.
 3. Add the page to the `nav:` of `mkdocs.yml` under Reports -> Windows and Linux.
 
@@ -103,4 +106,4 @@ go through `http://localhost:8000/`.
 
 Run `6-build-and-test-*` after every meaningful change and `7-build-all-*` before you push; glance at the coverage
 badges (`assets/badge_linecoverage.svg` etc., also at the top of `README.md`) or the JaCoCo page. A new method with 0%
-coverage has no test yet - write one before moving on (see [from-topic-en.md](from-topic-en.md#4-write-tests-first)).
+coverage has no test yet - write one before moving on (see [from-topic.md](from-topic.md#4-write-tests-first)).

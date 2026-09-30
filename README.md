@@ -29,12 +29,12 @@ from a template can.
 3. Owner: your account. Repository name: e.g. `cen207-yourname-project`. Select **Private**. **Create repository**.
 4. In your new repository: **Settings -> Collaborators -> Add people** -> add the instructor `ucoruh` and your team
    mates (they must accept the invitation).
-5. Clone it, install the tools ([install-en.md](docs/guide/install-en.md)), edit `project.env`, build.
+5. Clone it, install the tools ([install-en.md](docs/guide/install.en.md)), edit `project.env`, build.
 
 What a private repository on GitHub Free cannot do (GitHub Pages) you show **locally**: `7-build-all-*` builds the
 whole site with every report, `9-open-site-*` serves it on <http://localhost:8000/>, and the `release/` folder holds
-every output. The demo checklist: [Showing your project without GitHub Pages](docs/guide/showcase-en.md) /
-[TR](docs/guide/showcase-tr.md).
+every output. The demo checklist: [Showing your project without GitHub Pages](docs/guide/showcase.en.md) /
+[TR](docs/guide/showcase.tr.md).
 
 ## 2. Quick start
 
@@ -66,7 +66,7 @@ cd <your-repo>
 ./9-open-site-linux.sh
 ```
 
-Walkthrough: [use-template-en.md](docs/guide/use-template-en.md) / [use-template-tr.md](docs/guide/use-template-tr.md).
+Walkthrough: [use-template-en.md](docs/guide/use-template.en.md) / [use-template-tr.md](docs/guide/use-template.tr.md).
 
 ## 3. The numbered scripts
 
@@ -111,7 +111,7 @@ are the ones you use every day. Helper scripts live in `scripts/`.
 
 `build/<platform>-<config>/` (jar) - `publish/<platform>-<arch>/` (runnable app) - `reports/<platform>/<kind>-<tool>/`
 (every report, Windows and Linux separately) - `site/` (MkDocs site) - `site-native/` (Maven site) - `release/` (every
-release asset). Details and the release asset naming: [Naming standard](docs/guide/standard-en.md).
+release asset). Details and the release asset naming: [Naming standard](docs/guide/standard.en.md).
 
 | Report | Native tool | Other family |
 |---|---|---|
@@ -136,28 +136,28 @@ navigation, so they are never framed - they open as their own site in a new tab 
 `.github/workflows/ci.yml`: Windows and Linux jobs build, test and produce reports; a macOS job builds the app; a merge
 job builds the site (both platforms), checks links, deploys Pages on `main` (skipped on a private repo unless
 `PAGES_ON_PRIVATE=true`) and, on a `v*` tag, publishes every asset. See
-[releases-en.md](docs/guide/releases-en.md) / [releases-tr.md](docs/guide/releases-tr.md).
+[releases-en.md](docs/guide/releases.en.md) / [releases-tr.md](docs/guide/releases.tr.md).
 
 ## 6. Guides (English / Türkçe)
 
-Written for someone who has never used this toolchain; also in the site's **Guide (EN)** and **Kılavuz (TR)** menus.
+Written for someone who has never used this toolchain; also on the site (one menu, English and Türkçe with the language switcher).
 
 | Topic | English | Türkçe |
 |---|---|---|
-| Install everything (Windows + Linux/WSL) | [install-en.md](docs/guide/install-en.md) | [install-tr.md](docs/guide/install-tr.md) |
-| Use this template (private repo, first build) | [use-template-en.md](docs/guide/use-template-en.md) | [use-template-tr.md](docs/guide/use-template-tr.md) |
-| From a project topic to your own project | [from-topic-en.md](docs/guide/from-topic-en.md) | [from-topic-tr.md](docs/guide/from-topic-tr.md) |
-| Daily workflow, reports, framing a report | [workflow-en.md](docs/guide/workflow-en.md) | [workflow-tr.md](docs/guide/workflow-tr.md) |
-| Showing your project without GitHub Pages | [showcase-en.md](docs/guide/showcase-en.md) | [showcase-tr.md](docs/guide/showcase-tr.md) |
-| Releases and private repositories | [releases-en.md](docs/guide/releases-en.md) | [releases-tr.md](docs/guide/releases-tr.md) |
-| Naming standard and site rules | [standard-en.md](docs/guide/standard-en.md) | [standard-tr.md](docs/guide/standard-tr.md) |
-| Troubleshooting | [troubleshooting-en.md](docs/guide/troubleshooting-en.md) | [troubleshooting-tr.md](docs/guide/troubleshooting-tr.md) |
-| Reports across the 3 course templates | [toolchain-comparison-en.md](docs/guide/toolchain-comparison-en.md) | [toolchain-comparison-tr.md](docs/guide/toolchain-comparison-tr.md) |
-| Which report is which? | [which-report.md](docs/guide/which-report.md) (EN + TR on one page) | |
+| Install everything (Windows + Linux/WSL) | [install-en.md](docs/guide/install.en.md) | [install-tr.md](docs/guide/install.tr.md) |
+| Use this template (private repo, first build) | [use-template-en.md](docs/guide/use-template.en.md) | [use-template-tr.md](docs/guide/use-template.tr.md) |
+| From a project topic to your own project | [from-topic-en.md](docs/guide/from-topic.en.md) | [from-topic-tr.md](docs/guide/from-topic.tr.md) |
+| Daily workflow, reports, framing a report | [workflow-en.md](docs/guide/workflow.en.md) | [workflow-tr.md](docs/guide/workflow.tr.md) |
+| Showing your project without GitHub Pages | [showcase-en.md](docs/guide/showcase.en.md) | [showcase-tr.md](docs/guide/showcase.tr.md) |
+| Releases and private repositories | [releases-en.md](docs/guide/releases.en.md) | [releases-tr.md](docs/guide/releases.tr.md) |
+| Naming standard and site rules | [standard-en.md](docs/guide/standard.en.md) | [standard-tr.md](docs/guide/standard.tr.md) |
+| Troubleshooting | [troubleshooting-en.md](docs/guide/troubleshooting.en.md) | [troubleshooting-tr.md](docs/guide/troubleshooting.tr.md) |
+| Reports across the 3 course templates | [toolchain-comparison-en.md](docs/guide/toolchain-comparison.en.md) | [toolchain-comparison-tr.md](docs/guide/toolchain-comparison.tr.md) |
+| Which report is which? | [which-report.en.md](docs/guide/which-report.en.md) | [which-report.tr.md](docs/guide/which-report.tr.md) |
 
 ## Also in this repository
 
 - `docs/archive/README-history.md` - this README's original ~1000-line "how it was built" narrative (2023).
 - `docs/archive/Java_Installation_Guide_Windows.md`, `docs/archive/Maven_Installation_Guide_Windows.md` - earlier,
-  unmaintained install walkthroughs; superseded by [install-en.md](docs/guide/install-en.md).
+  unmaintained install walkthroughs; superseded by [install-en.md](docs/guide/install.en.md).
 - `LICENSE`, `Homework and Report Template.docx` - course paperwork, unrelated to the build.

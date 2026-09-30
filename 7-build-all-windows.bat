@@ -35,7 +35,7 @@ if errorlevel 1 (
 )
 
 echo [1/9] Clean the generated Windows output (the reports history is kept)
-for %%D in (tests-junit2html coverage-jacoco coverage-reportgenerator doccoverage-lcov doccoverage-reportgenerator api-doxygen api-javadoc) do (
+for %%D in (tests-junit2html coverage-jacoco coverage-reportgenerator doccoverage-lcov doccoverage-reportgenerator api-doxygen api-javadoc api-xref-jxr api-xreftest-jxr api-testjavadoc) do (
     if exist "reports\windows\%%D" rd /S /Q "reports\windows\%%D"
 )
 if exist "release" rd /S /Q "release"
@@ -111,6 +111,15 @@ robocopy "calculator-app\target\site\jacoco" "reports\windows\coverage-jacoco" /
 if errorlevel 8 exit /b 1
 robocopy "calculator-app\target\site\apidocs" "reports\windows\api-javadoc" /E /NFL /NDL /NJH /NJS /NP >nul
 if errorlevel 8 exit /b 1
+robocopy "calculator-app\target\site\testapidocs" "reports\windows\api-testjavadoc" /E /NFL /NDL /NJH /NJS /NP >nul
+if errorlevel 8 exit /b 1
+robocopy "calculator-app\target\site\xref" "reports\windows\api-xref-jxr" /E /NFL /NDL /NJH /NJS /NP >nul
+if errorlevel 8 exit /b 1
+robocopy "calculator-app\target\site\xref-test" "reports\windows\api-xreftest-jxr" /E /NFL /NDL /NJH /NJS /NP >nul
+if errorlevel 8 exit /b 1
+rem the Maven site frames every standalone report: give it its own copy of them
+%PY% scripts\assemble.py native
+if errorlevel 1 exit /b 1
 
 echo [8/9] Package every Windows report into release\
 %PY% scripts\assemble.py reports --platform windows

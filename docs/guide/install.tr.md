@@ -70,7 +70,7 @@ olarak çalıştırır. `perl`'in kendisi eksikse: `choco install strawberryperl
 py -3.12 -c "import coverxygen; print('coverxygen OK')"
 ```
 Beklenen: `coverxygen OK`. Bunun için **düz `python`'ı kullanmayın** - nedeni için bakınız
-[troubleshooting-tr.md](troubleshooting-tr.md#farkli-bir-python-once-calisiyor).
+[troubleshooting.md](troubleshooting.md#farkli-bir-python-once-calisiyor).
 
 ```batch
 dotnet --version
@@ -82,13 +82,13 @@ Beklenen: bir .NET SDK sürümü (8.x veya üzeri) ve ReportGenerator'ın yardı
 gh --version
 ```
 Beklenen: `gh version X.Y.Z (...)`. Yalnızca `10-release-windows.bat` için gerekli - bakınız
-[releases-tr.md](releases-tr.md).
+[releases.md](releases.md).
 
 ## Linux / WSL (Ubuntu)
 
 WSL kullanıyorsanız aşağıdaki tüm komutlar için bir **Ubuntu terminali** açın (PowerShell değil). WSL, Google
 Drive'ınızdaki `G:` yolunu göremez - bunu nasıl aşacağınız için bakınız
-[troubleshooting-tr.md](troubleshooting-tr.md#wsl-g-yi-goremiyor).
+[troubleshooting.md](troubleshooting.md#wsl-g-yi-goremiyor).
 
 ### 1. Her şey (tek betik)
 
@@ -116,7 +116,7 @@ gh --version
 `reportgenerator` kurulumdan hemen sonra "bulunamadı" derse, kabuğunuzda `$HOME/.dotnet/tools` henüz `PATH`'te
 değildir. *Bulunuyor* ama "You must install .NET to run this application" / eksik-framework hatasıyla
 başarısız oluyorsa (bir eski .NET SDK'sının önceden kurulu geldiği WSL imajlarında yaygındır), `DOTNET_ROOT`
-ayarlı değildir - bakınız [troubleshooting-tr.md](troubleshooting-tr.md#dotnet-root). İkisini de `~/.bashrc`'ye
+ayarlı değildir - bakınız [troubleshooting.md](troubleshooting.md#dotnet-root). İkisini de `~/.bashrc`'ye
 ekleyip yeni bir terminal açın:
 
 ```bash
@@ -135,5 +135,5 @@ chmod +x *.sh
 
 ## Sırada
 
-Yukarıdaki her komut bu sayfanın söylediğini yazdırdığında, [use-template-tr.md](use-template-tr.md) ile devam
+Yukarıdaki her komut bu sayfanın söylediğini yazdırdığında, [use-template.md](use-template.md) ile devam
 edin.

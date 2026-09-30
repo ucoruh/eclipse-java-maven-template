@@ -5,7 +5,7 @@ sayfalarının kendisini görmek için önce siteyi derleyin (`7-build-all-windo
 
 ## Aynı fikir, üç ekosistem
 
-Üç ders şablonu da aynı standardı izler ([Adlandırma standardı](standard-tr.md)): her rapor **iki kez** (native araç +
+Üç ders şablonu da aynı standardı izler ([Adlandırma standardı](standard.md)): her rapor **iki kez** (native araç +
 ekosistemler arası araç), **Windows ve Linux'ta**, ana site olarak **MkDocs Material** içinde gösterilir; ekosistemin
 kendi site aracı yanında (`native/`) yayınlanır.
 
@@ -21,4 +21,4 @@ kendi site aracı yanında (`native/`) yayınlanır.
 | Ana site | MkDocs Material | MkDocs Material | MkDocs Material |
 
 Geri kalan her şey (rozetler, `-historydir` kapsama eğilimi, sürümdeki `...-site.zip`) üçünde de aynı çalışır -
-bkz. [Sürümler ve özel depolar](releases-tr.md).
+bkz. [Sürümler ve özel depolar](releases.md).

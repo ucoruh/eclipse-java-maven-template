@@ -16,7 +16,7 @@ course project guide, the steps are the same).
 - [ ] Write tests **first** for each new module (normal, boundary, invalid input - see below)
 - [ ] Keep running `6-build-and-test-*` after every change (and `7-build-all-*` before a push) and check the coverage badges/reports
 - [ ] Update `README.md`'s title and description
-- [ ] Commit early, commit often (see [workflow-en.md](workflow-en.md))
+- [ ] Commit early, commit often (see [workflow.md](workflow.md))
 
 ## 1. Name the project and the Maven coordinates
 
@@ -28,7 +28,7 @@ VERSION=0.1.0
 GITHUB_REPO=<your-account>/<your-repo>
 ```
 
-The assets then become `librarytracker-0.1.0-windows-x64-app.zip` and so on (see [Naming standard](standard-en.md)).
+The assets then become `librarytracker-0.1.0-windows-x64-app.zip` and so on (see [Naming standard](standard.md)).
 
 Then `calculator-app/pom.xml`:
 
@@ -101,7 +101,7 @@ PROJECT_NAME    = "Library Book Tracker"
 PROJECT_BRIEF   = "A small library catalog and loan tracker"
 INPUT           = calculator-app/src/main/java
 ```
-The site: `mkdocs.yml` (`site_name`, `site_description`, `repo_url`) and the landing page `docs/index.md`; the Maven
+The site: `mkdocs.yml` (`site_name`, `site_description`, `repo_url`) and the landing page `docs/index.en.md` / `docs/index.tr.md`; the Maven
 site banner in `calculator-app/src/site/site.xml` is generic and can stay.
 
 ## 6. Rebuild and check
@@ -119,7 +119,7 @@ Open the site, check the **Which report is which?** page, and confirm:
 
 ## 7. Keep going
 
-- [workflow-en.md](workflow-en.md) - daily branch/commit/push loop and what CI does
-- [releases-en.md](releases-en.md) - how to publish a graded snapshot
-- [troubleshooting-en.md](troubleshooting-en.md) - fixes for the errors you are most likely to hit while doing
+- [workflow.md](workflow.md) - daily branch/commit/push loop and what CI does
+- [releases.md](releases.md) - how to publish a graded snapshot
+- [troubleshooting.md](troubleshooting.md) - fixes for the errors you are most likely to hit while doing
   all of the above

@@ -11,7 +11,7 @@ for a in "$@"; do [ "$a" = "--all" ] && ALL=1; done
 for d in build publish release site site-native calculator-app/target docs/reports docs/native docs/downloads docs/assets; do
     if [ -e "$d" ]; then echo "removing $d"; rm -rf "$d"; fi
 done
-rm -f docs/downloads.md docs/maven-site.md
+rm -f docs/downloads.*.md docs/maven-site.*.md
 if [ -d reports ]; then
     for p in reports/*/; do
         for k in "$p"*/; do

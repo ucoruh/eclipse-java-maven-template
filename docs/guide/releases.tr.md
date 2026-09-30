@@ -2,7 +2,7 @@
 
 Ders deponuz **özeldir (private)** ve çoğu öğrencinin düz bir **GitHub Free** hesabı vardır. Bu sayfa bunun neye izin
 verip neye vermediğini ve bu şablonun boşlukları nasıl kapattığını anlatır. Proje sunumu için adım adım tarif
-[GitHub Pages olmadan projenizi gösterin](showcase-tr.md) sayfasındadır.
+[GitHub Pages olmadan projenizi gösterin](showcase.md) sayfasındadır.
 
 ## Free ve Pro'da ne çalışır (GitHub belgelerinden olgular)
 
@@ -20,7 +20,7 @@ içinde `...-site.zip` olarak teslim edilir. Şablon deposunun kendisi herkese a
 
 `7-build-all-<platform>` `release/` klasörünü doldurur; `10-release-<platform>` ve CI iş akışı **tam olarak bu
 dosyaları** ekler. Adlar `<proje>-<sürüm>[-<platform>[-<mimari>]]-<içerik>[-<araç>].<uzantı>` kalıbındadır
-([Adlandırma standardı](standard-tr.md)); `calculator` 1.1.0 için:
+([Adlandırma standardı](standard.md)); `calculator` 1.1.0 için:
 
 | Dosya | Nedir |
 |---|---|
@@ -48,7 +48,7 @@ dosyaları** ekler. Adlar `<proje>-<sürüm>[-<platform>[-<mimari>]]-<içerik>[-
    `gh-pages`**. CI iş akışı ilk yayınında bu dalı oluşturur.
 5. Özel depoda yayına izin verin: **Settings -> Secrets and variables -> Actions -> Variables -> New repository
    variable**, ad `PAGES_ON_PRIVATE`, değer `true`. Bu olmadan iş akışı özel depoda Pages yayınını **atlar** ve nedenini
-   bir bildirimde ve çalıştırma özetinde söyler (bu mesaj [GitHub Pages olmadan projenizi gösterin](showcase-tr.md)
+   bir bildirimde ve çalıştırma özetinde söyler (bu mesaj [GitHub Pages olmadan projenizi gösterin](showcase.md)
    sayfasına bağlanır) - bilerek: Free özel depo çalışamayacak bir yayın için dakika harcamasın.
 6. `main`'e push edin; site bir iki dakika sonra `https://<kullanıcı-adınız>.github.io/<depo-adınız>/` adresinde canlıdır.
 
@@ -90,7 +90,7 @@ Beklenen: `Logged in to github.com account <kullanıcı-adınız>`.
 
 ## CI iş akışı (`.github/workflows/ci.yml`)
 
-Tek iş akışı, dört iş ([Adlandırma standardı](standard-tr.md#7-ci-tek-bakista)):
+Tek iş akışı, dört iş ([Adlandırma standardı](standard.md#7-ci-tek-bakista)):
 
 | Tetikleyici | Ne olur |
 |---|---|
@@ -105,7 +105,7 @@ dallarına özgürce push edin, yalnızca sürüm çıkarırken etiketleyin. Art
 
 **Özel depo kuralı:** iş akışı `github.event.repository.private` değerini algılar. Özel depoda `PAGES_ON_PRIVATE`
 deposu değişkeni `true` değilse Pages yayını atlanır; atlama bir `::notice` ek açıklamasında ve `$GITHUB_STEP_SUMMARY`
-içinde açıklanır ve [GitHub Pages olmadan projenizi gösterin](showcase-tr.md) sayfasına bağlanır. Sürümler her zaman
+içinde açıklanır ve [GitHub Pages olmadan projenizi gösterin](showcase.md) sayfasına bağlanır. Sürümler her zaman
 çalışır.
 
 ## Sorun giderme {#troubleshooting}

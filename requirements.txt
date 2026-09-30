@@ -6,3 +6,4 @@ mkdocs==1.6.1
 mkdocs-material==9.7.7
 junit2html==31.1.4
 coverxygen==1.8.2
+mkdocs-static-i18n==1.3.1

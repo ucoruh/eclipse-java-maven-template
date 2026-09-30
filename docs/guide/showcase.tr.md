@@ -14,7 +14,7 @@ Deponuzu **Fork** ile değil **Use this template** ile oluşturun: herkese açı
 3. Owner: kendi hesabınız. Repository name: örn. `cen207-adiniz-project`. **Private** seçin. **Create repository**.
 4. Yeni deponuzda: **Settings -> Collaborators -> Add people**; eğitmen `ucoruh`'u (ve takım arkadaşlarınızı) ekleyin.
    Davetiyeyi kabul etmeden depoyu göremezler.
-5. Klonlayın ve ilk derlemeyi yapın ([Şablonu kullanın](use-template-tr.md)).
+5. Klonlayın ve ilk derlemeyi yapın ([Şablonu kullanın](use-template.md)).
 
 ## Tam siteyi yerelde derleyin ve açın
 
@@ -79,11 +79,11 @@ Sürüm (release), bir etiket artı eklenmiş dosyalardır; GitHub Free'de özel
 ```
 (Linux/WSL'de `./10-release-linux.sh`.) `--dry-run` her şeyi derler ve yayınlamadan tam `gh release create` komutunu
 ve dosya listesini yazdırır. Gerçek çalıştırma `v<project.env'deki VERSION>` sürümünü **`release/`'deki her dosyayla**
-yayınlar. GitHub CLI'da bir kez oturum açmalısınız: `gh auth login` - bkz. [Sürümler ve özel depolar](releases-tr.md).
+yayınlar. GitHub CLI'da bir kez oturum açmalısınız: `gh auth login` - bkz. [Sürümler ve özel depolar](releases.md).
 
 ## GitHub Pro'nuz varsa (Student Developer Pack)
 
-O zaman canlı site de mümkündür: [Sürümler ve özel depolar](releases-tr.md), *Yine de GitHub Pages almak* bölümü. O
+O zaman canlı site de mümkündür: [Sürümler ve özel depolar](releases.md), *Yine de GitHub Pages almak* bölümü. O
 zamana kadar bu yerel gösterim tamamen yeterlidir.
 
 ## Sorunlar

@@ -986,6 +986,7 @@ coverage*[.json, .xml, .info]
 /docs/reports/
 /docs/native/
 /docs/downloads/
-/docs/downloads.md
-/docs/maven-site.md
+/docs/downloads.*.md
+/docs/maven-site.*.md
 /docs/assets/
+/calculator-app/src/site/markdown/frames/

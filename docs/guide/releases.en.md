@@ -2,7 +2,7 @@
 
 Your course repository is **private**, and most students have a plain **GitHub Free** account. This page explains
 exactly what that does and does not let you do, and how this template works around the gaps. The step-by-step
-recipe for the project presentation is in [Showing your project without GitHub Pages](showcase-en.md).
+recipe for the project presentation is in [Showing your project without GitHub Pages](showcase.md).
 
 ## What works on Free vs Pro (facts, from GitHub's own docs)
 
@@ -20,7 +20,7 @@ handed in as `...-site.zip` inside the **Release**. The template repository itse
 
 `7-build-all-<platform>` fills `release/`; `10-release-<platform>` and the CI workflow attach **exactly those files**.
 Names follow `<project>-<version>[-<platform>[-<arch>]]-<content>[-<tool>].<ext>` (see
-[Naming standard](standard-en.md)); for `calculator` 1.1.0:
+[Naming standard](standard.md)); for `calculator` 1.1.0:
 
 | File | What it is |
 |---|---|
@@ -49,7 +49,7 @@ lists what is missing; CI builds every platform.
 5. Allow the deploy on a private repo: **Settings -> Secrets and variables -> Actions -> Variables -> New repository
    variable**, name `PAGES_ON_PRIVATE`, value `true`. Without it the workflow **skips** the Pages deploy on a private
    repo and says why in a notice and in the run summary (that message links to
-   [Showing your project without GitHub Pages](showcase-en.md)) - on purpose, so a Free private repo never wastes
+   [Showing your project without GitHub Pages](showcase.md)) - on purpose, so a Free private repo never wastes
    minutes on a deploy that cannot work.
 6. Push to `main`; the site is live a minute or two later at `https://<your-username>.github.io/<your-repo>/`.
 
@@ -90,7 +90,7 @@ Expected: `Logged in to github.com account <your-username>`.
 
 ## The CI workflow (`.github/workflows/ci.yml`)
 
-One workflow, four jobs (see [Naming standard](standard-en.md#7-ci-in-one-picture)):
+One workflow, four jobs (see [Naming standard](standard.md#7-ci-in-one-picture)):
 
 | Trigger | What happens |
 |---|---|
@@ -106,7 +106,7 @@ macOS ten times on private repos), which is small on the public template but wor
 **Private repository rule:** the workflow detects `github.event.repository.private`. On a private repo the Pages
 deploy is skipped unless the repository variable `PAGES_ON_PRIVATE` is `true`; the skip is explained in a `::notice`
 annotation and in `$GITHUB_STEP_SUMMARY` and points to [Showing your project without
-GitHub Pages](showcase-en.md). Releases always run.
+GitHub Pages](showcase.md). Releases always run.
 
 ## Troubleshooting {#troubleshooting}
 
