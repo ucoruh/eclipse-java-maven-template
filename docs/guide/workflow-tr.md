@@ -57,6 +57,13 @@ kurulduğu (kendi raporunuzu eklemek isterseniz) için sıradaki bölüme bakın
 Maven'in otomatik ürettiği bir şey değil, elle yazılmış küçük bir sayfadır. İşte bunun nasıl kurulduğu - örnek
 olarak JaCoCo rapor sayfası - ve yeni bir tane nasıl eklenir.
 
+**Ne zaman iframe, ne zaman değil.** Bir raporu yalnızca site üreticisinin dışındaki bir aracın ürettiği *bağımsız*
+bir HTML raporuysa iframe içine koyun: JaCoCo, ReportGenerator, genhtml (coverxygen), Javadoc, Doxygen. Maven
+site'ın kendi ürettiği raporlar - Surefire raporu, Checkstyle, PMD, CPD, SpotBugs, JXR, proje bilgisi sayfaları - zaten
+bu sitenin sayfalarıdır ve aynı menüye sahiptir. Onları iframe'e koymak sitenin içinde siteyi gösterir (iki menü, iki
+başlık). Bunları `site.xml` içinden doğrudan bağlayın, örneğin
+`<item name="Code Quality: Checkstyle" href="checkstyle.html" />`.
+
 **1. Markdown kaynağı** - `calculator-app/src/site/markdown/reports/jacoco.md`:
 
 ```markdown

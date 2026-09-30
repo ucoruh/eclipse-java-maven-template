@@ -57,6 +57,13 @@ Every report page under the **Reports** menu (`calculator-app/src/site/markdown/
 small hand-written page, not something Maven generates automatically. This is how one is built, using the
 JaCoCo report page as a worked example, and how to add a new one.
 
+**When to use an iframe, and when not to.** Put a report in an iframe only if it is a *standalone* HTML report
+made by a tool outside the site generator: JaCoCo, ReportGenerator, genhtml (coverxygen), Javadoc, Doxygen. Reports
+that Maven site generates itself - Surefire report, Checkstyle, PMD, CPD, SpotBugs, JXR, the project-info pages - are
+already pages of this same site, with the same menu. Wrapping them in an iframe shows the site inside the site (two
+menus, two headers). Link those directly from `site.xml` instead, e.g.
+`<item name="Code Quality: Checkstyle" href="checkstyle.html" />`.
+
 **1. The markdown source** - `calculator-app/src/site/markdown/reports/jacoco.md`:
 
 ```markdown

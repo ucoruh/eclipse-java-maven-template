@@ -32,7 +32,7 @@ site** in its own page. Not sure what a report shows or why some show up twice? 
 
 <div class="report-card">
 <span class="card-eyebrow">Unit tests</span>
-<h3><a href="reports/surefire.html">Surefire Report</a></h3>
+<h3><a href="surefire.html">Surefire Report</a></h3>
 <p>Every JUnit&nbsp;5 test that ran, pass/fail, and how long it took.</p>
 </div>
 
@@ -74,25 +74,25 @@ site** in its own page. Not sure what a report shows or why some show up twice? 
 
 <div class="report-card">
 <span class="card-eyebrow">Code quality</span>
-<h3><a href="reports/checkstyle.html">Checkstyle</a></h3>
+<h3><a href="checkstyle.html">Checkstyle</a></h3>
 <p>Coding-style conformance against the Google style guide.</p>
 </div>
 
 <div class="report-card">
 <span class="card-eyebrow">Code quality</span>
-<h3><a href="reports/pmd.html">PMD</a></h3>
+<h3><a href="pmd.html">PMD</a></h3>
 <p>Design smells and likely-bug patterns, rule by rule.</p>
 </div>
 
 <div class="report-card">
 <span class="card-eyebrow">Code quality</span>
-<h3><a href="reports/cpd.html">CPD</a></h3>
+<h3><a href="cpd.html">CPD</a></h3>
 <p>Copy/paste detector - duplicated code blocks across the project.</p>
 </div>
 
 <div class="report-card">
 <span class="card-eyebrow">Code quality</span>
-<h3><a href="reports/spotbugs.html">SpotBugs</a></h3>
+<h3><a href="spotbugs.html">SpotBugs</a></h3>
 <p>Static, bytecode-based bug-pattern detector.</p>
 </div>
 

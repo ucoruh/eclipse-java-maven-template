@@ -71,17 +71,17 @@
 			src/site/markdown/reports/*.md and docs/guide/workflow-en.md
 			("Showing an HTML report inside your site"). -->
 		<menu name="Reports">
-				<item name="Unit Tests: Surefire (native)" href="reports/surefire.html" />
+				<item name="Unit Tests: Surefire (native)" href="surefire.html" />
 				<item name="Coverage: JaCoCo (native)" href="reports/jacoco.html" />
 				<item name="Coverage: ReportGenerator" href="reports/coveragereport.html" />
 				<item name="Doc Coverage: genhtml (native)" href="reports/coverxygen.html" />
 				<item name="Doc Coverage: ReportGenerator" href="reports/coverxygen-reportgenerator.html" />
 				<item name="API Docs: Javadoc (native)" href="reports/javadoc.html" />
 				<item name="API Docs: Doxygen" href="reports/doxygen.html" />
-				<item name="Code Quality: Checkstyle" href="reports/checkstyle.html" />
-				<item name="Code Quality: PMD" href="reports/pmd.html" />
-				<item name="Code Quality: CPD" href="reports/cpd.html" />
-				<item name="Code Quality: SpotBugs" href="reports/spotbugs.html" />
+				<item name="Code Quality: Checkstyle" href="checkstyle.html" />
+				<item name="Code Quality: PMD" href="pmd.html" />
+				<item name="Code Quality: CPD" href="cpd.html" />
+				<item name="Code Quality: SpotBugs" href="spotbugs.html" />
 		</menu>
 
 		<footer><![CDATA[All rights reserved.]]></footer>
