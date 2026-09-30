@@ -1,1 +1,0 @@
-genhtml --legend --title 'Documentation Coverage Report' calculator-app/target/site/coverxygen/lcov.info -o calculator-app/target/site/coverxygen

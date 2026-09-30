@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>all-tests.xml</title>
+    <style type="text/css">
+        body {
+    background-color: white;
+    padding-bottom: 20em;
+    margin: 0;
+    min-height: 15cm;
+}
+
+h1, h2, h3, h4, h5, h6, h7 {
+    font-family: sans-serif;
+}
+
+h1 {
+    background-color: #007acc;
+    color: white;
+    padding: 3mm;
+    margin-top: 0;
+    margin-bottom: 1mm;
+}
+
+.footer {
+    font-style: italic;
+    font-size: small;
+    text-align: right;
+    padding: 1em;
+}
+
+.testsuite {
+    padding-bottom: 2em;
+    margin-left: 1em;
+}
+
+.proplist {
+    width: 100%;
+    margin-bottom: 2em;
+    border-collapse: collapse;
+    border: 1px solid grey;
+}
+
+.proplist th {
+    background-color: silver;
+    width: 5em;
+    padding: 2px;
+    padding-right: 1em;
+    text-align: left;
+    font-family: monospace;
+}
+
+.proplist td {
+    padding: 2px;
+    word-break: break-all;
+}
+
+.index-table {
+    width: 90%;
+    margin-left: 1em;
+}
+
+.index-table td {
+    vertical-align: top;
+    max-width: 200px;
+    word-wrap: break-word;
+}
+
+.failure-index {
+
+}
+
+.toc {
+    margin-bottom: 2em;
+    font-family: monospace;
+}
+
+.stdio, pre {
+    min-height: 1em;
+    background-color: #1e1e1e;
+    color: silver;
+    padding: 0.5em;
+}
+.tdpre {
+    background-color: #1e1e1e;
+}
+
+.test {
+    margin-left: 0.5cm;
+}
+
+.toc {
+    list-style: none;
+}
+
+.toc li.outcome {
+    list-style: none;
+}
+
+.toc li.outcome::before {
+    content: "\2022";
+    color: black;
+    font-weight: bold;
+    display: inline-block;
+    width: 1.27em;
+    margin-left: -1.27em;
+    font-size: 1.2em;
+}
+
+.toc li.outcome-failed {
+    background-color: lightcoral;
+}
+
+.toc li.outcome-failed::before {
+    color: red;
+}
+
+.toc li.outcome-passed::before {
+    color: green;
+}
+
+.toc li.outcome-skipped::before {
+    color: orange;
+}
+
+.testcases .outcome {
+    border-left: 1em;
+    padding: 2px;
+}
+
+.testcases .outcome-failed {
+    border-left: 1em solid lightcoral;
+}
+
+
+.outcome-passed {
+    border-left: 1em solid lightgreen;
+}
+
+.outcome-skipped {
+    border-left: 1em dotted silver;
+}
+
+.testcases .outcome-passed {
+    border-left: 1em solid lightgreen;
+}
+
+.testcases .outcome-skipped {
+    border-left: 1em solid #FED8B1;
+}
+
+.stats-table {
+}
+
+.stats-table td {
+    min-width: 4em;
+    text-align: right;
+}
+
+.stats-table .failed {
+    background-color: lightcoral;
+}
+
+.stats-table .passed {
+    background-color: lightgreen;
+}
+
+.mx-table {
+    table-layout: fixed;
+    border-spacing: 0;
+    width: available;
+    margin-left: 1em;
+}
+
+.mx-table td {
+    vertical-align: center;
+}
+
+.mx-table td:last-child {
+    width: 0;
+}
+
+.mx-table tr:hover {
+    background-color: yellow;
+}
+
+.mx-ax-name {
+    white-space: nowrap;
+    padding-right: 0.5em;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    text-align: right;
+}
+
+.mx-ax-vertical {
+    white-space: nowrap;
+    transform: rotate(180deg);
+    writing-mode: vertical-rl;
+    text-align: right;
+    max-height: 4cm;
+    overflow: clip;
+}
+
+.mx-ax-vertical a {
+    text-decoration: none;
+}
+
+.mx-ax-line {
+    border-left: 1px solid black;
+    width: 0.5em;
+}
+
+.mx-ax-line a {
+    text-decoration: none;
+    width: 1em;
+    height: 1em;
+}
+
+.mx-cls {
+    text-align: left;
+    font-family: monospace;
+    width: 100%;
+    border-top: 2px solid grey;
+    border-bottom: 1px solid silver;
+}
+
+.mx-name {
+    text-align: left;
+    font-weight: normal;
+    font-style: italic;
+    padding-left: 1em;
+    font-family: monospace;
+    border-bottom: 1px solid silver;
+}
+
+.mx-res {
+    display: block;
+    width: 1em;
+    min-height: 1em;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.mx-res-combined {
+    white-space: nowrap;
+    padding-right: 0.2em;
+    text-align: right;
+}
+
+.mx-res-failed {
+    background-color: lightcoral;
+}
+
+.mx-res-passed {
+    background-color: lightgreen;
+}
+
+.mx-res-skipped {
+    background-color: lightyellow;
+}
+
+.mx-even {
+    background-color: lightgray;
+}
+    </style>
+</head>
+<body>
+    
+<h1>
+    Test Report : all-tests.xml
+</h1>
+
+
+<a id="toc"></a>
+<table class="index-table">
+    <tr>
+        <td>
+            <ul class="toc">
+            
+                
+                <li>com.ucoruh.calculator.CalculatorAppTest$MainMethod
+                <ul>
+                    
+                    <li class="outcome outcome-passed"><a href="#75149a6587ba">printsResult</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#a0aff1135f64">printsUsageForInvalidArguments</a></li>
+                    
+                </ul>
+                </li>
+                
+                <li>com.ucoruh.calculator.CalculatorAppTest$InvalidInput
+                <ul>
+                    
+                    <li class="outcome outcome-passed"><a href="#f95051d1086e">nonNumericSecondOperand</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#19665c2203ed">unknownOperator</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#1de6e8a9953a">nonNumericFirstOperand</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#22a31d59d17c">divisionByZero</a></li>
+                    
+                </ul>
+                </li>
+                
+                <li>com.ucoruh.calculator.CalculatorAppTest$BoundaryInput
+                <ul>
+                    
+                    <li class="outcome outcome-passed"><a href="#1e9228d51f1a">maxIntOperand</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#5a4758c3f94b">nullArguments</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#d1c797377a13">noArguments</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#2cb4484bcc38">tooManyArguments</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#9484657d6211">tooFewArguments</a></li>
+                    
+                </ul>
+                </li>
+                
+                <li>com.ucoruh.calculator.CalculatorAppTest$NormalInput
+                <ul>
+                    
+                    <li class="outcome outcome-passed"><a href="#a0957f266ad8">subtract</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#306fe31c97ae">divide</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#7a26d9291e93">add</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#e2d34518d1e9">multiply</a></li>
+                    
+                </ul>
+                </li>
+                
+            
+                
+                <li>com.ucoruh.calculator.CalculatorTest
+                <ul>
+                    
+                    <li class="outcome outcome-passed"><a href="#4481e81cc258">boundaryValues(int, String, int, int)[1]</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#710486ddc1a8">boundaryValues(int, String, int, int)[2]</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#40291ea0d7b7">boundaryValues(int, String, int, int)[3]</a></li>
+                    
+                </ul>
+                </li>
+                
+                <li>com.ucoruh.calculator.CalculatorTest$Multiply
+                <ul>
+                    
+                    <li class="outcome outcome-passed"><a href="#aa5d6e81bc4a">multiplyTwoNegatives</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#b40aee6d3db3">multipliesPositiveNumbers</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#f07be55c384e">multiplyByZero</a></li>
+                    
+                </ul>
+                </li>
+                
+                <li>com.ucoruh.calculator.CalculatorTest$Divide
+                <ul>
+                    
+                    <li class="outcome outcome-passed"><a href="#7cb068bc948e">divideByZeroThrows</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#9f02ed405073">zeroDividend</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#e4d4aa5f5d82">dividesWithRemainder</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#45f5f2cc442f">dividesEvenly</a></li>
+                    
+                </ul>
+                </li>
+                
+                <li>com.ucoruh.calculator.CalculatorTest$Subtract
+                <ul>
+                    
+                    <li class="outcome outcome-passed"><a href="#8dbfeb3fe31e">subtractsPositiveNumbers</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#92217af508df">subtractResultingInNegative</a></li>
+                    
+                </ul>
+                </li>
+                
+                <li>com.ucoruh.calculator.CalculatorTest$Add
+                <ul>
+                    
+                    <li class="outcome outcome-passed"><a href="#b793099141cd">addZero</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#1ca5dcec0347">addsPositiveNumbers</a></li>
+                    
+                    <li class="outcome outcome-passed"><a href="#05ae3b8bf7e0">addsNegativeAndPositive</a></li>
+                    
+                </ul>
+                </li>
+                
+            
+            </ul>
+        </td>
+        <td class="failure-index">
+            <ul class="toc">
+            
+                
+                    
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                
+            
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                    
+                
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                
+            
+            </ul>
+        </td>
+    </tr>
+</table>
+
+
+
+    <div class="testsuite">
+        <h2>Test Suite: com.ucoruh.calculator.CalculatorAppTest</h2>
+        <a id="8e712433a4cc"></a>
+        
+        
+        <h3>Suite Properties</h3>
+        <table class="proplist">
+            
+            <tr>
+                <th>java.specification.version</th><td>17</td>
+            </tr>
+            
+            <tr>
+                <th>sun.jnu.encoding</th><td>UTF-8</td>
+            </tr>
+            
+            <tr>
+                <th>java.class.path</th><td>/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/test-classes:/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/classes:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter/6.1.3/junit-jupiter-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-api/6.1.3/junit-jupiter-api-6.1.3.jar:/home/runner/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-commons/6.1.3/junit-platform-commons-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-params/6.1.3/junit-jupiter-params-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-engine/6.1.3/junit-jupiter-engine-6.1.3.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-launcher/6.1.3/junit-platform-launcher-6.1.3.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-engine/6.1.3/junit-platform-engine-6.1.3.jar:/home/runner/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/runner/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/home/runner/.m2/repository/org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20.jar:/home/runner/.m2/repository/ch/qos/logback/logback-classic/1.6.4/logback-classic-1.6.4.jar:/home/runner/.m2/repository/ch/qos/logback/logback-core/1.6.4/logback-core-1.6.4.jar</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.vendor</th><td>Eclipse Adoptium</td>
+            </tr>
+            
+            <tr>
+                <th>sun.arch.data.model</th><td>64</td>
+            </tr>
+            
+            <tr>
+                <th>java.vendor.url</th><td>https://adoptium.net/</td>
+            </tr>
+            
+            <tr>
+                <th>user.timezone</th><td>Etc/UTC</td>
+            </tr>
+            
+            <tr>
+                <th>os.name</th><td>Linux</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.specification.version</th><td>17</td>
+            </tr>
+            
+            <tr>
+                <th>sun.java.launcher</th><td>SUN_STANDARD</td>
+            </tr>
+            
+            <tr>
+                <th>sun.boot.library.path</th><td>/usr/lib/jvm/temurin-17-jdk-amd64/lib</td>
+            </tr>
+            
+            <tr>
+                <th>sun.java.command</th><td>/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/surefire/surefirebooter-20260930010718186_3.jar /home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/surefire 2026-09-30T01-07-17_813-jvmRun1 surefire-20260930010718186_1tmp surefire_0-20260930010718186_2tmp</td>
+            </tr>
+            
+            <tr>
+                <th>jdk.debug</th><td>release</td>
+            </tr>
+            
+            <tr>
+                <th>surefire.test.class.path</th><td>/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/test-classes:/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/classes:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter/6.1.3/junit-jupiter-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-api/6.1.3/junit-jupiter-api-6.1.3.jar:/home/runner/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-commons/6.1.3/junit-platform-commons-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-params/6.1.3/junit-jupiter-params-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-engine/6.1.3/junit-jupiter-engine-6.1.3.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-launcher/6.1.3/junit-platform-launcher-6.1.3.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-engine/6.1.3/junit-platform-engine-6.1.3.jar:/home/runner/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/runner/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/home/runner/.m2/repository/org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20.jar:/home/runner/.m2/repository/ch/qos/logback/logback-classic/1.6.4/logback-classic-1.6.4.jar:/home/runner/.m2/repository/ch/qos/logback/logback-core/1.6.4/logback-core-1.6.4.jar</td>
+            </tr>
+            
+            <tr>
+                <th>sun.cpu.endian</th><td>little</td>
+            </tr>
+            
+            <tr>
+                <th>user.home</th><td>/home/runner</td>
+            </tr>
+            
+            <tr>
+                <th>user.language</th><td>en</td>
+            </tr>
+            
+            <tr>
+                <th>java.specification.vendor</th><td>Oracle Corporation</td>
+            </tr>
+            
+            <tr>
+                <th>java.version.date</th><td>2026-08-18</td>
+            </tr>
+            
+            <tr>
+                <th>java.home</th><td>/usr/lib/jvm/temurin-17-jdk-amd64</td>
+            </tr>
+            
+            <tr>
+                <th>revision</th><td>1.1.0</td>
+            </tr>
+            
+            <tr>
+                <th>file.separator</th><td>/</td>
+            </tr>
+            
+            <tr>
+                <th>basedir</th><td>/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.compressedOopsMode</th><td>Zero based</td>
+            </tr>
+            
+            <tr>
+                <th>line.separator</th><td>
+</td>
+            </tr>
+            
+            <tr>
+                <th>java.specification.name</th><td>Java Platform API Specification</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.specification.vendor</th><td>Oracle Corporation</td>
+            </tr>
+            
+            <tr>
+                <th>surefire.real.class.path</th><td>/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/surefire/surefirebooter-20260930010718186_3.jar</td>
+            </tr>
+            
+            <tr>
+                <th>sun.management.compiler</th><td>HotSpot 64-Bit Tiered Compilers</td>
+            </tr>
+            
+            <tr>
+                <th>java.runtime.version</th><td>17.0.20.1+1</td>
+            </tr>
+            
+            <tr>
+                <th>user.name</th><td>runner</td>
+            </tr>
+            
+            <tr>
+                <th>path.separator</th><td>:</td>
+            </tr>
+            
+            <tr>
+                <th>os.version</th><td>6.17.0-1022-azure</td>
+            </tr>
+            
+            <tr>
+                <th>java.runtime.name</th><td>OpenJDK Runtime Environment</td>
+            </tr>
+            
+            <tr>
+                <th>file.encoding</th><td>UTF-8</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.name</th><td>OpenJDK 64-Bit Server VM</td>
+            </tr>
+            
+            <tr>
+                <th>java.vendor.version</th><td>Temurin-17.0.20.1+1</td>
+            </tr>
+            
+            <tr>
+                <th>localRepository</th><td>/home/runner/.m2/repository</td>
+            </tr>
+            
+            <tr>
+                <th>java.vendor.url.bug</th><td>https://github.com/adoptium/adoptium-support/issues</td>
+            </tr>
+            
+            <tr>
+                <th>java.io.tmpdir</th><td>/tmp</td>
+            </tr>
+            
+            <tr>
+                <th>java.version</th><td>17.0.20.1</td>
+            </tr>
+            
+            <tr>
+                <th>user.dir</th><td>/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app</td>
+            </tr>
+            
+            <tr>
+                <th>os.arch</th><td>amd64</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.specification.name</th><td>Java Virtual Machine Specification</td>
+            </tr>
+            
+            <tr>
+                <th>native.encoding</th><td>UTF-8</td>
+            </tr>
+            
+            <tr>
+                <th>java.library.path</th><td>/opt/hostedtoolcache/Python/3.12.14/x64/lib:/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.info</th><td>mixed mode, sharing</td>
+            </tr>
+            
+            <tr>
+                <th>java.vendor</th><td>Eclipse Adoptium</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.version</th><td>17.0.20.1+1</td>
+            </tr>
+            
+            <tr>
+                <th>java.specification.maintenance.version</th><td>1</td>
+            </tr>
+            
+            <tr>
+                <th>sun.io.unicode.encoding</th><td>UnicodeLittle</td>
+            </tr>
+            
+            <tr>
+                <th>java.class.version</th><td>61.0</td>
+            </tr>
+            
+        </table>
+        
+        <h3>Results</h3>
+        <table class="proplist">
+            <tr>
+                <th>Duration</th><td>0.503 sec</td>
+            </tr>
+            <tr>
+                <th>Tests</th><td>15</td>
+            </tr>
+            <tr>
+                <th>Failures</th><td>0</td>
+            </tr>
+        </table>
+
+        <div class="testclasses">
+            <h3>Tests</h3>
+            
+            <div class="testclass">
+                <h4>com.ucoruh.calculator.CalculatorAppTest$MainMethod</h4>
+                <div class="testcases">
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="75149a6587ba"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>printsResult</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.36 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - multiply(4, 5)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="a0aff1135f64"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>printsUsageForInvalidArguments</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.006 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] WARN  com.ucoruh.calculator.CalculatorApp - Expected 3 arguments, got 1
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="testclass">
+                <h4>com.ucoruh.calculator.CalculatorAppTest$InvalidInput</h4>
+                <div class="testcases">
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="f95051d1086e"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>nonNumericSecondOperand</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.004 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] ERROR com.ucoruh.calculator.CalculatorApp - Invalid operand: java.lang.NumberFormatException: For input string: &#34;xyz&#34;
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="19665c2203ed"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>unknownOperator</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.005 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] WARN  com.ucoruh.calculator.CalculatorApp - Unknown operator: %
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="1de6e8a9953a"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>nonNumericFirstOperand</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.004 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] ERROR com.ucoruh.calculator.CalculatorApp - Invalid operand: java.lang.NumberFormatException: For input string: &#34;abc&#34;
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="22a31d59d17c"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>divisionByZero</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.009 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - divide(1, 0)
+2026-09-30 01:07:20 [main] ERROR com.ucoruh.calculator.Calculator - divide by zero requested for dividend 1
+2026-09-30 01:07:20 [main] ERROR com.ucoruh.calculator.CalculatorApp - Division by zero requested
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="testclass">
+                <h4>com.ucoruh.calculator.CalculatorAppTest$BoundaryInput</h4>
+                <div class="testcases">
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="1e9228d51f1a"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>maxIntOperand</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.002 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - add(2147483647, 0)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="5a4758c3f94b"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>nullArguments</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.001 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] WARN  com.ucoruh.calculator.CalculatorApp - Expected 3 arguments, got 0
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="d1c797377a13"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>noArguments</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.001 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] WARN  com.ucoruh.calculator.CalculatorApp - Expected 3 arguments, got 0
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="2cb4484bcc38"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>tooManyArguments</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.004 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] WARN  com.ucoruh.calculator.CalculatorApp - Expected 3 arguments, got 4
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="9484657d6211"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>tooFewArguments</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.004 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] WARN  com.ucoruh.calculator.CalculatorApp - Expected 3 arguments, got 2
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="testclass">
+                <h4>com.ucoruh.calculator.CalculatorAppTest$NormalInput</h4>
+                <div class="testcases">
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="a0957f266ad8"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>subtract</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.004 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - subtract(2, 3)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="306fe31c97ae"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>divide</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.008 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - divide(6, 3)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="7a26d9291e93"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>add</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.004 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - add(2, 3)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="e2d34518d1e9"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>multiply</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.004 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - multiply(3, 4)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <div class="testsuite">
+        <h2>Test Suite: com.ucoruh.calculator.CalculatorTest</h2>
+        <a id="aa47e1f0c541"></a>
+        
+        
+        <h3>Suite Properties</h3>
+        <table class="proplist">
+            
+            <tr>
+                <th>java.specification.version</th><td>17</td>
+            </tr>
+            
+            <tr>
+                <th>sun.jnu.encoding</th><td>UTF-8</td>
+            </tr>
+            
+            <tr>
+                <th>java.class.path</th><td>/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/test-classes:/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/classes:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter/6.1.3/junit-jupiter-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-api/6.1.3/junit-jupiter-api-6.1.3.jar:/home/runner/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-commons/6.1.3/junit-platform-commons-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-params/6.1.3/junit-jupiter-params-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-engine/6.1.3/junit-jupiter-engine-6.1.3.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-launcher/6.1.3/junit-platform-launcher-6.1.3.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-engine/6.1.3/junit-platform-engine-6.1.3.jar:/home/runner/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/runner/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/home/runner/.m2/repository/org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20.jar:/home/runner/.m2/repository/ch/qos/logback/logback-classic/1.6.4/logback-classic-1.6.4.jar:/home/runner/.m2/repository/ch/qos/logback/logback-core/1.6.4/logback-core-1.6.4.jar</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.vendor</th><td>Eclipse Adoptium</td>
+            </tr>
+            
+            <tr>
+                <th>sun.arch.data.model</th><td>64</td>
+            </tr>
+            
+            <tr>
+                <th>java.vendor.url</th><td>https://adoptium.net/</td>
+            </tr>
+            
+            <tr>
+                <th>user.timezone</th><td>Etc/UTC</td>
+            </tr>
+            
+            <tr>
+                <th>os.name</th><td>Linux</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.specification.version</th><td>17</td>
+            </tr>
+            
+            <tr>
+                <th>sun.java.launcher</th><td>SUN_STANDARD</td>
+            </tr>
+            
+            <tr>
+                <th>sun.boot.library.path</th><td>/usr/lib/jvm/temurin-17-jdk-amd64/lib</td>
+            </tr>
+            
+            <tr>
+                <th>sun.java.command</th><td>/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/surefire/surefirebooter-20260930010718186_3.jar /home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/surefire 2026-09-30T01-07-17_813-jvmRun1 surefire-20260930010718186_1tmp surefire_0-20260930010718186_2tmp</td>
+            </tr>
+            
+            <tr>
+                <th>jdk.debug</th><td>release</td>
+            </tr>
+            
+            <tr>
+                <th>surefire.test.class.path</th><td>/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/test-classes:/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/classes:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter/6.1.3/junit-jupiter-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-api/6.1.3/junit-jupiter-api-6.1.3.jar:/home/runner/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-commons/6.1.3/junit-platform-commons-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-params/6.1.3/junit-jupiter-params-6.1.3.jar:/home/runner/.m2/repository/org/junit/jupiter/junit-jupiter-engine/6.1.3/junit-jupiter-engine-6.1.3.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-launcher/6.1.3/junit-platform-launcher-6.1.3.jar:/home/runner/.m2/repository/org/junit/platform/junit-platform-engine/6.1.3/junit-platform-engine-6.1.3.jar:/home/runner/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/runner/.m2/repository/org/jspecify/jspecify/1.0.0/jspecify-1.0.0.jar:/home/runner/.m2/repository/org/slf4j/slf4j-api/2.0.20/slf4j-api-2.0.20.jar:/home/runner/.m2/repository/ch/qos/logback/logback-classic/1.6.4/logback-classic-1.6.4.jar:/home/runner/.m2/repository/ch/qos/logback/logback-core/1.6.4/logback-core-1.6.4.jar</td>
+            </tr>
+            
+            <tr>
+                <th>sun.cpu.endian</th><td>little</td>
+            </tr>
+            
+            <tr>
+                <th>user.home</th><td>/home/runner</td>
+            </tr>
+            
+            <tr>
+                <th>user.language</th><td>en</td>
+            </tr>
+            
+            <tr>
+                <th>java.specification.vendor</th><td>Oracle Corporation</td>
+            </tr>
+            
+            <tr>
+                <th>java.version.date</th><td>2026-08-18</td>
+            </tr>
+            
+            <tr>
+                <th>java.home</th><td>/usr/lib/jvm/temurin-17-jdk-amd64</td>
+            </tr>
+            
+            <tr>
+                <th>revision</th><td>1.1.0</td>
+            </tr>
+            
+            <tr>
+                <th>file.separator</th><td>/</td>
+            </tr>
+            
+            <tr>
+                <th>basedir</th><td>/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.compressedOopsMode</th><td>Zero based</td>
+            </tr>
+            
+            <tr>
+                <th>line.separator</th><td>
+</td>
+            </tr>
+            
+            <tr>
+                <th>java.specification.name</th><td>Java Platform API Specification</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.specification.vendor</th><td>Oracle Corporation</td>
+            </tr>
+            
+            <tr>
+                <th>surefire.real.class.path</th><td>/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app/target/surefire/surefirebooter-20260930010718186_3.jar</td>
+            </tr>
+            
+            <tr>
+                <th>sun.management.compiler</th><td>HotSpot 64-Bit Tiered Compilers</td>
+            </tr>
+            
+            <tr>
+                <th>java.runtime.version</th><td>17.0.20.1+1</td>
+            </tr>
+            
+            <tr>
+                <th>user.name</th><td>runner</td>
+            </tr>
+            
+            <tr>
+                <th>path.separator</th><td>:</td>
+            </tr>
+            
+            <tr>
+                <th>os.version</th><td>6.17.0-1022-azure</td>
+            </tr>
+            
+            <tr>
+                <th>java.runtime.name</th><td>OpenJDK Runtime Environment</td>
+            </tr>
+            
+            <tr>
+                <th>file.encoding</th><td>UTF-8</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.name</th><td>OpenJDK 64-Bit Server VM</td>
+            </tr>
+            
+            <tr>
+                <th>java.vendor.version</th><td>Temurin-17.0.20.1+1</td>
+            </tr>
+            
+            <tr>
+                <th>localRepository</th><td>/home/runner/.m2/repository</td>
+            </tr>
+            
+            <tr>
+                <th>java.vendor.url.bug</th><td>https://github.com/adoptium/adoptium-support/issues</td>
+            </tr>
+            
+            <tr>
+                <th>java.io.tmpdir</th><td>/tmp</td>
+            </tr>
+            
+            <tr>
+                <th>java.version</th><td>17.0.20.1</td>
+            </tr>
+            
+            <tr>
+                <th>user.dir</th><td>/home/runner/work/eclipse-java-maven-template/eclipse-java-maven-template/calculator-app</td>
+            </tr>
+            
+            <tr>
+                <th>os.arch</th><td>amd64</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.specification.name</th><td>Java Virtual Machine Specification</td>
+            </tr>
+            
+            <tr>
+                <th>native.encoding</th><td>UTF-8</td>
+            </tr>
+            
+            <tr>
+                <th>java.library.path</th><td>/opt/hostedtoolcache/Python/3.12.14/x64/lib:/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.info</th><td>mixed mode, sharing</td>
+            </tr>
+            
+            <tr>
+                <th>java.vendor</th><td>Eclipse Adoptium</td>
+            </tr>
+            
+            <tr>
+                <th>java.vm.version</th><td>17.0.20.1+1</td>
+            </tr>
+            
+            <tr>
+                <th>java.specification.maintenance.version</th><td>1</td>
+            </tr>
+            
+            <tr>
+                <th>sun.io.unicode.encoding</th><td>UnicodeLittle</td>
+            </tr>
+            
+            <tr>
+                <th>java.class.version</th><td>61.0</td>
+            </tr>
+            
+        </table>
+        
+        <h3>Results</h3>
+        <table class="proplist">
+            <tr>
+                <th>Duration</th><td>0.186 sec</td>
+            </tr>
+            <tr>
+                <th>Tests</th><td>15</td>
+            </tr>
+            <tr>
+                <th>Failures</th><td>0</td>
+            </tr>
+        </table>
+
+        <div class="testclasses">
+            <h3>Tests</h3>
+            
+            <div class="testclass">
+                <h4>com.ucoruh.calculator.CalculatorTest</h4>
+                <div class="testcases">
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="4481e81cc258"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>boundaryValues(int, String, int, int)[1]</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.02 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - add(2147483647, 0)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="710486ddc1a8"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>boundaryValues(int, String, int, int)[2]</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.002 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - add(-2147483648, 0)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="40291ea0d7b7"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>boundaryValues(int, String, int, int)[3]</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.002 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - subtract(0, 2147483647)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="testclass">
+                <h4>com.ucoruh.calculator.CalculatorTest$Multiply</h4>
+                <div class="testcases">
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="aa5d6e81bc4a"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>multiplyTwoNegatives</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.001 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - multiply(-2, -3)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="b40aee6d3db3"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>multipliesPositiveNumbers</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.004 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - multiply(3, 4)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="f07be55c384e"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>multiplyByZero</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.001 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - multiply(123, 0)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="testclass">
+                <h4>com.ucoruh.calculator.CalculatorTest$Divide</h4>
+                <div class="testcases">
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="7cb068bc948e"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>divideByZeroThrows</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.009 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - divide(10, 0)
+2026-09-30 01:07:20 [main] ERROR com.ucoruh.calculator.Calculator - divide by zero requested for dividend 10
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="9f02ed405073"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>zeroDividend</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.003 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - divide(0, 42)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="e4d4aa5f5d82"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>dividesWithRemainder</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.004 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - divide(1, 3)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="45f5f2cc442f"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>dividesEvenly</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.003 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - divide(6, 3)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="testclass">
+                <h4>com.ucoruh.calculator.CalculatorTest$Subtract</h4>
+                <div class="testcases">
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="8dbfeb3fe31e"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>subtractsPositiveNumbers</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.001 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - subtract(4, 3)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="92217af508df"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>subtractResultingInNegative</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.003 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - subtract(0, 5)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            </div>
+            
+            <div class="testclass">
+                <h4>com.ucoruh.calculator.CalculatorTest$Add</h4>
+                <div class="testcases">
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="b793099141cd"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>addZero</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.001 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - add(7, 0)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="1ca5dcec0347"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>addsPositiveNumbers</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.001 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - add(2, 3)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                    <div class="test outcome outcome-passed">
+                        <a id="05ae3b8bf7e0"></a>
+                        <table class="proplist">
+                            <tr><th>Test case:</th><td><b>addsNegativeAndPositive</b></td></tr>
+                            <tr><th>Outcome:</th><td>Passed</td></tr>
+                            <tr><th>Duration:</th><td>0.002 sec</td></tr>
+                        
+                        
+                        </table>
+
+                        
+                        
+
+                        
+                        
+                        
+                        <div class="stderr"><i>Stderr</i><br>
+                            <pre>2026-09-30 01:07:20 [main] INFO  com.ucoruh.calculator.Calculator - add(-4, 3)
+</pre>
+                        </div>
+                        
+                    </div>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+
+
+
+<p class="footer">
+    Generated by junit2html
+</p>
+</body>
+</html>
